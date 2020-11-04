@@ -1,0 +1,3314 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>东京电讯(Tokyo Teleport) - meme</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+
+    <style>
+        /* General */
+
+@font-face {
+    font-family: Whitney;
+    src: url(https://cdn.jsdelivr.net/gh/Tyrrrz/DiscordFonts@master/whitney-300.woff);
+    font-weight: 300;
+}
+
+@font-face {
+    font-family: Whitney;
+    src: url(https://cdn.jsdelivr.net/gh/Tyrrrz/DiscordFonts@master/whitney-400.woff);
+    font-weight: 400;
+}
+
+@font-face {
+    font-family: Whitney;
+    src: url(https://cdn.jsdelivr.net/gh/Tyrrrz/DiscordFonts@master/whitney-500.woff);
+    font-weight: 500;
+}
+
+@font-face {
+    font-family: Whitney;
+    src: url(https://cdn.jsdelivr.net/gh/Tyrrrz/DiscordFonts@master/whitney-600.woff);
+    font-weight: 600;
+}
+
+@font-face {
+    font-family: Whitney;
+    src: url(https://cdn.jsdelivr.net/gh/Tyrrrz/DiscordFonts@master/whitney-700.woff);
+    font-weight: 700;
+}
+
+body {
+    font-family: "Whitney", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 17px;
+}
+
+a {
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+img {
+    object-fit: contain;
+}
+
+.markdown {
+    max-width: 100%;
+    white-space: pre-wrap;
+    line-height: 1.3;
+    overflow-wrap: break-word;
+}
+
+.spoiler {
+    width: fit-content;
+}
+
+.spoiler--hidden {
+    cursor: pointer;
+}
+
+.spoiler-text {
+    border-radius: 3px;
+}
+
+.spoiler--hidden .spoiler-text {
+    color: rgba(0, 0, 0, 0);
+}
+
+.spoiler--hidden .spoiler-text::selection {
+    color: rgba(0, 0, 0, 0);
+}
+
+.spoiler-image {
+    position: relative;
+    overflow: hidden;
+    border-radius: 3px;
+}
+
+.spoiler--hidden .spoiler-image {
+    box-shadow: 0 0 1px 1px rgba(0, 0, 0, 0.1);
+}
+
+.spoiler--hidden .spoiler-image img {
+    filter: blur(44px);
+}
+
+.spoiler--hidden .spoiler-image:after {
+    content: "SPOILER";
+    color: #dcddde;
+    background-color: rgba(0, 0, 0, 0.6);
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    font-weight: 600;
+    padding: 0.5em 0.7em;
+    border-radius: 20px;
+    letter-spacing: 0.05em;
+    font-size: 0.9em;
+}
+
+.spoiler--hidden:hover .spoiler-image:after {
+    color: #fff;
+    background-color: rgba(0, 0, 0, 0.9);
+}
+
+.quote {
+    margin: 0.1em 0;
+    padding-left: 0.6em;
+    border-left: 4px solid;
+    border-radius: 3px;
+}
+
+.pre {
+    font-family: "Consolas", "Courier New", Courier, monospace;
+}
+
+.pre--multiline {
+    margin-top: 0.25em;
+    padding: 0.5em;
+    border: 2px solid;
+    border-radius: 5px;
+}
+
+.pre--inline {
+    padding: 2px;
+    border-radius: 3px;
+    font-size: 0.85em;
+}
+
+.mention {
+    border-radius: 3px;
+    padding: 0 2px;
+    color: #7289da;
+    background: rgba(114, 137, 218, .1);
+    font-weight: 500;
+}
+
+.emoji {
+    width: 1.25em;
+    height: 1.25em;
+    margin: 0 0.06em;
+    vertical-align: -0.4em;
+}
+
+.emoji--small {
+    width: 1em;
+    height: 1em;
+}
+
+.emoji--large {
+    width: 2.8em;
+    height: 2.8em;
+}
+
+/* Preamble */
+
+.preamble {
+    display: grid;
+    margin: 0 0.3em 0.6em 0.3em;
+    max-width: 100%;
+    grid-template-columns: auto 1fr;
+}
+
+.preamble__guild-icon-container {
+    grid-column: 1;
+}
+
+.preamble__guild-icon {
+    max-width: 88px;
+    max-height: 88px;
+}
+
+.preamble__entries-container {
+    grid-column: 2;
+    margin-left: 0.6em;
+}
+
+.preamble__entry {
+    font-size: 1.4em;
+}
+
+.preamble__entry--small {
+    font-size: 1em;
+}
+
+/* Chatlog */
+
+.chatlog {
+    max-width: 100%;
+}
+
+.chatlog__message-group {
+    display: grid;
+    margin: 0 0.6em;
+    padding: 0.9em 0;
+    border-top: 1px solid;
+    grid-template-columns: auto 1fr;
+}
+
+.chatlog__author-avatar-container {
+    grid-column: 1;
+    width: 40px;
+    height: 40px;
+}
+
+.chatlog__author-avatar {
+    border-radius: 50%;
+    height: 40px;
+    width: 40px;
+}
+
+.chatlog__messages {
+    grid-column: 2;
+    margin-left: 1.2em;
+    min-width: 50%;
+}
+
+.chatlog__author-name {
+    font-weight: 500;
+}
+
+.chatlog__timestamp {
+    margin-left: 0.3em;
+    font-size: 0.75em;
+}
+
+.chatlog__message {
+    padding: 0.1em 0.3em;
+    margin: 0 -0.3em;
+    background-color: transparent;
+    transition: background-color 1s ease;
+}
+
+.chatlog__content {
+    font-size: 0.95em;
+    word-wrap: break-word;
+}
+
+.chatlog__edited-timestamp {
+    margin-left: 0.15em;
+    font-size: 0.8em;
+}
+
+.chatlog__attachment {
+    margin-top: 0.3em;
+}
+
+.chatlog__attachment-thumbnail {
+    vertical-align: top;
+    max-width: 45vw;
+    max-height: 500px;
+    border-radius: 3px;
+}
+
+.chatlog__embed {
+    display: flex;
+    margin-top: 0.3em;
+    max-width: 520px;
+}
+
+.chatlog__embed-color-pill {
+    flex-shrink: 0;
+    width: 0.25em;
+    border-top-left-radius: 3px;
+    border-bottom-left-radius: 3px;
+}
+
+.chatlog__embed-content-container {
+    display: flex;
+    flex-direction: column;
+    padding: 0.5em 0.6em;
+    border: 1px solid;
+    border-top-right-radius: 3px;
+    border-bottom-right-radius: 3px;
+}
+
+.chatlog__embed-content {
+    display: flex;
+    width: 100%;
+}
+
+.chatlog__embed-text {
+    flex: 1;
+}
+
+.chatlog__embed-author {
+    display: flex;
+    margin-bottom: 0.3em;
+    align-items: center;
+}
+
+.chatlog__embed-author-icon {
+    margin-right: 0.5em;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+}
+
+.chatlog__embed-author-name {
+    font-size: 0.875em;
+    font-weight: 600;
+}
+
+.chatlog__embed-title {
+    margin-bottom: 0.2em;
+    font-size: 0.875em;
+    font-weight: 600;
+}
+
+.chatlog__embed-description {
+    font-weight: 500;
+    font-size: 0.85em;
+}
+
+.chatlog__embed-fields {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.chatlog__embed-field {
+    flex: 0;
+    min-width: 100%;
+    max-width: 506px;
+    padding-top: 0.6em;
+    font-size: 0.875em;
+}
+
+.chatlog__embed-field--inline {
+    flex: 1;
+    flex-basis: auto;
+    min-width: 150px;
+}
+
+.chatlog__embed-field-name {
+    margin-bottom: 0.2em;
+    font-weight: 600;
+}
+
+.chatlog__embed-field-value {
+    font-weight: 500;
+}
+
+.chatlog__embed-thumbnail {
+    flex: 0;
+    margin-left: 1.2em;
+    max-width: 80px;
+    max-height: 80px;
+    border-radius: 3px;
+}
+
+.chatlog__embed-image-container {
+    margin-top: 0.6em;
+}
+
+.chatlog__embed-image {
+    max-width: 500px;
+    max-height: 400px;
+    border-radius: 3px;
+}
+
+.chatlog__embed-footer {
+    margin-top: 0.6em;
+}
+
+.chatlog__embed-footer-icon {
+    margin-right: 0.2em;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    vertical-align: middle;
+}
+
+.chatlog__embed-footer-text {
+    font-size: 0.75em;
+    font-weight: 500;
+}
+
+.chatlog__reactions {
+    display: flex;
+}
+
+.chatlog__reaction {
+    display: flex;
+    align-items: center;
+    margin: 0.35em 0.1em 0.1em 0.1em;
+    padding: 0.2em 0.35em;
+    border-radius: 3px;
+}
+
+.chatlog__reaction-count {
+    min-width: 9px;
+    margin-left: 0.35em;
+    font-size: 0.875em;
+}
+
+.chatlog__bot-tag {
+    position: relative;
+    top: -.2em;
+    margin-left: 0.3em;
+    padding: 0.05em 0.3em;
+    border-radius: 3px;
+    vertical-align: middle;
+    line-height: 1.3;
+    background: #7289da;
+    color: #ffffff;
+    font-size: 0.625em;
+    font-weight: 500;
+}
+
+/* Postamble */
+
+.postamble {
+    margin: 1.4em 0.3em 0.6em 0.3em;
+    padding: 1em;
+    border-top: 1px solid;
+}
+    </style>
+    <style>
+        /* General */
+
+body {
+    background-color: #36393e;
+    color: #dcddde;
+}
+
+a {
+    color: #0096cf;
+}
+
+.spoiler-text {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.spoiler--hidden .spoiler-text {
+    background-color: #202225;
+}
+
+.spoiler--hidden:hover .spoiler-text {
+    background-color: rgba(32, 34, 37, 0.8);
+}
+
+.quote {
+    border-color: #4f545c;
+}
+
+.pre {
+    background-color: #2f3136 !important;
+}
+
+.pre--multiline {
+    border-color: #282b30 !important;
+    color: #b9bbbe !important;
+}
+
+/* === Preamble === */
+
+.preamble__entry {
+    color: #ffffff;
+}
+
+/* Chatlog */
+
+.chatlog__message-group {
+    border-color: rgba(255, 255, 255, 0.1);
+}
+
+.chatlog__author-name {
+    color: #ffffff;
+}
+
+.chatlog__timestamp {
+    color: rgba(255, 255, 255, 0.2);
+}
+
+.chatlog__message--highlighted {
+    background-color: rgba(114, 137, 218, 0.2) !important;
+}
+
+.chatlog__message--pinned {
+    background-color: rgba(249, 168, 37, 0.05);
+}
+
+.chatlog__edited-timestamp {
+    color: rgba(255, 255, 255, 0.2);
+}
+
+.chatlog__embed-color-pill--default {
+    background-color: rgba(79, 84, 92, 1);
+}
+
+.chatlog__embed-content-container {
+    background-color: rgba(46, 48, 54, 0.3);
+    border-color: rgba(46, 48, 54, 0.6);
+}
+
+.chatlog__embed-author-name {
+    color: #ffffff;
+}
+
+.chatlog__embed-author-name-link {
+    color: #ffffff;
+}
+
+.chatlog__embed-title {
+    color: #ffffff;
+}
+
+.chatlog__embed-description {
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.chatlog__embed-field-name {
+    color: #ffffff;
+}
+
+.chatlog__embed-field-value {
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.chatlog__embed-footer {
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.chatlog__reaction {
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+.chatlog__reaction-count {
+    color: rgba(255, 255, 255, 0.3);
+}
+
+/* Postamble */
+
+.postamble {
+    border-color: rgba(255, 255, 255, 0.1);
+}
+
+.postamble__entry {
+    color: #ffffff;
+}
+    </style>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/solarized-dark.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/highlight.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelectorAll('.pre--multiline').forEach(block => hljs.highlightBlock(block));
+        });
+    </script>
+
+    <script>
+        function scrollToMessage(event, id) {
+            var element = document.getElementById('message-' + id);
+
+            if (element) {
+                event.preventDefault();
+
+                element.classList.add('chatlog__message--highlighted');
+
+                window.scrollTo({
+                    top: element.getBoundingClientRect().top - document.body.getBoundingClientRect().top - (window.innerHeight / 2),
+                    behavior: 'smooth'
+                });
+
+                window.setTimeout(function() {
+                    element.classList.remove('chatlog__message--highlighted');
+                }, 2000);
+            }
+        }
+
+        function showSpoiler(event, element) {
+            if (element && element.classList.contains('spoiler--hidden')) {
+                event.preventDefault();
+                element.classList.remove('spoiler--hidden');
+            }
+        }
+    </script>
+</head>
+<body>
+
+<div class="preamble">
+    <div class="preamble__guild-icon-container">
+        <img class="preamble__guild-icon" src="https://cdn.discordapp.com/icons/654291964250030101/cbdca1e9deee87fd1383394eb2ecb186.png" alt="Guild icon">
+    </div>
+    <div class="preamble__entries-container">
+        <div class="preamble__entry">东京电讯(Tokyo Teleport)</div>
+        <div class="preamble__entry">otaku&#128510; / meme</div>
+
+
+    </div>
+</div>
+
+<div class="chatlog">
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/473746307585015819/e8344e833251ab6664e6d17d9b7eb4e9.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="JYOTA#2924" data-user-id="473746307585015819" style="color: rgb(52,152,219)">JYOTA</span>
+
+
+        <span class="chatlog__timestamp">29-Jan-20 04:42 PM</span>
+
+            <div class="chatlog__message " data-message-id="671983525012176896" id="message-671983525012176896">
+                <div class="chatlog__content">
+                    <div class="markdown"><a href="https://www.instagram.com/p/Bn693LwHyPf/">https://www.instagram.com/p/Bn693LwHyPf/</a> </div>
+                </div>
+
+
+                    <div class="chatlog__embed">
+                            <div class="chatlog__embed-color-pill" style="background-color: rgba(255,255,255,255)"></div>
+
+                        <div class="chatlog__embed-content-container">
+                            <div class="chatlog__embed-content">
+                                <div class="chatlog__embed-text">
+
+                                        <div class="chatlog__embed-title">
+                                                <a class="chatlog__embed-title-link" href="https://www.instagram.com/p/Bn693LwHyPf/">
+                                                    <div class="markdown">Polite_Cat_Olli on Instagram: “Look’s to me that Ollie ate the...</div>
+                                                </a>
+                                        </div>
+
+                                        <div class="chatlog__embed-description">
+                                            <div class="markdown">68.5k Likes, 588 Comments - Polite_Cat_Olli (@polite_cat_olli_official) on Instagram: “Look’s to me that Ollie ate the wrong fly, he rather catch a bird instead, he will now catch the…”</div>
+                                        </div>
+
+                                </div>
+
+                                    <div class="chatlog__embed-thumbnail-container">
+                                        <a class="chatlog__embed-thumbnail-link" href="https://scontent-lga3-1.cdninstagram.com/v/t51.2885-15/e35/41754262_1837692193005363_7862366438625569734_n.jpg?_nc_ht=scontent-lga3-1.cdninstagram.com&amp;_nc_cat=103&amp;_nc_ohc=VAEPqRlHTd4AX-_yQqN&amp;oh=bd4344f0952b71026776ba9f43a3a1fd&amp;oe=5EB749CD">
+                                            <img class="chatlog__embed-thumbnail" src="https://scontent-lga3-1.cdninstagram.com/v/t51.2885-15/e35/41754262_1837692193005363_7862366438625569734_n.jpg?_nc_ht=scontent-lga3-1.cdninstagram.com&amp;_nc_cat=103&amp;_nc_ohc=VAEPqRlHTd4AX-_yQqN&amp;oh=bd4344f0952b71026776ba9f43a3a1fd&amp;oe=5EB749CD" alt="Thumbnail">
+                                        </a>
+                                    </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/580290181614010371/e56e574fac66e25f1566a67ca28cc8dd.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Nehちゃん#3561" data-user-id="580290181614010371" style="color: rgb(233,30,99)">Nehちゃん</span>
+
+
+        <span class="chatlog__timestamp">29-Jan-20 07:35 PM</span>
+
+            <div class="chatlog__message " data-message-id="672026989678428172" id="message-672026989678428172">
+                <div class="chatlog__content">
+                    <div class="markdown"><a href="https://www.youtube.com/watch?v=SMat1hTXVYw">https://www.youtube.com/watch?v=SMat1hTXVYw</a> </div>
+                </div>
+
+
+                    <div class="chatlog__embed">
+                            <div class="chatlog__embed-color-pill" style="background-color: rgba(255,0,0,255)"></div>
+
+                        <div class="chatlog__embed-content-container">
+                            <div class="chatlog__embed-content">
+                                <div class="chatlog__embed-text">
+                                        <div class="chatlog__embed-author">
+
+                                                <span class="chatlog__embed-author-name">
+                                                        <a class="chatlog__embed-author-name-link" href="https://www.youtube.com/channel/UCfkOgP1_x5P_n1XnnHy5llg">Fizzylazer</a>
+                                                </span>
+                                        </div>
+
+                                        <div class="chatlog__embed-title">
+                                                <a class="chatlog__embed-title-link" href="https://www.youtube.com/watch?v=SMat1hTXVYw">
+                                                    <div class="markdown">Fizzylazer - Could You Imagine Me? (Official Music Video)</div>
+                                                </a>
+                                        </div>
+
+                                        <div class="chatlog__embed-description">
+                                            <div class="markdown">Get it on Bandcamp now: <a href="https://bit.ly/36gfjeX">https://bit.ly/36gfjeX</a>
+Everywhere else: <a href="https://bit.ly/39wSghQ">https://bit.ly/39wSghQ</a>
+
+[Photosensitive seizure warning, strobing lights.]
+
+PATREON: <a href="https://www.patreon.com/fizzylazer">https://www.patreon.com/fizzylazer</a>
+DISCORD: <a href="https://discord.gg/jFNwJqw">https://discord.gg/jFNwJqw</a>
+WEBSITE: <a href="https://www.fizzylazer.com">https://www.fizzylazer.com</a>
+
+I love you because ...</div>
+                                        </div>
+
+                                </div>
+
+                                    <div class="chatlog__embed-thumbnail-container">
+                                        <a class="chatlog__embed-thumbnail-link" href="https://i.ytimg.com/vi/SMat1hTXVYw/maxresdefault.jpg">
+                                            <img class="chatlog__embed-thumbnail" src="https://i.ytimg.com/vi/SMat1hTXVYw/maxresdefault.jpg" alt="Thumbnail">
+                                        </a>
+                                    </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/580290181614010371/e56e574fac66e25f1566a67ca28cc8dd.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Nehちゃん#3561" data-user-id="580290181614010371" style="color: rgb(233,30,99)">Nehちゃん</span>
+
+
+        <span class="chatlog__timestamp">29-May-20 12:57 PM</span>
+
+            <div class="chatlog__message " data-message-id="715775861877637163" id="message-715775861877637163">
+                <div class="chatlog__content">
+                    <div class="markdown"><a href="https://youtu.be/dmkRV8SPBng">https://youtu.be/dmkRV8SPBng</a> </div>
+                </div>
+
+
+                    <div class="chatlog__embed">
+                            <div class="chatlog__embed-color-pill" style="background-color: rgba(255,0,0,255)"></div>
+
+                        <div class="chatlog__embed-content-container">
+                            <div class="chatlog__embed-content">
+                                <div class="chatlog__embed-text">
+                                        <div class="chatlog__embed-author">
+
+                                                <span class="chatlog__embed-author-name">
+                                                        <a class="chatlog__embed-author-name-link" href="https://www.youtube.com/channel/UCqG7LH8EGewYNmfjkW9S1HA">CMT</a>
+                                                </span>
+                                        </div>
+
+                                        <div class="chatlog__embed-title">
+                                                <a class="chatlog__embed-title-link" href="https://www.youtube.com/watch?v=dmkRV8SPBng">
+                                                    <div class="markdown">Astronomia (Coffin Dance) - Fubuki [CMT Bootleg Remix]</div>
+                                                </a>
+                                        </div>
+
+                                        <div class="chatlog__embed-description">
+                                            <div class="markdown">Credit to:  <a href="https://www.youtube.com/watch?v=UZnIHM2dQvA">https://www.youtube.com/watch?v=UZnIHM2dQvA</a>
+And: <a href="https://www.youtube.com/watch?v=--cxZbnmmoc">https://www.youtube.com/watch?v=--cxZbnmmoc</a>
+It&#39;s been done, and it&#39;s kinda clumsy but I spent too long editing this so it&#39;s going up ok. If you can actually remix feel free to use the video as it is synced with Astro...</div>
+                                        </div>
+
+                                </div>
+
+                                    <div class="chatlog__embed-thumbnail-container">
+                                        <a class="chatlog__embed-thumbnail-link" href="https://i.ytimg.com/vi/dmkRV8SPBng/maxresdefault.jpg">
+                                            <img class="chatlog__embed-thumbnail" src="https://i.ytimg.com/vi/dmkRV8SPBng/maxresdefault.jpg" alt="Thumbnail">
+                                        </a>
+                                    </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+
+            </div>
+            <div class="chatlog__message " data-message-id="715776345170509945" id="message-715776345170509945">
+                <div class="chatlog__content">
+                    <div class="markdown"><a href="https://youtu.be/dJ1h8chkax0">https://youtu.be/dJ1h8chkax0</a> </div>
+                </div>
+
+
+                    <div class="chatlog__embed">
+                            <div class="chatlog__embed-color-pill" style="background-color: rgba(255,0,0,255)"></div>
+
+                        <div class="chatlog__embed-content-container">
+                            <div class="chatlog__embed-content">
+                                <div class="chatlog__embed-text">
+                                        <div class="chatlog__embed-author">
+
+                                                <span class="chatlog__embed-author-name">
+                                                        <a class="chatlog__embed-author-name-link" href="https://www.youtube.com/channel/UCTBqCtoS_XvwU5oczcQdplw">Visicks</a>
+                                                </span>
+                                        </div>
+
+                                        <div class="chatlog__embed-title">
+                                                <a class="chatlog__embed-title-link" href="https://www.youtube.com/watch?v=dJ1h8chkax0">
+                                                    <div class="markdown">SMILE, SWEET, SISTER... MEME COMPILATION #1</div>
+                                                </a>
+                                        </div>
+
+                                        <div class="chatlog__embed-description">
+                                            <div class="markdown">The Best &#39;&#39;S Stands For/Blend S Meme Compilation Part 1&#39;&#39;
+Enjoy!
+Anime: Blend S
+
+Smile
+Sweet
+Sister
+Sadistic
+Surprise
+Service
+Suscribete prro :v
+
+Watch the playlist with the best memes compilation here:
+<a href="https://www.youtube.com/playlist?list=PLkvC-S5OioJz4s_WER7IiqfQlP0-2tav1">https://www.youtube.com/playlist?list=PLkvC-S5OioJz4s_WER7IiqfQlP0-2tav1</a>
+
+...</div>
+                                        </div>
+
+                                </div>
+
+                                    <div class="chatlog__embed-thumbnail-container">
+                                        <a class="chatlog__embed-thumbnail-link" href="https://i.ytimg.com/vi/dJ1h8chkax0/maxresdefault.jpg">
+                                            <img class="chatlog__embed-thumbnail" src="https://i.ytimg.com/vi/dJ1h8chkax0/maxresdefault.jpg" alt="Thumbnail">
+                                        </a>
+                                    </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/561199590569672714/bad6281d27c0e32986c43f210b4ebe2b.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="天王洲Isle#1895" data-user-id="561199590569672714" style="color: rgb(233,30,99)">天王洲Isle</span>
+
+
+        <span class="chatlog__timestamp">29-May-20 01:04 PM</span>
+
+            <div class="chatlog__message " data-message-id="715777491830046740" id="message-715777491830046740">
+                <div class="chatlog__content">
+                    <div class="markdown"><a href="https://youtu.be/_I6I2JOJhHY">https://youtu.be/_I6I2JOJhHY</a> </div>
+                </div>
+
+
+                    <div class="chatlog__embed">
+                            <div class="chatlog__embed-color-pill" style="background-color: rgba(255,0,0,255)"></div>
+
+                        <div class="chatlog__embed-content-container">
+                            <div class="chatlog__embed-content">
+                                <div class="chatlog__embed-text">
+                                        <div class="chatlog__embed-author">
+
+                                                <span class="chatlog__embed-author-name">
+                                                        <a class="chatlog__embed-author-name-link" href="https://www.youtube.com/channel/UCWSC_-y9QsDmACXRY3rvtsQ">Astrophysics Lives</a>
+                                                </span>
+                                        </div>
+
+                                        <div class="chatlog__embed-title">
+                                                <a class="chatlog__embed-title-link" href="https://www.youtube.com/watch?v=_I6I2JOJhHY">
+                                                    <div class="markdown">ｈｅｙ　ｙａ！ (synthwave/80s remix)</div>
+                                                </a>
+                                        </div>
+
+                                        <div class="chatlog__embed-description">
+                                            <div class="markdown">This is a re-upload, I used this remix do celebrate the recovery of my original channel, but the range of it was ruined because of the absence of uploads, even with 40k subs its views were really below average. So, I&#39;ll be using this chance to use Outkast&#39;s classic to celebrat...</div>
+                                        </div>
+
+                                </div>
+
+                                    <div class="chatlog__embed-thumbnail-container">
+                                        <a class="chatlog__embed-thumbnail-link" href="https://i.ytimg.com/vi/_I6I2JOJhHY/maxresdefault.jpg">
+                                            <img class="chatlog__embed-thumbnail" src="https://i.ytimg.com/vi/_I6I2JOJhHY/maxresdefault.jpg" alt="Thumbnail">
+                                        </a>
+                                    </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+
+            </div>
+            <div class="chatlog__message " data-message-id="715777533114712104" id="message-715777533114712104">
+                <div class="chatlog__content">
+                    <div class="markdown">I see this as the end of Internet music. </div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/580290181614010371/e56e574fac66e25f1566a67ca28cc8dd.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Nehちゃん#3561" data-user-id="580290181614010371" style="color: rgb(233,30,99)">Nehちゃん</span>
+
+
+        <span class="chatlog__timestamp">31-May-20 10:38 PM</span>
+
+            <div class="chatlog__message " data-message-id="716646905391874048" id="message-716646905391874048">
+                <div class="chatlog__content">
+                    <div class="markdown"><a href="https://youtu.be/myiJB8SiIcU">https://youtu.be/myiJB8SiIcU</a> </div>
+                </div>
+
+
+                    <div class="chatlog__embed">
+                            <div class="chatlog__embed-color-pill" style="background-color: rgba(255,0,0,255)"></div>
+
+                        <div class="chatlog__embed-content-container">
+                            <div class="chatlog__embed-content">
+                                <div class="chatlog__embed-text">
+                                        <div class="chatlog__embed-author">
+
+                                                <span class="chatlog__embed-author-name">
+                                                        <a class="chatlog__embed-author-name-link" href="https://www.youtube.com/channel/UCYxBY8mhJ7R2rMIcQ28H_Zw">Ujico*/Snail&#39;s House</a>
+                                                </span>
+                                        </div>
+
+                                        <div class="chatlog__embed-title">
+                                                <a class="chatlog__embed-title-link" href="https://www.youtube.com/watch?v=myiJB8SiIcU">
+                                                    <div class="markdown">Snail&#39;s House - Twinklestar (Official MV)</div>
+                                                </a>
+                                        </div>
+
+                                        <div class="chatlog__embed-description">
+                                            <div class="markdown"><img class="emoji " alt="★" title="★" src="https://twemoji.maxcdn.com/2/72x72/2605.png">Snailien visits the Earth!<img class="emoji " alt="★" title="★" src="https://twemoji.maxcdn.com/2/72x72/2605.png">
+
+Listen/Buy this song on your favourite platforms!
+<a href="https://fanlink.to/twinklestar">https://fanlink.to/twinklestar</a>
+
+✪MV CREATORS✪
+
+<img class="emoji " alt="★" title="★" src="https://twemoji.maxcdn.com/2/72x72/2605.png">Speedoru (Main MV)
+
+<a href="https://twitter.com/Speedoru">https://twitter.com/Speedoru</a>
+
+<a href="https://www.youtube.com/user/SpeedoSa">https://www.youtube.com/user/SpeedoSa</a>...
+
+<img class="emoji " alt="★" title="★" src="https://twemoji.maxcdn.com/2/72x72/2605.png">SouredApple (Additional Background)
+
+<a href="https://twitter.com">https://twitter.com</a>...</div>
+                                        </div>
+
+                                </div>
+
+                                    <div class="chatlog__embed-thumbnail-container">
+                                        <a class="chatlog__embed-thumbnail-link" href="https://i.ytimg.com/vi/myiJB8SiIcU/maxresdefault.jpg">
+                                            <img class="chatlog__embed-thumbnail" src="https://i.ytimg.com/vi/myiJB8SiIcU/maxresdefault.jpg" alt="Thumbnail">
+                                        </a>
+                                    </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/580290181614010371/e56e574fac66e25f1566a67ca28cc8dd.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Nehちゃん#3561" data-user-id="580290181614010371" style="color: rgb(233,30,99)">Nehちゃん</span>
+
+
+        <span class="chatlog__timestamp">07-Jun-20 12:13 AM</span>
+
+            <div class="chatlog__message " data-message-id="718844936065122337" id="message-718844936065122337">
+                <div class="chatlog__content">
+                    <div class="markdown"><a href="https://www.youtube.com/watch?v=EvcN3qieMA0">https://www.youtube.com/watch?v=EvcN3qieMA0</a> </div>
+                </div>
+
+
+                    <div class="chatlog__embed">
+                            <div class="chatlog__embed-color-pill" style="background-color: rgba(255,0,0,255)"></div>
+
+                        <div class="chatlog__embed-content-container">
+                            <div class="chatlog__embed-content">
+                                <div class="chatlog__embed-text">
+                                        <div class="chatlog__embed-author">
+
+                                                <span class="chatlog__embed-author-name">
+                                                        <a class="chatlog__embed-author-name-link" href="https://www.youtube.com/channel/UCNG4AqyWQnCZImFhR2ouNaw">GradNC</a>
+                                                </span>
+                                        </div>
+
+                                        <div class="chatlog__embed-title">
+                                                <a class="chatlog__embed-title-link" href="https://www.youtube.com/watch?v=EvcN3qieMA0">
+                                                    <div class="markdown">Watch Me Work It  (*≧▽≦)</div>
+                                                </a>
+                                        </div>
+
+                                        <div class="chatlog__embed-description">
+                                            <div class="markdown">MMV – Watch Me Work It 
+
+
+<img class="emoji " alt="♔" title="♔" src="https://twemoji.maxcdn.com/2/72x72/2654.png">   Song   <img class="emoji " alt="♔" title="♔" src="https://twemoji.maxcdn.com/2/72x72/2654.png">
+
+<img class="emoji " alt="☆" title="☆" src="https://twemoji.maxcdn.com/2/72x72/2606.png">  Micha Moor - Slip and Slide (Bershka Mix)  <img class="emoji " alt="☆" title="☆" src="https://twemoji.maxcdn.com/2/72x72/2606.png">
+
+• <a href="https://www.youtube.com/watch?v=efEVIi9INY4&list=LLNG4AqyWQnCZImFhR2ouNaw&index=35&t=0s">https://www.youtube.com/watch?v=efEVIi9INY4&amp;list=LLNG4AqyWQnCZImFhR2ouNaw&amp;index=35&amp;t=0s</a>
+
+
+<img class="emoji " alt="♔" title="♔" src="https://twemoji.maxcdn.com/2/72x72/2654.png">   Micha Moor   <img class="emoji " alt="♔" title="♔" src="https://twemoji.maxcdn.com/2/72x72/2654.png">
+
+• <a href="https://www.youtube.com/channel/UCe1QBQDmfMZx-kHg2wr1t1w">https://www.youtube.com/channel/UCe1QBQDmfMZx-kHg2wr1t1w</a>
+• <a href="https://www.fac">https://www.fac</a>...</div>
+                                        </div>
+
+                                </div>
+
+                                    <div class="chatlog__embed-thumbnail-container">
+                                        <a class="chatlog__embed-thumbnail-link" href="https://i.ytimg.com/vi/EvcN3qieMA0/maxresdefault.jpg">
+                                            <img class="chatlog__embed-thumbnail" src="https://i.ytimg.com/vi/EvcN3qieMA0/maxresdefault.jpg" alt="Thumbnail">
+                                        </a>
+                                    </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/580290181614010371/e56e574fac66e25f1566a67ca28cc8dd.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Nehちゃん#3561" data-user-id="580290181614010371" style="color: rgb(233,30,99)">Nehちゃん</span>
+
+
+        <span class="chatlog__timestamp">08-Jun-20 09:16 PM</span>
+
+            <div class="chatlog__message " data-message-id="719525222272729179" id="message-719525222272729179">
+                <div class="chatlog__content">
+                    <div class="markdown">Animation Process
+<a href="https://www.youtube.com/watch?v=v7l85PSAgog">https://www.youtube.com/watch?v=v7l85PSAgog</a> </div>
+                </div>
+
+
+                    <div class="chatlog__embed">
+                            <div class="chatlog__embed-color-pill" style="background-color: rgba(255,0,0,255)"></div>
+
+                        <div class="chatlog__embed-content-container">
+                            <div class="chatlog__embed-content">
+                                <div class="chatlog__embed-text">
+                                        <div class="chatlog__embed-author">
+
+                                                <span class="chatlog__embed-author-name">
+                                                        <a class="chatlog__embed-author-name-link" href="https://www.youtube.com/channel/UCK08q4dyLIvwMS8pZfmDOFw">CuteNikeChan</a>
+                                                </span>
+                                        </div>
+
+                                        <div class="chatlog__embed-title">
+                                                <a class="chatlog__embed-title-link" href="https://www.youtube.com/watch?v=v7l85PSAgog">
+                                                    <div class="markdown">Sand Planet  [Animation Process Video]</div>
+                                                </a>
+                                        </div>
+
+                                        <div class="chatlog__embed-description">
+                                            <div class="markdown">process of the making of my sand planet fan animation ! ~
+
+Finished Animation: <a href="https://youtu.be/bpewcfi3rkk">https://youtu.be/bpewcfi3rkk</a>
+
+Song: 砂の惑星 Spacelectro Remix (please support spacelectro! <img class="emoji " alt="♥" title="♥" src="https://twemoji.maxcdn.com/2/72x72/2665.png">)
+Song Link: <a href="https://youtu.be/R4P-CzHqMFM">https://youtu.be/R4P-CzHqMFM</a>
+
+Duration: 33+ hrs
+Software: Adobe Flash CS3 + After Effects
+Record...</div>
+                                        </div>
+
+                                </div>
+
+                                    <div class="chatlog__embed-thumbnail-container">
+                                        <a class="chatlog__embed-thumbnail-link" href="https://i.ytimg.com/vi/v7l85PSAgog/maxresdefault.jpg">
+                                            <img class="chatlog__embed-thumbnail" src="https://i.ytimg.com/vi/v7l85PSAgog/maxresdefault.jpg" alt="Thumbnail">
+                                        </a>
+                                    </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/580290181614010371/e56e574fac66e25f1566a67ca28cc8dd.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Nehちゃん#3561" data-user-id="580290181614010371" style="color: rgb(233,30,99)">Nehちゃん</span>
+
+
+        <span class="chatlog__timestamp">09-Jun-20 10:31 PM</span>
+
+            <div class="chatlog__message " data-message-id="719906621005889576" id="message-719906621005889576">
+                <div class="chatlog__content">
+                    <div class="markdown"><a href="https://youtu.be/gbM1LKE8OVk">https://youtu.be/gbM1LKE8OVk</a> </div>
+                </div>
+
+
+                    <div class="chatlog__embed">
+                            <div class="chatlog__embed-color-pill" style="background-color: rgba(255,0,0,255)"></div>
+
+                        <div class="chatlog__embed-content-container">
+                            <div class="chatlog__embed-content">
+                                <div class="chatlog__embed-text">
+                                        <div class="chatlog__embed-author">
+
+                                                <span class="chatlog__embed-author-name">
+                                                        <a class="chatlog__embed-author-name-link" href="https://www.youtube.com/channel/UCLXxry0HqEz_mzHSsXwrhYg">をとはofficial</a>
+                                                </span>
+                                        </div>
+
+                                        <div class="chatlog__embed-title">
+                                                <a class="chatlog__embed-title-link" href="https://www.youtube.com/watch?v=gbM1LKE8OVk">
+                                                    <div class="markdown">(:]ミ - down shout leaf - femme fatale(Capchii remix)/をとは&amp;somunia-co...</div>
+                                                </a>
+                                        </div>
+
+                                        <div class="chatlog__embed-description">
+                                            <div class="markdown">をとはです、戦慄かなのさん、頓知気さきなさんのユニット、femme fataleの「down shout leaf」をそっちゃんと歌いました。
+
+femme fataleをきっかけにアイドルが好きになりました
+
+---------------------------------------------------------------
+
+■本家様：<a href="https://youtu.be/x6x3cxr23sI">https://youtu.be/x6x3cxr23sI</a>
+めっちゃかわいいので見てください
+
+------------------------------------------------------...</div>
+                                        </div>
+
+                                </div>
+
+                                    <div class="chatlog__embed-thumbnail-container">
+                                        <a class="chatlog__embed-thumbnail-link" href="https://i.ytimg.com/vi/gbM1LKE8OVk/maxresdefault.jpg">
+                                            <img class="chatlog__embed-thumbnail" src="https://i.ytimg.com/vi/gbM1LKE8OVk/maxresdefault.jpg" alt="Thumbnail">
+                                        </a>
+                                    </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/580290181614010371/e56e574fac66e25f1566a67ca28cc8dd.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Nehちゃん#3561" data-user-id="580290181614010371" style="color: rgb(233,30,99)">Nehちゃん</span>
+
+
+        <span class="chatlog__timestamp">11-Jun-20 09:28 PM</span>
+
+            <div class="chatlog__message " data-message-id="720615360952401932" id="message-720615360952401932">
+                <div class="chatlog__content">
+                    <div class="markdown"><a href="https://youtu.be/WqxuRRCBLqs">https://youtu.be/WqxuRRCBLqs</a> </div>
+                </div>
+
+
+                    <div class="chatlog__embed">
+                            <div class="chatlog__embed-color-pill" style="background-color: rgba(255,0,0,255)"></div>
+
+                        <div class="chatlog__embed-content-container">
+                            <div class="chatlog__embed-content">
+                                <div class="chatlog__embed-text">
+                                        <div class="chatlog__embed-author">
+
+                                                <span class="chatlog__embed-author-name">
+                                                        <a class="chatlog__embed-author-name-link" href="https://www.youtube.com/channel/UC3XZCxTQ55JkT35W27Jtbyg">Aiobahn</a>
+                                                </span>
+                                        </div>
+
+                                        <div class="chatlog__embed-title">
+                                                <a class="chatlog__embed-title-link" href="https://www.youtube.com/watch?v=WqxuRRCBLqs">
+                                                    <div class="markdown">달의하루 (Dareharu) - 너로피어오라 (Flowering) [Aiobahn Remix]</div>
+                                                </a>
+                                        </div>
+
+                                        <div class="chatlog__embed-description">
+                                            <div class="markdown">달의하루 (Dareharu) - 너로피어오라 (Flowering) [Aiobahn Remix]
+신곡 ‘Fragments’가 공개되었습니다.
+<a href="https://youtu.be/XQa_cKNI9fY">https://youtu.be/XQa_cKNI9fY</a>
+들으러 와주시면 감사합니다.
+
+DL: <a href="https://www.toneden.io/aiobahn/post/dareharu-flowering-aiobahn-remix">https://www.toneden.io/aiobahn/post/dareharu-flowering-aiobahn-remix</a>
+음원은 듣는 용으로만 사용 가능합니다.
+Listening purpose only, DO NOT reuse/upload it.
+
+Aiobahn...</div>
+                                        </div>
+
+                                </div>
+
+                                    <div class="chatlog__embed-thumbnail-container">
+                                        <a class="chatlog__embed-thumbnail-link" href="https://i.ytimg.com/vi/WqxuRRCBLqs/maxresdefault.jpg">
+                                            <img class="chatlog__embed-thumbnail" src="https://i.ytimg.com/vi/WqxuRRCBLqs/maxresdefault.jpg" alt="Thumbnail">
+                                        </a>
+                                    </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/561199590569672714/bad6281d27c0e32986c43f210b4ebe2b.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="天王洲Isle#1895" data-user-id="561199590569672714" style="color: rgb(233,30,99)">天王洲Isle</span>
+
+
+        <span class="chatlog__timestamp">11-Jun-20 10:04 PM</span>
+
+            <div class="chatlog__message " data-message-id="720624608264585247" id="message-720624608264585247">
+                <div class="chatlog__content">
+                    <div class="markdown"><a href="https://youtu.be/z_d3S69L_8U">https://youtu.be/z_d3S69L_8U</a> </div>
+                </div>
+
+
+                    <div class="chatlog__embed">
+                            <div class="chatlog__embed-color-pill" style="background-color: rgba(255,0,0,255)"></div>
+
+                        <div class="chatlog__embed-content-container">
+                            <div class="chatlog__embed-content">
+                                <div class="chatlog__embed-text">
+                                        <div class="chatlog__embed-author">
+
+                                                <span class="chatlog__embed-author-name">
+                                                        <a class="chatlog__embed-author-name-link" href="https://www.youtube.com/channel/UCCpOH03vDKLyjCabT_h4ZLA">Kitzophrenic</a>
+                                                </span>
+                                        </div>
+
+                                        <div class="chatlog__embed-title">
+                                                <a class="chatlog__embed-title-link" href="https://www.youtube.com/watch?v=z_d3S69L_8U">
+                                                    <div class="markdown">hungry! | meme</div>
+                                                </a>
+                                        </div>
+
+                                        <div class="chatlog__embed-description">
+                                            <div class="markdown">just a little meme to show off the evolution line of my digimon oc (Dia/Starlet&#39;s partner), StarWizardmon !! i love him so much !!
+
+learn more about him here !! <a href="https://www.deviantart.com/kitzophrenic/art/StarWizardmon-802024339">https://www.deviantart.com/kitzophrenic/art/StarWizardmon-802024339</a>
+
+--
+⋆ SUPPORT ME ON PATREON !!
+<a href="https://www.patre">https://www.patre</a>...</div>
+                                        </div>
+
+                                </div>
+
+                                    <div class="chatlog__embed-thumbnail-container">
+                                        <a class="chatlog__embed-thumbnail-link" href="https://i.ytimg.com/vi/z_d3S69L_8U/maxresdefault.jpg">
+                                            <img class="chatlog__embed-thumbnail" src="https://i.ytimg.com/vi/z_d3S69L_8U/maxresdefault.jpg" alt="Thumbnail">
+                                        </a>
+                                    </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/561199590569672714/bad6281d27c0e32986c43f210b4ebe2b.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="天王洲Isle#1895" data-user-id="561199590569672714" style="color: rgb(233,30,99)">天王洲Isle</span>
+
+
+        <span class="chatlog__timestamp">13-Jun-20 09:23 PM</span>
+
+            <div class="chatlog__message " data-message-id="721339038094852107" id="message-721339038094852107">
+                <div class="chatlog__content">
+                    <div class="markdown"><img class="emoji emoji--large" alt="waitwhat" title="waitwhat" src="https://cdn.discordapp.com/emojis/663496146471223306.png"> </div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/580290181614010371/e56e574fac66e25f1566a67ca28cc8dd.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Nehちゃん#3561" data-user-id="580290181614010371" style="color: rgb(233,30,99)">Nehちゃん</span>
+
+
+        <span class="chatlog__timestamp">15-Jun-20 08:13 AM</span>
+
+            <div class="chatlog__message " data-message-id="721864935402897508" id="message-721864935402897508">
+                <div class="chatlog__content">
+                    <div class="markdown"><a href="https://youtu.be/OPhAeQRu0sU">https://youtu.be/OPhAeQRu0sU</a> </div>
+                </div>
+
+
+                    <div class="chatlog__embed">
+                            <div class="chatlog__embed-color-pill" style="background-color: rgba(255,0,0,255)"></div>
+
+                        <div class="chatlog__embed-content-container">
+                            <div class="chatlog__embed-content">
+                                <div class="chatlog__embed-text">
+                                        <div class="chatlog__embed-author">
+
+                                                <span class="chatlog__embed-author-name">
+                                                        <a class="chatlog__embed-author-name-link" href="https://www.youtube.com/channel/UC0Qt-ycVvKBcP5J_Xz44zTg">江戸レナEdo Lena</a>
+                                                </span>
+                                        </div>
+
+                                        <div class="chatlog__embed-title">
+                                                <a class="chatlog__embed-title-link" href="https://www.youtube.com/watch?v=OPhAeQRu0sU">
+                                                    <div class="markdown">【歌ってみた】Gimme&#215;Gimme / Covered by 江戸レナ&#215;焔魔るり【八王子P &#215; Giga】</div>
+                                                </a>
+                                        </div>
+
+                                        <div class="chatlog__embed-description">
+                                            <div class="markdown"><img class="emoji " alt="💜" title="💜" src="https://twemoji.maxcdn.com/2/72x72/1f49c.png">Twitter
+ <a href="https://twitter.com/edo_lena">https://twitter.com/edo_lena</a>
+
+
+今回は！八王子P &#215; Gigaさんの「Gimme&#215;Gimme feat. 初音ミク・鏡音リン」をパープル&amp;のじゃ仲間の&quot;焔魔るり&quot;ちゃんと歌わせて頂きました！
+
+&quot;吐息漏れるこの唇を kiss で塞いで&quot;
+
+
+<img class="emoji " alt="🍆" title="🍆" src="https://twemoji.maxcdn.com/2/72x72/1f346.png">焔魔るり(RURI ENMA)
+Twitter <a href="https://twitter.com/Ruri_Enma">https://twitter.com/Ruri_Enma</a>
+YouTube <a href="https://www.youtube.com/channel/UC1nqXaKzG4hd1SRFVra16gw">https://www.youtube.com/channel/UC1nqXaKzG4hd1SRFVra16gw</a>
+
+
+༄༅༄༅༄༅༄༅༄...</div>
+                                        </div>
+
+                                </div>
+
+                                    <div class="chatlog__embed-thumbnail-container">
+                                        <a class="chatlog__embed-thumbnail-link" href="https://i.ytimg.com/vi/OPhAeQRu0sU/maxresdefault.jpg">
+                                            <img class="chatlog__embed-thumbnail" src="https://i.ytimg.com/vi/OPhAeQRu0sU/maxresdefault.jpg" alt="Thumbnail">
+                                        </a>
+                                    </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/561199590569672714/bad6281d27c0e32986c43f210b4ebe2b.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="天王洲Isle#1895" data-user-id="561199590569672714" style="color: rgb(233,30,99)">天王洲Isle</span>
+
+
+        <span class="chatlog__timestamp">15-Jun-20 08:20 AM</span>
+
+            <div class="chatlog__message " data-message-id="721866607722496051" id="message-721866607722496051">
+                <div class="chatlog__content">
+                    <div class="markdown"><img class="emoji emoji--large" alt="fujisaki" title="fujisaki" src="https://cdn.discordapp.com/emojis/695331007485837363.gif"> </div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/580290181614010371/e56e574fac66e25f1566a67ca28cc8dd.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Nehちゃん#3561" data-user-id="580290181614010371" style="color: rgb(233,30,99)">Nehちゃん</span>
+
+
+        <span class="chatlog__timestamp">15-Jun-20 06:51 PM</span>
+
+            <div class="chatlog__message " data-message-id="722025449177481266" id="message-722025449177481266">
+                <div class="chatlog__content">
+                    <div class="markdown"><a href="https://youtu.be/dVcU6i2k9-M">https://youtu.be/dVcU6i2k9-M</a> </div>
+                </div>
+
+
+                    <div class="chatlog__embed">
+                            <div class="chatlog__embed-color-pill" style="background-color: rgba(255,0,0,255)"></div>
+
+                        <div class="chatlog__embed-content-container">
+                            <div class="chatlog__embed-content">
+                                <div class="chatlog__embed-text">
+                                        <div class="chatlog__embed-author">
+
+                                                <span class="chatlog__embed-author-name">
+                                                        <a class="chatlog__embed-author-name-link" href="https://www.youtube.com/channel/UC-kbi_tDjGXp2oEIzbjEo7A">Flutter</a>
+                                                </span>
+                                        </div>
+
+                                        <div class="chatlog__embed-title">
+                                                <a class="chatlog__embed-title-link" href="https://www.youtube.com/watch?v=dVcU6i2k9-M">
+                                                    <div class="markdown">AM&#201;RICA?? MAKE HAMBURGER COUNTRY!! NICENICENICENICE!!</div>
+                                                </a>
+                                        </div>
+
+                                        <div class="chatlog__embed-description">
+                                            <div class="markdown">Am&#233;rica??
+Am&#233;rica?!
+Make Hamburger Country!!
+
+ #NICENICENICENICENICE!!
+#VRChat</div>
+                                        </div>
+
+                                </div>
+
+                                    <div class="chatlog__embed-thumbnail-container">
+                                        <a class="chatlog__embed-thumbnail-link" href="https://i.ytimg.com/vi/dVcU6i2k9-M/sddefault.jpg">
+                                            <img class="chatlog__embed-thumbnail" src="https://i.ytimg.com/vi/dVcU6i2k9-M/sddefault.jpg" alt="Thumbnail">
+                                        </a>
+                                    </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/580290181614010371/e56e574fac66e25f1566a67ca28cc8dd.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Nehちゃん#3561" data-user-id="580290181614010371" style="color: rgb(233,30,99)">Nehちゃん</span>
+
+
+        <span class="chatlog__timestamp">15-Jun-20 07:04 PM</span>
+
+            <div class="chatlog__message " data-message-id="722028719010742322" id="message-722028719010742322">
+                <div class="chatlog__content">
+                    <div class="markdown"><a href="https://youtu.be/W1J2ZELm7Sw">https://youtu.be/W1J2ZELm7Sw</a> </div>
+                </div>
+
+
+                    <div class="chatlog__embed">
+                            <div class="chatlog__embed-color-pill" style="background-color: rgba(255,0,0,255)"></div>
+
+                        <div class="chatlog__embed-content-container">
+                            <div class="chatlog__embed-content">
+                                <div class="chatlog__embed-text">
+                                        <div class="chatlog__embed-author">
+
+                                                <span class="chatlog__embed-author-name">
+                                                        <a class="chatlog__embed-author-name-link" href="https://www.youtube.com/channel/UCaXRnD344VW4pw9-cqmBEzw">23.exe</a>
+                                                </span>
+                                        </div>
+
+                                        <div class="chatlog__embed-title">
+                                                <a class="chatlog__embed-title-link" href="https://www.youtube.com/watch?v=W1J2ZELm7Sw">
+                                                    <div class="markdown">ochatime - ft.Hatsune Miku</div>
+                                                </a>
+                                        </div>
+
+                                        <div class="chatlog__embed-description">
+                                            <div class="markdown">歌詞は字幕をオンにすると表示できます。
+
+DL &amp; Stream
+<a href="https://linkco.re/FqHh4aff">https://linkco.re/FqHh4aff</a>
+<a href="https://23exe.bandcamp.com/track/ochatime">https://23exe.bandcamp.com/track/ochatime</a>
+
+SNS
+<a href="https://soundcloud.com/23-sc">https://soundcloud.com/23-sc</a>
+<a href="https://twitter.com/23_twt">https://twitter.com/23_twt</a></div>
+                                        </div>
+
+                                </div>
+
+                                    <div class="chatlog__embed-thumbnail-container">
+                                        <a class="chatlog__embed-thumbnail-link" href="https://i.ytimg.com/vi/W1J2ZELm7Sw/maxresdefault.jpg">
+                                            <img class="chatlog__embed-thumbnail" src="https://i.ytimg.com/vi/W1J2ZELm7Sw/maxresdefault.jpg" alt="Thumbnail">
+                                        </a>
+                                    </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/580290181614010371/e56e574fac66e25f1566a67ca28cc8dd.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Nehちゃん#3561" data-user-id="580290181614010371" style="color: rgb(233,30,99)">Nehちゃん</span>
+
+
+        <span class="chatlog__timestamp">15-Jun-20 10:00 PM</span>
+
+            <div class="chatlog__message " data-message-id="722072934738296842" id="message-722072934738296842">
+                <div class="chatlog__content">
+                    <div class="markdown"><a href="https://youtu.be/BsFu9oMFrJU">https://youtu.be/BsFu9oMFrJU</a> </div>
+                </div>
+
+
+                    <div class="chatlog__embed">
+                            <div class="chatlog__embed-color-pill" style="background-color: rgba(255,0,0,255)"></div>
+
+                        <div class="chatlog__embed-content-container">
+                            <div class="chatlog__embed-content">
+                                <div class="chatlog__embed-text">
+                                        <div class="chatlog__embed-author">
+
+                                                <span class="chatlog__embed-author-name">
+                                                        <a class="chatlog__embed-author-name-link" href="https://www.youtube.com/channel/UCvM_2cYlaDyYYrwr5Y6kUpg">e Yeahsom</a>
+                                                </span>
+                                        </div>
+
+                                        <div class="chatlog__embed-title">
+                                                <a class="chatlog__embed-title-link" href="https://www.youtube.com/watch?v=BsFu9oMFrJU">
+                                                    <div class="markdown">U Got That - Helltaker | FULL VERSION</div>
+                                                </a>
+                                        </div>
+
+                                        <div class="chatlog__embed-description">
+                                            <div class="markdown">BGM : Halogen - U Got That
+<a href="https://youtu.be/9W6AN_eQeZo">https://youtu.be/9W6AN_eQeZo</a>
+
+Image source(game) : Helltaker</div>
+                                        </div>
+
+                                </div>
+
+                                    <div class="chatlog__embed-thumbnail-container">
+                                        <a class="chatlog__embed-thumbnail-link" href="https://i.ytimg.com/vi/BsFu9oMFrJU/maxresdefault.jpg">
+                                            <img class="chatlog__embed-thumbnail" src="https://i.ytimg.com/vi/BsFu9oMFrJU/maxresdefault.jpg" alt="Thumbnail">
+                                        </a>
+                                    </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/612550474822057984/3cc0d253b0315a7b59a3cf328fef3644.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="sushitrash#7030" data-user-id="612550474822057984" style="">sushitrash</span>
+
+
+        <span class="chatlog__timestamp">16-Jun-20 05:04 AM</span>
+
+            <div class="chatlog__message " data-message-id="722179665694949466" id="message-722179665694949466">
+                <div class="chatlog__content">
+                    <div class="markdown"><img class="emoji emoji--large" alt="san" title="san" src="https://cdn.discordapp.com/emojis/695328553000108124.png"> </div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/580290181614010371/e56e574fac66e25f1566a67ca28cc8dd.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Nehちゃん#3561" data-user-id="580290181614010371" style="color: rgb(233,30,99)">Nehちゃん</span>
+
+
+        <span class="chatlog__timestamp">16-Jun-20 05:52 AM</span>
+
+            <div class="chatlog__message " data-message-id="722191795974438923" id="message-722191795974438923">
+                <div class="chatlog__content">
+                    <div class="markdown"><span class="mention" title="sushitrash#7030">@sushitrash</span> yo<img class="emoji " alt="im" title="im" src="https://cdn.discordapp.com/emojis/722191500733317227.png"> </div>
+                </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="722191864794578984" id="message-722191864794578984">
+                <div class="chatlog__content">
+                    <div class="markdown"><img class="emoji emoji--large" alt="im" title="im" src="https://cdn.discordapp.com/emojis/722191500733317227.png"> </div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/612550474822057984/3cc0d253b0315a7b59a3cf328fef3644.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="sushitrash#7030" data-user-id="612550474822057984" style="">sushitrash</span>
+
+
+        <span class="chatlog__timestamp">16-Jun-20 05:55 AM</span>
+
+            <div class="chatlog__message " data-message-id="722192505558532146" id="message-722192505558532146">
+                <div class="chatlog__content">
+                    <div class="markdown">Hello </div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/580290181614010371/e56e574fac66e25f1566a67ca28cc8dd.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Nehちゃん#3561" data-user-id="580290181614010371" style="color: rgb(233,30,99)">Nehちゃん</span>
+
+
+        <span class="chatlog__timestamp">16-Jun-20 05:55 AM</span>
+
+            <div class="chatlog__message " data-message-id="722192695224696975" id="message-722192695224696975">
+                <div class="chatlog__content">
+                    <div class="markdown"><span class="mention" title="sushitrash#7030">@sushitrash</span> Are you a rapper? </div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/612550474822057984/3cc0d253b0315a7b59a3cf328fef3644.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="sushitrash#7030" data-user-id="612550474822057984" style="">sushitrash</span>
+
+
+        <span class="chatlog__timestamp">16-Jun-20 05:56 AM</span>
+
+            <div class="chatlog__message " data-message-id="722192847436251228" id="message-722192847436251228">
+                <div class="chatlog__content">
+                    <div class="markdown">wha- no lol </div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/580290181614010371/e56e574fac66e25f1566a67ca28cc8dd.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Nehちゃん#3561" data-user-id="580290181614010371" style="color: rgb(233,30,99)">Nehちゃん</span>
+
+
+        <span class="chatlog__timestamp">16-Jun-20 05:57 AM</span>
+
+            <div class="chatlog__message " data-message-id="722193141431664681" id="message-722193141431664681">
+                <div class="chatlog__content">
+                    <div class="markdown">ok.
+Send me any emoji you want to use. I will register. </div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/612550474822057984/3cc0d253b0315a7b59a3cf328fef3644.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="sushitrash#7030" data-user-id="612550474822057984" style="">sushitrash</span>
+
+
+        <span class="chatlog__timestamp">16-Jun-20 06:03 AM</span>
+
+            <div class="chatlog__message " data-message-id="722194590844715128" id="message-722194590844715128">
+                <div class="chatlog__content">
+                    <div class="markdown">uh register for what? </div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/580290181614010371/e56e574fac66e25f1566a67ca28cc8dd.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Nehちゃん#3561" data-user-id="580290181614010371" style="color: rgb(233,30,99)">Nehちゃん</span>
+
+
+        <span class="chatlog__timestamp">16-Jun-20 06:07 AM</span>
+
+            <div class="chatlog__message " data-message-id="722195560345501768" id="message-722195560345501768">
+                <div class="chatlog__content">
+                    <div class="markdown">Using emoji.
+Please let me know if you know a good image as I am not familiar with memes. </div>
+                </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="722195734937731072" id="message-722195734937731072">
+                <div class="chatlog__content">
+                    <div class="markdown"><img class="emoji emoji--large" alt="67945984_p3_master1200" title="67945984_p3_master1200" src="https://cdn.discordapp.com/emojis/671535473923194880.png"> <img class="emoji emoji--large" alt="im" title="im" src="https://cdn.discordapp.com/emojis/722191500733317227.png"> <img class="emoji emoji--large" alt="san" title="san" src="https://cdn.discordapp.com/emojis/695328553000108124.png"> </div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/612550474822057984/3cc0d253b0315a7b59a3cf328fef3644.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="sushitrash#7030" data-user-id="612550474822057984" style="">sushitrash</span>
+
+
+        <span class="chatlog__timestamp">16-Jun-20 06:08 AM</span>
+
+            <div class="chatlog__message " data-message-id="722195937799438427" id="message-722195937799438427">
+                <div class="chatlog__content">
+                    <div class="markdown">uh </div>
+                </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="722195980702974082" id="message-722195980702974082">
+                <div class="chatlog__content">
+                    <div class="markdown">;_; </div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/580290181614010371/e56e574fac66e25f1566a67ca28cc8dd.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Nehちゃん#3561" data-user-id="580290181614010371" style="color: rgb(233,30,99)">Nehちゃん</span>
+
+
+        <span class="chatlog__timestamp">16-Jun-20 06:16 AM</span>
+
+            <div class="chatlog__message " data-message-id="722197772857770094" id="message-722197772857770094">
+                <div class="chatlog__content">
+                    <div class="markdown">never mind. </div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/580290181614010371/e56e574fac66e25f1566a67ca28cc8dd.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Nehちゃん#3561" data-user-id="580290181614010371" style="color: rgb(233,30,99)">Nehちゃん</span>
+
+
+        <span class="chatlog__timestamp">17-Jun-20 07:26 PM</span>
+
+            <div class="chatlog__message " data-message-id="722759078165741631" id="message-722759078165741631">
+                <div class="chatlog__content">
+                    <div class="markdown"><a href="https://youtu.be/21z3_LxWacA">https://youtu.be/21z3_LxWacA</a> </div>
+                </div>
+
+
+                    <div class="chatlog__embed">
+                            <div class="chatlog__embed-color-pill" style="background-color: rgba(255,0,0,255)"></div>
+
+                        <div class="chatlog__embed-content-container">
+                            <div class="chatlog__embed-content">
+                                <div class="chatlog__embed-text">
+                                        <div class="chatlog__embed-author">
+
+                                                <span class="chatlog__embed-author-name">
+                                                        <a class="chatlog__embed-author-name-link" href="https://www.youtube.com/channel/UCc0_4m8a-YtBHEcYwjEnbxw">makeUmove</a>
+                                                </span>
+                                        </div>
+
+                                        <div class="chatlog__embed-title">
+                                                <a class="chatlog__embed-title-link" href="https://www.youtube.com/watch?v=21z3_LxWacA">
+                                                    <div class="markdown">[Beat Saber] YOASOBI - Yoru ni Kakeru (Short ver.) (EXPERT)</div>
+                                                </a>
+                                        </div>
+
+                                        <div class="chatlog__embed-description">
+                                            <div class="markdown">Thank you for English subtitles, MuLyer!
+
+Discord: <a href="https://discord.gg/makeumove">https://discord.gg/makeumove</a>
+
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+Music: YOASOBI - 夜に駆ける / Yoru ni Kakeru
+<a href="https://www.youtube.com/watch?v=by4SYYWlhEs">https://www.youtube.com/watch?v=by4SYYWlhEs</a>
+
+Beatmap: Dack
+- - - - - - - - ...</div>
+                                        </div>
+
+                                </div>
+
+                                    <div class="chatlog__embed-thumbnail-container">
+                                        <a class="chatlog__embed-thumbnail-link" href="https://i.ytimg.com/vi/21z3_LxWacA/maxresdefault.jpg">
+                                            <img class="chatlog__embed-thumbnail" src="https://i.ytimg.com/vi/21z3_LxWacA/maxresdefault.jpg" alt="Thumbnail">
+                                        </a>
+                                    </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/580290181614010371/e56e574fac66e25f1566a67ca28cc8dd.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Nehちゃん#3561" data-user-id="580290181614010371" style="color: rgb(233,30,99)">Nehちゃん</span>
+
+
+        <span class="chatlog__timestamp">17-Jun-20 09:40 PM</span>
+
+            <div class="chatlog__message " data-message-id="722792836528865281" id="message-722792836528865281">
+                <div class="chatlog__content">
+                    <div class="markdown"><a href="https://hypebeast.com/2019/8/ozweego">https://hypebeast.com/2019/8/ozweego</a>
+cool </div>
+                </div>
+
+
+                    <div class="chatlog__embed">
+                            <div class="chatlog__embed-color-pill" style="background-color: rgba(255,255,255,255)"></div>
+
+                        <div class="chatlog__embed-content-container">
+                            <div class="chatlog__embed-content">
+                                <div class="chatlog__embed-text">
+
+                                        <div class="chatlog__embed-title">
+                                                <a class="chatlog__embed-title-link" href="https://hypebeast.com/2019/8/ozweego">
+                                                    <div class="markdown">EXCLUSIVE: Best Drops of 2048</div>
+                                                </a>
+                                        </div>
+
+                                        <div class="chatlog__embed-description">
+                                            <div class="markdown">adidas Originals reimagines a futuristic classic from 2019.</div>
+                                        </div>
+
+                                </div>
+
+                                    <div class="chatlog__embed-thumbnail-container">
+                                        <a class="chatlog__embed-thumbnail-link" href="https://image-cdn.hypb.st/https%3A%2F%2Fhypebeast.com%2Fimage%2F2019%2F08%2FImage-from-iOS.jpg?w=960&amp;cbr=1&amp;q=90&amp;fit=max">
+                                            <img class="chatlog__embed-thumbnail" src="https://image-cdn.hypb.st/https%3A%2F%2Fhypebeast.com%2Fimage%2F2019%2F08%2FImage-from-iOS.jpg?w=960&amp;cbr=1&amp;q=90&amp;fit=max" alt="Thumbnail">
+                                        </a>
+                                    </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/580290181614010371/e56e574fac66e25f1566a67ca28cc8dd.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Nehちゃん#3561" data-user-id="580290181614010371" style="color: rgb(233,30,99)">Nehちゃん</span>
+
+
+        <span class="chatlog__timestamp">20-Jun-20 05:03 AM</span>
+
+            <div class="chatlog__message " data-message-id="723628943407579177" id="message-723628943407579177">
+                <div class="chatlog__content">
+                    <div class="markdown"> </div>
+                </div>
+
+                    <div class="chatlog__attachment">
+                            <a href="https://cdn.discordapp.com/attachments/671727218552078345/723628942623506522/Hentai.mp4">
+Attachment: Hentai.mp4 (4.19 MB)                            </a>
+                    </div>
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/580290181614010371/e56e574fac66e25f1566a67ca28cc8dd.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Nehちゃん#3561" data-user-id="580290181614010371" style="color: rgb(233,30,99)">Nehちゃん</span>
+
+
+        <span class="chatlog__timestamp">22-Jun-20 07:19 PM</span>
+
+            <div class="chatlog__message " data-message-id="724569140529987665" id="message-724569140529987665">
+                <div class="chatlog__content">
+                    <div class="markdown"><a href="https://youtu.be/1OowcVcx1g4">https://youtu.be/1OowcVcx1g4</a> </div>
+                </div>
+
+
+                    <div class="chatlog__embed">
+                            <div class="chatlog__embed-color-pill" style="background-color: rgba(255,0,0,255)"></div>
+
+                        <div class="chatlog__embed-content-container">
+                            <div class="chatlog__embed-content">
+                                <div class="chatlog__embed-text">
+                                        <div class="chatlog__embed-author">
+
+                                                <span class="chatlog__embed-author-name">
+                                                        <a class="chatlog__embed-author-name-link" href="https://www.youtube.com/channel/UCRXdep1w5uD8dp8d-SA0Rww">Kekyoin</a>
+                                                </span>
+                                        </div>
+
+                                        <div class="chatlog__embed-title">
+                                                <a class="chatlog__embed-title-link" href="https://www.youtube.com/watch?v=1OowcVcx1g4">
+                                                    <div class="markdown">DIO Tool</div>
+                                                </a>
+                                        </div>
+
+                                        <div class="chatlog__embed-description">
+                                            <div class="markdown">Author: 和猫法师
+Source: <a href="https://www.bilibili.com/video/BV1w741157SU">https://www.bilibili.com/video/BV1w741157SU</a></div>
+                                        </div>
+
+                                </div>
+
+                                    <div class="chatlog__embed-thumbnail-container">
+                                        <a class="chatlog__embed-thumbnail-link" href="https://i.ytimg.com/vi/1OowcVcx1g4/maxresdefault.jpg">
+                                            <img class="chatlog__embed-thumbnail" src="https://i.ytimg.com/vi/1OowcVcx1g4/maxresdefault.jpg" alt="Thumbnail">
+                                        </a>
+                                    </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/580290181614010371/e56e574fac66e25f1566a67ca28cc8dd.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Nehちゃん#3561" data-user-id="580290181614010371" style="color: rgb(233,30,99)">Nehちゃん</span>
+
+
+        <span class="chatlog__timestamp">24-Jun-20 09:05 AM</span>
+
+            <div class="chatlog__message " data-message-id="725139576863195186" id="message-725139576863195186">
+                <div class="chatlog__content">
+                    <div class="markdown"><a href="https://youtu.be/nVXTz-oPilE%F0%9F%8D%B4">https://youtu.be/nVXTz-oPilE&#127860;</a> <img class="emoji " alt="😩" title="😩" src="https://twemoji.maxcdn.com/2/72x72/1f629.png"> </div>
+                </div>
+
+
+                    <div class="chatlog__embed">
+                            <div class="chatlog__embed-color-pill" style="background-color: rgba(255,0,0,255)"></div>
+
+                        <div class="chatlog__embed-content-container">
+                            <div class="chatlog__embed-content">
+                                <div class="chatlog__embed-text">
+                                        <div class="chatlog__embed-author">
+
+                                                <span class="chatlog__embed-author-name">
+                                                        <a class="chatlog__embed-author-name-link" href="https://www.youtube.com/channel/UCu9g5OmzcCpcJnmSYyHnIVw">Aden Films</a>
+                                                </span>
+                                        </div>
+
+                                        <div class="chatlog__embed-title">
+                                                <a class="chatlog__embed-title-link" href="https://www.youtube.com/watch?v=nVXTz-oPilE">
+                                                    <div class="markdown">Fried Rice - Japanese Style</div>
+                                                </a>
+                                        </div>
+
+                                        <div class="chatlog__embed-description">
+                                            <div class="markdown">Fried rice with onion, garlic, egg, spring onion and some fat</div>
+                                        </div>
+
+                                </div>
+
+                                    <div class="chatlog__embed-thumbnail-container">
+                                        <a class="chatlog__embed-thumbnail-link" href="https://i.ytimg.com/vi/nVXTz-oPilE/maxresdefault.jpg">
+                                            <img class="chatlog__embed-thumbnail" src="https://i.ytimg.com/vi/nVXTz-oPilE/maxresdefault.jpg" alt="Thumbnail">
+                                        </a>
+                                    </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+
+                    <div class="chatlog__reactions">
+                            <div class="chatlog__reaction">
+                                <img class="emoji emoji--small" alt="GWslippyPeepoHugged" title="GWslippyPeepoHugged" src="https://cdn.discordapp.com/emojis/407618441017688064.png">
+                                <span class="chatlog__reaction-count">1</span>
+                            </div>
+                    </div>
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/580290181614010371/e56e574fac66e25f1566a67ca28cc8dd.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Nehちゃん#3561" data-user-id="580290181614010371" style="color: rgb(233,30,99)">Nehちゃん</span>
+
+
+        <span class="chatlog__timestamp">25-Jun-20 06:12 PM</span>
+
+            <div class="chatlog__message " data-message-id="725639570640732202" id="message-725639570640732202">
+                <div class="chatlog__content">
+                    <div class="markdown"> </div>
+                </div>
+
+                    <div class="chatlog__attachment">
+                            <a href="https://cdn.discordapp.com/attachments/671727218552078345/725639570120507433/3LH0Gswl.jpg">
+                                    <img class="chatlog__attachment-thumbnail" src="https://cdn.discordapp.com/attachments/671727218552078345/725639570120507433/3LH0Gswl.jpg" alt="Attachment">
+                            </a>
+                    </div>
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/580290181614010371/e56e574fac66e25f1566a67ca28cc8dd.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Nehちゃん#3561" data-user-id="580290181614010371" style="color: rgb(233,30,99)">Nehちゃん</span>
+
+
+        <span class="chatlog__timestamp">27-Jun-20 05:35 PM</span>
+
+            <div class="chatlog__message " data-message-id="726355085587906590" id="message-726355085587906590">
+                <div class="chatlog__content">
+                    <div class="markdown"> </div>
+                </div>
+
+                    <div class="chatlog__attachment">
+                            <a href="https://cdn.discordapp.com/attachments/671727218552078345/726355085201899591/IKbzDjhl.jpg">
+                                    <img class="chatlog__attachment-thumbnail" src="https://cdn.discordapp.com/attachments/671727218552078345/726355085201899591/IKbzDjhl.jpg" alt="Attachment">
+                            </a>
+                    </div>
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="726355304433975347" id="message-726355304433975347">
+                <div class="chatlog__content">
+                    <div class="markdown"><a href="https://youtu.be/onTKv0A44PA">https://youtu.be/onTKv0A44PA</a> </div>
+                </div>
+
+
+                    <div class="chatlog__embed">
+                            <div class="chatlog__embed-color-pill" style="background-color: rgba(255,0,0,255)"></div>
+
+                        <div class="chatlog__embed-content-container">
+                            <div class="chatlog__embed-content">
+                                <div class="chatlog__embed-text">
+                                        <div class="chatlog__embed-author">
+
+                                                <span class="chatlog__embed-author-name">
+                                                        <a class="chatlog__embed-author-name-link" href="https://www.youtube.com/channel/UCY-eObJE_4t7WyoeaMOfq0g">WAXMASTER TAKANOME</a>
+                                                </span>
+                                        </div>
+
+                                        <div class="chatlog__embed-title">
+                                                <a class="chatlog__embed-title-link" href="https://www.youtube.com/watch?v=onTKv0A44PA">
+                                                    <div class="markdown">[PV] 呂布カルマ - 俺の勝手</div>
+                                                </a>
+                                        </div>
+
+                                        <div class="chatlog__embed-description">
+                                            <div class="markdown">Track by DJ Whitesmith
+
+呂布カルマ
+&quot;The Cool Core&quot;
+NOW ON SALE
+
+
+絶対零度、大人向けヒップホップ。2年以上のブランクを経て発表される呂布カルマの4枚目のフルアルバム。己の思考、精神世界の内へ内へと入り込んでいくリリックの世界観は、過去3作と比較しても最も冷たく、最もディープな仕上がりとなった。ドラッグ、アルコールへのアディクトやセルフボーストなどのこれまで日本語ラップが蹂躙し倒してきたトピックを捨て、より哲学的に、より肉感的に進化したラップはリスナーをふるいにかけることになるだろう。客演には自身...</div>
+                                        </div>
+
+                                </div>
+
+                                    <div class="chatlog__embed-thumbnail-container">
+                                        <a class="chatlog__embed-thumbnail-link" href="https://i.ytimg.com/vi/onTKv0A44PA/maxresdefault.jpg">
+                                            <img class="chatlog__embed-thumbnail" src="https://i.ytimg.com/vi/onTKv0A44PA/maxresdefault.jpg" alt="Thumbnail">
+                                        </a>
+                                    </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/580290181614010371/e56e574fac66e25f1566a67ca28cc8dd.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Nehちゃん#3561" data-user-id="580290181614010371" style="color: rgb(233,30,99)">Nehちゃん</span>
+
+
+        <span class="chatlog__timestamp">29-Jun-20 05:30 PM</span>
+
+            <div class="chatlog__message " data-message-id="727078407212367914" id="message-727078407212367914">
+                <div class="chatlog__content">
+                    <div class="markdown"><a href="https://twitter.com/LogankadeLK/status/1276959759648919553">https://twitter.com/LogankadeLK/status/1276959759648919553</a> </div>
+                </div>
+
+
+                    <div class="chatlog__embed">
+                            <div class="chatlog__embed-color-pill" style="background-color: rgba(29,161,242,255)"></div>
+
+                        <div class="chatlog__embed-content-container">
+                            <div class="chatlog__embed-content">
+                                <div class="chatlog__embed-text">
+                                        <div class="chatlog__embed-author">
+                                                <img class="chatlog__embed-author-icon" src="https://pbs.twimg.com/profile_images/1257971452726276104/jRDgwOpQ_bigger.jpg" alt="Author icon">
+
+                                                <span class="chatlog__embed-author-name">
+                                                        <a class="chatlog__embed-author-name-link" href="https://twitter.com/LogankadeLK">Logan Kade (@LogankadeLK)</a>
+                                                </span>
+                                        </div>
+
+
+                                        <div class="chatlog__embed-description">
+                                            <div class="markdown">Working on making a music video animated like this <img class="emoji " alt="🎶" title="🎶" src="https://twemoji.maxcdn.com/2/72x72/1f3b6.png"> also another 8 bit beat ✨<img class="emoji " alt="💫" title="💫" src="https://twemoji.maxcdn.com/2/72x72/1f4ab.png"> <a href="https://t.co/nVaEn0XZHt">https://t.co/nVaEn0XZHt</a></div>
+                                        </div>
+
+                                </div>
+
+                                    <div class="chatlog__embed-thumbnail-container">
+                                        <a class="chatlog__embed-thumbnail-link" href="https://pbs.twimg.com/ext_tw_video_thumb/1276959588131180545/pu/img/D3Ue837ovw3ZqU-w.jpg">
+                                            <img class="chatlog__embed-thumbnail" src="https://pbs.twimg.com/ext_tw_video_thumb/1276959588131180545/pu/img/D3Ue837ovw3ZqU-w.jpg" alt="Thumbnail">
+                                        </a>
+                                    </div>
+                            </div>
+
+
+                                <div class="chatlog__embed-footer">
+                                        <img class="chatlog__embed-footer-icon" src="https://abs.twimg.com/icons/apple-touch-icon-192x192.png" alt="Footer icon">
+
+                                        <span class="chatlog__embed-footer-text">
+Twitter
+
+                                        </span>
+                                </div>
+                        </div>
+                    </div>
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/580290181614010371/e56e574fac66e25f1566a67ca28cc8dd.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Nehちゃん#3561" data-user-id="580290181614010371" style="color: rgb(233,30,99)">Nehちゃん</span>
+
+
+        <span class="chatlog__timestamp">01-Jul-20 08:14 AM</span>
+
+            <div class="chatlog__message " data-message-id="727663332407902210" id="message-727663332407902210">
+                <div class="chatlog__content">
+                    <div class="markdown"><a href="https://youtu.be/KiurTGIyPNo">https://youtu.be/KiurTGIyPNo</a>
+Tokyo! </div>
+                </div>
+
+
+                    <div class="chatlog__embed">
+                            <div class="chatlog__embed-color-pill" style="background-color: rgba(255,0,0,255)"></div>
+
+                        <div class="chatlog__embed-content-container">
+                            <div class="chatlog__embed-content">
+                                <div class="chatlog__embed-text">
+                                        <div class="chatlog__embed-author">
+
+                                                <span class="chatlog__embed-author-name">
+                                                        <a class="chatlog__embed-author-name-link" href="https://www.youtube.com/channel/UCaghC0OZwAdidMrbvxkcrPg">PlayStation Japan</a>
+                                                </span>
+                                        </div>
+
+                                        <div class="chatlog__embed-title">
+                                                <a class="chatlog__embed-title-link" href="https://www.youtube.com/watch?v=KiurTGIyPNo">
+                                                    <div class="markdown">『Ghostwire: Tokyo』 ゲームプレイ公開トレーラー</div>
+                                                </a>
+                                        </div>
+
+                                        <div class="chatlog__embed-description">
+                                            <div class="markdown">ゲーム概要：
+Ghostwire: Tokyo は、三上真司率いるTango GameworksがPlayStation&#174;5（PS5™）用に開発した、息をのむほど美しいヴィジュアルのアクションアドベンチャーゲームです。Tango Gameworksが描く、未来的な都市の中に伝統と歴史が息づくメトロポリス、東京のビジョンを、迫り来る超常現象との戦いを通してご体感ください。
+
+ストーリー：
+東京にて、大規模な超常現象が発生。人口の99%が突如消失し、時を同じくして妖怪や亡霊が街にあふれ出した。プレイヤーは自らの &quot;&quot;超常&quot;&quot; の力を行使して、消失事件の...</div>
+                                        </div>
+
+                                </div>
+
+                                    <div class="chatlog__embed-thumbnail-container">
+                                        <a class="chatlog__embed-thumbnail-link" href="https://i.ytimg.com/vi/KiurTGIyPNo/maxresdefault.jpg">
+                                            <img class="chatlog__embed-thumbnail" src="https://i.ytimg.com/vi/KiurTGIyPNo/maxresdefault.jpg" alt="Thumbnail">
+                                        </a>
+                                    </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/580290181614010371/e56e574fac66e25f1566a67ca28cc8dd.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Nehちゃん#3561" data-user-id="580290181614010371" style="color: rgb(233,30,99)">Nehちゃん</span>
+
+
+        <span class="chatlog__timestamp">09-Jul-20 09:50 PM</span>
+
+            <div class="chatlog__message " data-message-id="730767748392681564" id="message-730767748392681564">
+                <div class="chatlog__content">
+                    <div class="markdown"> </div>
+                </div>
+
+                    <div class="chatlog__attachment">
+                            <a href="https://cdn.discordapp.com/attachments/671727218552078345/730767748551934014/EceSpgJUMAA7yzL.jpeg">
+                                    <img class="chatlog__attachment-thumbnail" src="https://cdn.discordapp.com/attachments/671727218552078345/730767748551934014/EceSpgJUMAA7yzL.jpeg" alt="Attachment">
+                            </a>
+                    </div>
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="730767750917652551" id="message-730767750917652551">
+                <div class="chatlog__content">
+                    <div class="markdown"> </div>
+                </div>
+
+                    <div class="chatlog__attachment">
+                            <a href="https://cdn.discordapp.com/attachments/671727218552078345/730767750615793664/EcZBxVhUEAAwUbz.jpeg">
+                                    <img class="chatlog__attachment-thumbnail" src="https://cdn.discordapp.com/attachments/671727218552078345/730767750615793664/EcZBxVhUEAAwUbz.jpeg" alt="Attachment">
+                            </a>
+                    </div>
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/580290181614010371/e56e574fac66e25f1566a67ca28cc8dd.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Nehちゃん#3561" data-user-id="580290181614010371" style="color: rgb(233,30,99)">Nehちゃん</span>
+
+
+        <span class="chatlog__timestamp">02-Aug-20 06:31 PM</span>
+
+            <div class="chatlog__message " data-message-id="739415010144682004" id="message-739415010144682004">
+                <div class="chatlog__content">
+                    <div class="markdown"> </div>
+                </div>
+
+                    <div class="chatlog__attachment">
+                            <a href="https://cdn.discordapp.com/attachments/671727218552078345/739415007644745737/EeRFdrHXgAQI1C2.png">
+                                    <img class="chatlog__attachment-thumbnail" src="https://cdn.discordapp.com/attachments/671727218552078345/739415007644745737/EeRFdrHXgAQI1C2.png" alt="Attachment">
+                            </a>
+                    </div>
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/580290181614010371/e56e574fac66e25f1566a67ca28cc8dd.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Nehちゃん#3561" data-user-id="580290181614010371" style="color: rgb(233,30,99)">Nehちゃん</span>
+
+
+        <span class="chatlog__timestamp">28-Aug-20 08:55 AM</span>
+
+            <div class="chatlog__message " data-message-id="748692152414109706" id="message-748692152414109706">
+                <div class="chatlog__content">
+                    <div class="markdown"><a href="https://twitter.com/OutofVTubers/status/1289709442699649025">https://twitter.com/OutofVTubers/status/1289709442699649025</a> </div>
+                </div>
+
+
+                    <div class="chatlog__embed">
+                            <div class="chatlog__embed-color-pill" style="background-color: rgba(29,161,242,255)"></div>
+
+                        <div class="chatlog__embed-content-container">
+                            <div class="chatlog__embed-content">
+                                <div class="chatlog__embed-text">
+                                        <div class="chatlog__embed-author">
+                                                <img class="chatlog__embed-author-icon" src="https://pbs.twimg.com/profile_images/1290560911929835520/2qmVdeYc_bigger.jpg" alt="Author icon">
+
+                                                <span class="chatlog__embed-author-name">
+                                                        <a class="chatlog__embed-author-name-link" href="https://twitter.com/OutofVTubers">Out of Context Virtual Youtubers (@OutofVTubers)</a>
+                                                </span>
+                                        </div>
+
+
+                                        <div class="chatlog__embed-description">
+                                            <div class="markdown"><a href="https://t.co/ubXVbktTkR">https://t.co/ubXVbktTkR</a></div>
+                                        </div>
+
+                                        <div class="chatlog__embed-fields">
+                                                <div class="chatlog__embed-field chatlog__embed-field--inline">
+                                                        <div class="chatlog__embed-field-name">
+                                                            <div class="markdown">Retweets</div>
+                                                        </div>
+
+                                                        <div class="chatlog__embed-field-value">
+                                                            <div class="markdown">7029</div>
+                                                        </div>
+                                                </div>
+                                                <div class="chatlog__embed-field chatlog__embed-field--inline">
+                                                        <div class="chatlog__embed-field-name">
+                                                            <div class="markdown">Likes</div>
+                                                        </div>
+
+                                                        <div class="chatlog__embed-field-value">
+                                                            <div class="markdown">26059</div>
+                                                        </div>
+                                                </div>
+                                        </div>
+                                </div>
+
+                                    <div class="chatlog__embed-thumbnail-container">
+                                        <a class="chatlog__embed-thumbnail-link" href="https://pbs.twimg.com/ext_tw_video_thumb/1289709300277866503/pu/img/s8wYwdiTNALn-XrR.jpg">
+                                            <img class="chatlog__embed-thumbnail" src="https://pbs.twimg.com/ext_tw_video_thumb/1289709300277866503/pu/img/s8wYwdiTNALn-XrR.jpg" alt="Thumbnail">
+                                        </a>
+                                    </div>
+                            </div>
+
+
+                                <div class="chatlog__embed-footer">
+                                        <img class="chatlog__embed-footer-icon" src="https://abs.twimg.com/icons/apple-touch-icon-192x192.png" alt="Footer icon">
+
+                                        <span class="chatlog__embed-footer-text">
+Twitter
+
+                                        </span>
+                                </div>
+                        </div>
+                    </div>
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/580290181614010371/e56e574fac66e25f1566a67ca28cc8dd.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Nehちゃん#3561" data-user-id="580290181614010371" style="color: rgb(233,30,99)">Nehちゃん</span>
+
+
+        <span class="chatlog__timestamp">28-Aug-20 09:24 AM</span>
+
+            <div class="chatlog__message " data-message-id="748699457885044746" id="message-748699457885044746">
+                <div class="chatlog__content">
+                    <div class="markdown"><a href="https://twitter.com/psuedofolio/status/1299101275548774402">https://twitter.com/psuedofolio/status/1299101275548774402</a> </div>
+                </div>
+
+
+                    <div class="chatlog__embed">
+                            <div class="chatlog__embed-color-pill" style="background-color: rgba(29,161,242,255)"></div>
+
+                        <div class="chatlog__embed-content-container">
+                            <div class="chatlog__embed-content">
+                                <div class="chatlog__embed-text">
+                                        <div class="chatlog__embed-author">
+                                                <img class="chatlog__embed-author-icon" src="https://pbs.twimg.com/profile_images/1190115758942171136/NflR4CbJ_bigger.jpg" alt="Author icon">
+
+                                                <span class="chatlog__embed-author-name">
+                                                        <a class="chatlog__embed-author-name-link" href="https://twitter.com/psuedofolio">psudonym (@psuedofolio)</a>
+                                                </span>
+                                        </div>
+
+
+                                        <div class="chatlog__embed-description">
+                                            <div class="markdown">A Fall Guy, for #fallguys</div>
+                                        </div>
+
+                                        <div class="chatlog__embed-fields">
+                                                <div class="chatlog__embed-field chatlog__embed-field--inline">
+                                                        <div class="chatlog__embed-field-name">
+                                                            <div class="markdown">Retweets</div>
+                                                        </div>
+
+                                                        <div class="chatlog__embed-field-value">
+                                                            <div class="markdown">5812</div>
+                                                        </div>
+                                                </div>
+                                                <div class="chatlog__embed-field chatlog__embed-field--inline">
+                                                        <div class="chatlog__embed-field-name">
+                                                            <div class="markdown">Likes</div>
+                                                        </div>
+
+                                                        <div class="chatlog__embed-field-value">
+                                                            <div class="markdown">33437</div>
+                                                        </div>
+                                                </div>
+                                        </div>
+                                </div>
+
+                            </div>
+
+                                <div class="chatlog__embed-image-container">
+                                    <a class="chatlog__embed-image-link" href="https://pbs.twimg.com/media/EgdVpDJWoAAmgRY.png:large">
+                                        <img class="chatlog__embed-image" src="https://pbs.twimg.com/media/EgdVpDJWoAAmgRY.png:large" alt="Image">
+                                    </a>
+                                </div>
+
+                                <div class="chatlog__embed-footer">
+                                        <img class="chatlog__embed-footer-icon" src="https://abs.twimg.com/icons/apple-touch-icon-192x192.png" alt="Footer icon">
+
+                                        <span class="chatlog__embed-footer-text">
+Twitter
+
+                                        </span>
+                                </div>
+                        </div>
+                    </div>
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/580290181614010371/e56e574fac66e25f1566a67ca28cc8dd.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Nehちゃん#3561" data-user-id="580290181614010371" style="color: rgb(233,30,99)">Nehちゃん</span>
+
+
+        <span class="chatlog__timestamp">29-Aug-20 10:12 PM</span>
+
+            <div class="chatlog__message " data-message-id="749255126325133362" id="message-749255126325133362">
+                <div class="chatlog__content">
+                    <div class="markdown"> </div>
+                </div>
+
+                    <div class="chatlog__attachment">
+                            <a href="https://cdn.discordapp.com/attachments/671727218552078345/749255125742256258/Egd9khEVoAEcVGs.jpeg">
+                                    <img class="chatlog__attachment-thumbnail" src="https://cdn.discordapp.com/attachments/671727218552078345/749255125742256258/Egd9khEVoAEcVGs.jpeg" alt="Attachment">
+                            </a>
+                    </div>
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/580290181614010371/e56e574fac66e25f1566a67ca28cc8dd.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Nehちゃん#3561" data-user-id="580290181614010371" style="color: rgb(233,30,99)">Nehちゃん</span>
+
+
+        <span class="chatlog__timestamp">02-Sep-20 06:47 AM</span>
+
+            <div class="chatlog__message " data-message-id="750471884516360193" id="message-750471884516360193">
+                <div class="chatlog__content">
+                    <div class="markdown"><a href="https://twitter.com/Erickajamon/status/1298801736950448134">https://twitter.com/Erickajamon/status/1298801736950448134</a> </div>
+                </div>
+
+
+                    <div class="chatlog__embed">
+                            <div class="chatlog__embed-color-pill" style="background-color: rgba(29,161,242,255)"></div>
+
+                        <div class="chatlog__embed-content-container">
+                            <div class="chatlog__embed-content">
+                                <div class="chatlog__embed-text">
+
+                                        <div class="chatlog__embed-title">
+                                                <a class="chatlog__embed-title-link" href="https://twitter.com/Erickajamon/status/1298801736950448134">
+                                                    <div class="markdown">eʀɪᴄᴋᴀ (@Erickajamon)</div>
+                                                </a>
+                                        </div>
+
+                                        <div class="chatlog__embed-description">
+                                            <div class="markdown">no s&#233;, me gustan los patos</div>
+                                        </div>
+
+                                        <div class="chatlog__embed-fields">
+                                                <div class="chatlog__embed-field chatlog__embed-field--inline">
+                                                        <div class="chatlog__embed-field-name">
+                                                            <div class="markdown">Tweets</div>
+                                                        </div>
+
+                                                        <div class="chatlog__embed-field-value">
+                                                            <div class="markdown">1016</div>
+                                                        </div>
+                                                </div>
+                                                <div class="chatlog__embed-field chatlog__embed-field--inline">
+                                                        <div class="chatlog__embed-field-name">
+                                                            <div class="markdown">Followers</div>
+                                                        </div>
+
+                                                        <div class="chatlog__embed-field-value">
+                                                            <div class="markdown">639</div>
+                                                        </div>
+                                                </div>
+                                        </div>
+                                </div>
+
+                                    <div class="chatlog__embed-thumbnail-container">
+                                        <a class="chatlog__embed-thumbnail-link" href="https://pbs.twimg.com/profile_images/1299755636608163840/gMSx82nR_normal.jpg">
+                                            <img class="chatlog__embed-thumbnail" src="https://pbs.twimg.com/profile_images/1299755636608163840/gMSx82nR_normal.jpg" alt="Thumbnail">
+                                        </a>
+                                    </div>
+                            </div>
+
+
+                                <div class="chatlog__embed-footer">
+                                        <img class="chatlog__embed-footer-icon" src="https://abs.twimg.com/icons/apple-touch-icon-192x192.png" alt="Footer icon">
+
+                                        <span class="chatlog__embed-footer-text">
+Twitter
+
+                                        </span>
+                                </div>
+                        </div>
+                    </div>
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/580290181614010371/e56e574fac66e25f1566a67ca28cc8dd.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Nehちゃん#3561" data-user-id="580290181614010371" style="color: rgb(233,30,99)">Nehちゃん</span>
+
+
+        <span class="chatlog__timestamp">05-Sep-20 06:34 AM</span>
+
+            <div class="chatlog__message " data-message-id="751555798005448778" id="message-751555798005448778">
+                <div class="chatlog__content">
+                    <div class="markdown"><a href="https://twitter.com/hattori2000/status/1301746891294609410">https://twitter.com/hattori2000/status/1301746891294609410</a> </div>
+                </div>
+
+
+                    <div class="chatlog__embed">
+                            <div class="chatlog__embed-color-pill" style="background-color: rgba(29,161,242,255)"></div>
+
+                        <div class="chatlog__embed-content-container">
+                            <div class="chatlog__embed-content">
+                                <div class="chatlog__embed-text">
+                                        <div class="chatlog__embed-author">
+                                                <img class="chatlog__embed-author-icon" src="https://pbs.twimg.com/profile_images/1293218647805067264/0Ax9HcUP_bigger.jpg" alt="Author icon">
+
+                                                <span class="chatlog__embed-author-name">
+                                                        <a class="chatlog__embed-author-name-link" href="https://twitter.com/hattori2000">服部グラフィクス・ラ・銀座 (@hattori2000)</a>
+                                                </span>
+                                        </div>
+
+
+                                        <div class="chatlog__embed-description">
+                                            <div class="markdown">犬をしまうGIF <a href="https://t.co/WpoxRhNlOA">https://t.co/WpoxRhNlOA</a></div>
+                                        </div>
+
+                                        <div class="chatlog__embed-fields">
+                                                <div class="chatlog__embed-field chatlog__embed-field--inline">
+                                                        <div class="chatlog__embed-field-name">
+                                                            <div class="markdown">Retweets</div>
+                                                        </div>
+
+                                                        <div class="chatlog__embed-field-value">
+                                                            <div class="markdown">2946</div>
+                                                        </div>
+                                                </div>
+                                                <div class="chatlog__embed-field chatlog__embed-field--inline">
+                                                        <div class="chatlog__embed-field-name">
+                                                            <div class="markdown">Likes</div>
+                                                        </div>
+
+                                                        <div class="chatlog__embed-field-value">
+                                                            <div class="markdown">7138</div>
+                                                        </div>
+                                                </div>
+                                        </div>
+                                </div>
+
+                                    <div class="chatlog__embed-thumbnail-container">
+                                        <a class="chatlog__embed-thumbnail-link" href="https://pbs.twimg.com/tweet_video_thumb/EhC72IxU0AE9BHr.jpg">
+                                            <img class="chatlog__embed-thumbnail" src="https://pbs.twimg.com/tweet_video_thumb/EhC72IxU0AE9BHr.jpg" alt="Thumbnail">
+                                        </a>
+                                    </div>
+                            </div>
+
+
+                                <div class="chatlog__embed-footer">
+                                        <img class="chatlog__embed-footer-icon" src="https://abs.twimg.com/icons/apple-touch-icon-192x192.png" alt="Footer icon">
+
+                                        <span class="chatlog__embed-footer-text">
+Twitter
+
+                                        </span>
+                                </div>
+                        </div>
+                    </div>
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/580290181614010371/e56e574fac66e25f1566a67ca28cc8dd.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Nehちゃん#3561" data-user-id="580290181614010371" style="color: rgb(233,30,99)">Nehちゃん</span>
+
+
+        <span class="chatlog__timestamp">11-Sep-20 10:08 PM</span>
+
+            <div class="chatlog__message " data-message-id="753965175362682901" id="message-753965175362682901">
+                <div class="chatlog__content">
+                    <div class="markdown"><a href="https://twitter.com/taninao1988/status/1304005540847075328">https://twitter.com/taninao1988/status/1304005540847075328</a> </div>
+                </div>
+
+
+                    <div class="chatlog__embed">
+                            <div class="chatlog__embed-color-pill" style="background-color: rgba(29,161,242,255)"></div>
+
+                        <div class="chatlog__embed-content-container">
+                            <div class="chatlog__embed-content">
+                                <div class="chatlog__embed-text">
+                                        <div class="chatlog__embed-author">
+                                                <img class="chatlog__embed-author-icon" src="https://pbs.twimg.com/profile_images/1273407369230213120/YF7v97ZY_bigger.jpg" alt="Author icon">
+
+                                                <span class="chatlog__embed-author-name">
+                                                        <a class="chatlog__embed-author-name-link" href="https://twitter.com/taninao1988">てんぐのぅず (@taninao1988)</a>
+                                                </span>
+                                        </div>
+
+
+                                        <div class="chatlog__embed-description">
+                                            <div class="markdown">ところどころトレスにてオリジナルも入れて　
+独特の動き表現させていただきました
+無限ループします。
+#マリンのお宝 
+#ホロライブどった～と <a href="https://t.co/Ssp9fNut8h">https://t.co/Ssp9fNut8h</a></div>
+                                        </div>
+
+                                        <div class="chatlog__embed-fields">
+                                                <div class="chatlog__embed-field chatlog__embed-field--inline">
+                                                        <div class="chatlog__embed-field-name">
+                                                            <div class="markdown">Retweets</div>
+                                                        </div>
+
+                                                        <div class="chatlog__embed-field-value">
+                                                            <div class="markdown">10857</div>
+                                                        </div>
+                                                </div>
+                                                <div class="chatlog__embed-field chatlog__embed-field--inline">
+                                                        <div class="chatlog__embed-field-name">
+                                                            <div class="markdown">Likes</div>
+                                                        </div>
+
+                                                        <div class="chatlog__embed-field-value">
+                                                            <div class="markdown">40193</div>
+                                                        </div>
+                                                </div>
+                                        </div>
+                                </div>
+
+                                    <div class="chatlog__embed-thumbnail-container">
+                                        <a class="chatlog__embed-thumbnail-link" href="https://pbs.twimg.com/tweet_video_thumb/EhjAfekUMAAvBvF.jpg">
+                                            <img class="chatlog__embed-thumbnail" src="https://pbs.twimg.com/tweet_video_thumb/EhjAfekUMAAvBvF.jpg" alt="Thumbnail">
+                                        </a>
+                                    </div>
+                            </div>
+
+
+                                <div class="chatlog__embed-footer">
+                                        <img class="chatlog__embed-footer-icon" src="https://abs.twimg.com/icons/apple-touch-icon-192x192.png" alt="Footer icon">
+
+                                        <span class="chatlog__embed-footer-text">
+Twitter
+
+                                        </span>
+                                </div>
+                        </div>
+                    </div>
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/580290181614010371/e56e574fac66e25f1566a67ca28cc8dd.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Nehちゃん#3561" data-user-id="580290181614010371" style="color: rgb(233,30,99)">Nehちゃん</span>
+
+
+        <span class="chatlog__timestamp">15-Sep-20 02:10 PM</span>
+
+            <div class="chatlog__message " data-message-id="755294524242133052" id="message-755294524242133052">
+                <div class="chatlog__content">
+                    <div class="markdown"><a href="https://twitter.com/NikkoGuy/status/1084975039626113024">https://twitter.com/NikkoGuy/status/1084975039626113024</a> </div>
+                </div>
+
+
+                    <div class="chatlog__embed">
+                            <div class="chatlog__embed-color-pill" style="background-color: rgba(29,161,242,255)"></div>
+
+                        <div class="chatlog__embed-content-container">
+                            <div class="chatlog__embed-content">
+                                <div class="chatlog__embed-text">
+                                        <div class="chatlog__embed-author">
+                                                <img class="chatlog__embed-author-icon" src="https://pbs.twimg.com/profile_images/950965192162082816/lLN0soRK_bigger.jpg" alt="Author icon">
+
+                                                <span class="chatlog__embed-author-name">
+                                                        <a class="chatlog__embed-author-name-link" href="https://twitter.com/NikkoGuy">Nikko Nikko (@NikkoGuy)</a>
+                                                </span>
+                                        </div>
+
+
+                                        <div class="chatlog__embed-description">
+                                            <div class="markdown">sasuke uchiha brings me no joy
+
+- marie kondo probably</div>
+                                        </div>
+
+                                        <div class="chatlog__embed-fields">
+                                                <div class="chatlog__embed-field chatlog__embed-field--inline">
+                                                        <div class="chatlog__embed-field-name">
+                                                            <div class="markdown">Retweets</div>
+                                                        </div>
+
+                                                        <div class="chatlog__embed-field-value">
+                                                            <div class="markdown">5815</div>
+                                                        </div>
+                                                </div>
+                                                <div class="chatlog__embed-field chatlog__embed-field--inline">
+                                                        <div class="chatlog__embed-field-name">
+                                                            <div class="markdown">Likes</div>
+                                                        </div>
+
+                                                        <div class="chatlog__embed-field-value">
+                                                            <div class="markdown">14509</div>
+                                                        </div>
+                                                </div>
+                                        </div>
+                                </div>
+
+                            </div>
+
+                                <div class="chatlog__embed-image-container">
+                                    <a class="chatlog__embed-image-link" href="https://pbs.twimg.com/media/Dw6atr-UUAAA8cx.jpg:large">
+                                        <img class="chatlog__embed-image" src="https://pbs.twimg.com/media/Dw6atr-UUAAA8cx.jpg:large" alt="Image">
+                                    </a>
+                                </div>
+
+                                <div class="chatlog__embed-footer">
+                                        <img class="chatlog__embed-footer-icon" src="https://abs.twimg.com/icons/apple-touch-icon-192x192.png" alt="Footer icon">
+
+                                        <span class="chatlog__embed-footer-text">
+Twitter
+
+                                        </span>
+                                </div>
+                        </div>
+                    </div>
+                    <div class="chatlog__embed">
+                            <div class="chatlog__embed-color-pill chatlog__embed-color-pill--default"></div>
+
+                        <div class="chatlog__embed-content-container">
+                            <div class="chatlog__embed-content">
+                                <div class="chatlog__embed-text">
+
+
+
+                                </div>
+
+                            </div>
+
+                                <div class="chatlog__embed-image-container">
+                                    <a class="chatlog__embed-image-link" href="https://pbs.twimg.com/media/Dw6au52UwAAO3FU.jpg:large">
+                                        <img class="chatlog__embed-image" src="https://pbs.twimg.com/media/Dw6au52UwAAO3FU.jpg:large" alt="Image">
+                                    </a>
+                                </div>
+
+                        </div>
+                    </div>
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/561199590569672714/bad6281d27c0e32986c43f210b4ebe2b.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="天王洲Isle#1895" data-user-id="561199590569672714" style="color: rgb(233,30,99)">天王洲Isle</span>
+
+
+        <span class="chatlog__timestamp">05-Oct-20 10:04 PM</span>
+
+            <div class="chatlog__message " data-message-id="762661384970043422" id="message-762661384970043422">
+                <div class="chatlog__content">
+                    <div class="markdown"><a href="https://tenor.com/view/cat-annoyed-borede-bored-goodmorning-gif-5863240">https://tenor.com/view/cat-annoyed-borede-bored-goodmorning-gif-5863240</a> </div>
+                </div>
+
+
+                    <div class="chatlog__embed">
+                            <div class="chatlog__embed-color-pill chatlog__embed-color-pill--default"></div>
+
+                        <div class="chatlog__embed-content-container">
+                            <div class="chatlog__embed-content">
+                                <div class="chatlog__embed-text">
+
+
+
+                                </div>
+
+                                    <div class="chatlog__embed-thumbnail-container">
+                                        <a class="chatlog__embed-thumbnail-link" href="https://media.tenor.co/images/42c8ad361418d4089d771c8bcf1d5850/raw">
+                                            <img class="chatlog__embed-thumbnail" src="https://media.tenor.co/images/42c8ad361418d4089d771c8bcf1d5850/raw" alt="Thumbnail">
+                                        </a>
+                                    </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/521310710257680407/bb05e562f17472ce372672a854dcac9a.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Oli &#128150;#1312" data-user-id="521310710257680407" style="color: rgb(139,221,248)">Kaz9</span>
+
+
+        <span class="chatlog__timestamp">05-Oct-20 10:33 PM</span>
+
+            <div class="chatlog__message " data-message-id="762668746287349850" id="message-762668746287349850">
+                <div class="chatlog__content">
+                    <div class="markdown">Yesss </div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/196505650077892608/6be9833b0f2e40e75f4cedb58ba1d48b.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="kuroikami#0105" data-user-id="196505650077892608" style="color: rgb(31,139,76)">kuroikami</span>
+
+
+        <span class="chatlog__timestamp">07-Oct-20 07:50 PM</span>
+
+            <div class="chatlog__message " data-message-id="763352595632357396" id="message-763352595632357396">
+                <div class="chatlog__content">
+                    <div class="markdown"> </div>
+                </div>
+
+                    <div class="chatlog__attachment">
+                            <a href="https://cdn.discordapp.com/attachments/671727218552078345/763352593434673162/Smmii9rEAqAw7hX6.mp4">
+Attachment: Smmii9rEAqAw7hX6.mp4 (1.12 MB)                            </a>
+                    </div>
+
+
+                    <div class="chatlog__reactions">
+                            <div class="chatlog__reaction">
+                                <img class="emoji emoji--small" alt="GWcmeisterPeepoLove" title="GWcmeisterPeepoLove" src="https://cdn.discordapp.com/emojis/403295311189245952.png">
+                                <span class="chatlog__reaction-count">1</span>
+                            </div>
+                    </div>
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/521310710257680407/bb05e562f17472ce372672a854dcac9a.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Oli &#128150;#1312" data-user-id="521310710257680407" style="color: rgb(139,221,248)">Kaz9</span>
+
+
+        <span class="chatlog__timestamp">07-Oct-20 11:39 PM</span>
+
+            <div class="chatlog__message " data-message-id="763410235682979881" id="message-763410235682979881">
+                <div class="chatlog__content">
+                    <div class="markdown">You ruined TK for me </div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/580290181614010371/e56e574fac66e25f1566a67ca28cc8dd.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Nehちゃん#3561" data-user-id="580290181614010371" style="color: rgb(233,30,99)">Nehちゃん</span>
+
+
+        <span class="chatlog__timestamp">17-Oct-20 09:42 PM</span>
+
+            <div class="chatlog__message " data-message-id="767004650904879105" id="message-767004650904879105">
+                <div class="chatlog__content">
+                    <div class="markdown"> </div>
+                </div>
+
+                    <div class="chatlog__attachment">
+                            <a href="https://cdn.discordapp.com/attachments/671727218552078345/767004647927316510/AlarmingEnlightenedBlacklemur-size_restricted.gif">
+                                    <img class="chatlog__attachment-thumbnail" src="https://cdn.discordapp.com/attachments/671727218552078345/767004647927316510/AlarmingEnlightenedBlacklemur-size_restricted.gif" alt="Attachment">
+                            </a>
+                    </div>
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="767004673549926440" id="message-767004673549926440">
+                <div class="chatlog__content">
+                    <div class="markdown"> </div>
+                </div>
+
+                    <div class="chatlog__attachment">
+                            <a href="https://cdn.discordapp.com/attachments/671727218552078345/767004670781685760/satanachia-anime-internet-meme-anime.jpg">
+                                    <img class="chatlog__attachment-thumbnail" src="https://cdn.discordapp.com/attachments/671727218552078345/767004670781685760/satanachia-anime-internet-meme-anime.jpg" alt="Attachment">
+                            </a>
+                    </div>
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/599456693801189377/70102086839d81f06a108510c7c2cdda.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="somewierdkid#0431" data-user-id="599456693801189377" style="">somewierdkid</span>
+
+
+        <span class="chatlog__timestamp">26-Oct-20 12:52 PM</span>
+
+            <div class="chatlog__message " data-message-id="770132661561458708" id="message-770132661561458708">
+                <div class="chatlog__content">
+                    <div class="markdown"> </div>
+                </div>
+
+                    <div class="chatlog__attachment">
+                            <a href="https://cdn.discordapp.com/attachments/671727218552078345/770132658386501653/video0.mp4">
+Attachment: video0.mp4 (1.33 MB)                            </a>
+                    </div>
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/521310710257680407/bb05e562f17472ce372672a854dcac9a.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Oli &#128150;#1312" data-user-id="521310710257680407" style="color: rgb(139,221,248)">Kaz9</span>
+
+
+        <span class="chatlog__timestamp">26-Oct-20 01:13 PM</span>
+
+            <div class="chatlog__message " data-message-id="770137945461358612" id="message-770137945461358612">
+                <div class="chatlog__content">
+                    <div class="markdown"><img class="emoji emoji--large" alt="😨" title="😨" src="https://twemoji.maxcdn.com/2/72x72/1f628.png"> </div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/580290181614010371/e56e574fac66e25f1566a67ca28cc8dd.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Nehちゃん#3561" data-user-id="580290181614010371" style="color: rgb(233,30,99)">Nehちゃん</span>
+
+
+        <span class="chatlog__timestamp">26-Oct-20 01:21 PM</span>
+
+            <div class="chatlog__message " data-message-id="770139918374273044" id="message-770139918374273044">
+                <div class="chatlog__content">
+                    <div class="markdown"><img class="emoji emoji--large" alt="😢" title="😢" src="https://twemoji.maxcdn.com/2/72x72/1f622.png"> </div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/599456693801189377/70102086839d81f06a108510c7c2cdda.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="somewierdkid#0431" data-user-id="599456693801189377" style="">somewierdkid</span>
+
+
+        <span class="chatlog__timestamp">26-Oct-20 05:22 PM</span>
+
+            <div class="chatlog__message " data-message-id="770200594635292682" id="message-770200594635292682">
+                <div class="chatlog__content">
+                    <div class="markdown"> </div>
+                </div>
+
+                    <div class="chatlog__attachment">
+                            <a href="https://cdn.discordapp.com/attachments/671727218552078345/770200589903855616/image0.png">
+                                    <img class="chatlog__attachment-thumbnail" src="https://cdn.discordapp.com/attachments/671727218552078345/770200589903855616/image0.png" alt="Attachment">
+                            </a>
+                    </div>
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/580290181614010371/e56e574fac66e25f1566a67ca28cc8dd.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Nehちゃん#3561" data-user-id="580290181614010371" style="color: rgb(233,30,99)">Nehちゃん</span>
+
+
+        <span class="chatlog__timestamp">26-Oct-20 05:41 PM</span>
+
+            <div class="chatlog__message " data-message-id="770205425152163841" id="message-770205425152163841">
+                <div class="chatlog__content">
+                    <div class="markdown"><img class="emoji emoji--large" alt="🥺" title="🥺" src="https://twemoji.maxcdn.com/2/72x72/1f97a.png"> </div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/521310710257680407/bb05e562f17472ce372672a854dcac9a.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Oli &#128150;#1312" data-user-id="521310710257680407" style="color: rgb(139,221,248)">Kaz9</span>
+
+
+        <span class="chatlog__timestamp">27-Oct-20 12:11 AM</span>
+
+            <div class="chatlog__message " data-message-id="770303605214543902" id="message-770303605214543902">
+                <div class="chatlog__content">
+                    <div class="markdown">UwU </div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/599456693801189377/70102086839d81f06a108510c7c2cdda.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="somewierdkid#0431" data-user-id="599456693801189377" style="">somewierdkid</span>
+
+
+        <span class="chatlog__timestamp">27-Oct-20 12:48 AM</span>
+
+            <div class="chatlog__message " data-message-id="770313004725567530" id="message-770313004725567530">
+                <div class="chatlog__content">
+                    <div class="markdown"> </div>
+                </div>
+
+                    <div class="chatlog__attachment">
+                            <a href="https://cdn.discordapp.com/attachments/671727218552078345/770313001068003388/video0.mp4">
+Attachment: video0.mp4 (981.69 KB)                            </a>
+                    </div>
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/580290181614010371/e56e574fac66e25f1566a67ca28cc8dd.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Nehちゃん#3561" data-user-id="580290181614010371" style="color: rgb(233,30,99)">Nehちゃん</span>
+
+
+        <span class="chatlog__timestamp">30-Oct-20 08:52 AM</span>
+
+            <div class="chatlog__message " data-message-id="771521930708779028" id="message-771521930708779028">
+                <div class="chatlog__content">
+                    <div class="markdown"><a href="https://www.instagram.com/p/CG8a6suHU1FTntpsj7RObm_rIqbJVGNc-JnPuQ0/?igshid=1seeejx5shrjc">https://www.instagram.com/p/CG8a6suHU1FTntpsj7RObm_rIqbJVGNc-JnPuQ0/?igshid=1seeejx5shrjc</a> </div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+</div>
+
+<div class="postamble">
+    <div class="postamble__entry">Exported 65 message(s)</div>
+</div>
+
+</body>
+</html>

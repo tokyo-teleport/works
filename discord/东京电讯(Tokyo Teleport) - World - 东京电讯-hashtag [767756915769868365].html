@@ -1,0 +1,2300 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>东京电讯(Tokyo Teleport) - 东京电讯-hashtag</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+
+    <style>
+        /* General */
+
+@font-face {
+    font-family: Whitney;
+    src: url(https://cdn.jsdelivr.net/gh/Tyrrrz/DiscordFonts@master/whitney-300.woff);
+    font-weight: 300;
+}
+
+@font-face {
+    font-family: Whitney;
+    src: url(https://cdn.jsdelivr.net/gh/Tyrrrz/DiscordFonts@master/whitney-400.woff);
+    font-weight: 400;
+}
+
+@font-face {
+    font-family: Whitney;
+    src: url(https://cdn.jsdelivr.net/gh/Tyrrrz/DiscordFonts@master/whitney-500.woff);
+    font-weight: 500;
+}
+
+@font-face {
+    font-family: Whitney;
+    src: url(https://cdn.jsdelivr.net/gh/Tyrrrz/DiscordFonts@master/whitney-600.woff);
+    font-weight: 600;
+}
+
+@font-face {
+    font-family: Whitney;
+    src: url(https://cdn.jsdelivr.net/gh/Tyrrrz/DiscordFonts@master/whitney-700.woff);
+    font-weight: 700;
+}
+
+body {
+    font-family: "Whitney", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 17px;
+}
+
+a {
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+img {
+    object-fit: contain;
+}
+
+.markdown {
+    max-width: 100%;
+    white-space: pre-wrap;
+    line-height: 1.3;
+    overflow-wrap: break-word;
+}
+
+.spoiler {
+    width: fit-content;
+}
+
+.spoiler--hidden {
+    cursor: pointer;
+}
+
+.spoiler-text {
+    border-radius: 3px;
+}
+
+.spoiler--hidden .spoiler-text {
+    color: rgba(0, 0, 0, 0);
+}
+
+.spoiler--hidden .spoiler-text::selection {
+    color: rgba(0, 0, 0, 0);
+}
+
+.spoiler-image {
+    position: relative;
+    overflow: hidden;
+    border-radius: 3px;
+}
+
+.spoiler--hidden .spoiler-image {
+    box-shadow: 0 0 1px 1px rgba(0, 0, 0, 0.1);
+}
+
+.spoiler--hidden .spoiler-image img {
+    filter: blur(44px);
+}
+
+.spoiler--hidden .spoiler-image:after {
+    content: "SPOILER";
+    color: #dcddde;
+    background-color: rgba(0, 0, 0, 0.6);
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    font-weight: 600;
+    padding: 0.5em 0.7em;
+    border-radius: 20px;
+    letter-spacing: 0.05em;
+    font-size: 0.9em;
+}
+
+.spoiler--hidden:hover .spoiler-image:after {
+    color: #fff;
+    background-color: rgba(0, 0, 0, 0.9);
+}
+
+.quote {
+    margin: 0.1em 0;
+    padding-left: 0.6em;
+    border-left: 4px solid;
+    border-radius: 3px;
+}
+
+.pre {
+    font-family: "Consolas", "Courier New", Courier, monospace;
+}
+
+.pre--multiline {
+    margin-top: 0.25em;
+    padding: 0.5em;
+    border: 2px solid;
+    border-radius: 5px;
+}
+
+.pre--inline {
+    padding: 2px;
+    border-radius: 3px;
+    font-size: 0.85em;
+}
+
+.mention {
+    border-radius: 3px;
+    padding: 0 2px;
+    color: #7289da;
+    background: rgba(114, 137, 218, .1);
+    font-weight: 500;
+}
+
+.emoji {
+    width: 1.25em;
+    height: 1.25em;
+    margin: 0 0.06em;
+    vertical-align: -0.4em;
+}
+
+.emoji--small {
+    width: 1em;
+    height: 1em;
+}
+
+.emoji--large {
+    width: 2.8em;
+    height: 2.8em;
+}
+
+/* Preamble */
+
+.preamble {
+    display: grid;
+    margin: 0 0.3em 0.6em 0.3em;
+    max-width: 100%;
+    grid-template-columns: auto 1fr;
+}
+
+.preamble__guild-icon-container {
+    grid-column: 1;
+}
+
+.preamble__guild-icon {
+    max-width: 88px;
+    max-height: 88px;
+}
+
+.preamble__entries-container {
+    grid-column: 2;
+    margin-left: 0.6em;
+}
+
+.preamble__entry {
+    font-size: 1.4em;
+}
+
+.preamble__entry--small {
+    font-size: 1em;
+}
+
+/* Chatlog */
+
+.chatlog {
+    max-width: 100%;
+}
+
+.chatlog__message-group {
+    display: grid;
+    margin: 0 0.6em;
+    padding: 0.9em 0;
+    border-top: 1px solid;
+    grid-template-columns: auto 1fr;
+}
+
+.chatlog__author-avatar-container {
+    grid-column: 1;
+    width: 40px;
+    height: 40px;
+}
+
+.chatlog__author-avatar {
+    border-radius: 50%;
+    height: 40px;
+    width: 40px;
+}
+
+.chatlog__messages {
+    grid-column: 2;
+    margin-left: 1.2em;
+    min-width: 50%;
+}
+
+.chatlog__author-name {
+    font-weight: 500;
+}
+
+.chatlog__timestamp {
+    margin-left: 0.3em;
+    font-size: 0.75em;
+}
+
+.chatlog__message {
+    padding: 0.1em 0.3em;
+    margin: 0 -0.3em;
+    background-color: transparent;
+    transition: background-color 1s ease;
+}
+
+.chatlog__content {
+    font-size: 0.95em;
+    word-wrap: break-word;
+}
+
+.chatlog__edited-timestamp {
+    margin-left: 0.15em;
+    font-size: 0.8em;
+}
+
+.chatlog__attachment {
+    margin-top: 0.3em;
+}
+
+.chatlog__attachment-thumbnail {
+    vertical-align: top;
+    max-width: 45vw;
+    max-height: 500px;
+    border-radius: 3px;
+}
+
+.chatlog__embed {
+    display: flex;
+    margin-top: 0.3em;
+    max-width: 520px;
+}
+
+.chatlog__embed-color-pill {
+    flex-shrink: 0;
+    width: 0.25em;
+    border-top-left-radius: 3px;
+    border-bottom-left-radius: 3px;
+}
+
+.chatlog__embed-content-container {
+    display: flex;
+    flex-direction: column;
+    padding: 0.5em 0.6em;
+    border: 1px solid;
+    border-top-right-radius: 3px;
+    border-bottom-right-radius: 3px;
+}
+
+.chatlog__embed-content {
+    display: flex;
+    width: 100%;
+}
+
+.chatlog__embed-text {
+    flex: 1;
+}
+
+.chatlog__embed-author {
+    display: flex;
+    margin-bottom: 0.3em;
+    align-items: center;
+}
+
+.chatlog__embed-author-icon {
+    margin-right: 0.5em;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+}
+
+.chatlog__embed-author-name {
+    font-size: 0.875em;
+    font-weight: 600;
+}
+
+.chatlog__embed-title {
+    margin-bottom: 0.2em;
+    font-size: 0.875em;
+    font-weight: 600;
+}
+
+.chatlog__embed-description {
+    font-weight: 500;
+    font-size: 0.85em;
+}
+
+.chatlog__embed-fields {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.chatlog__embed-field {
+    flex: 0;
+    min-width: 100%;
+    max-width: 506px;
+    padding-top: 0.6em;
+    font-size: 0.875em;
+}
+
+.chatlog__embed-field--inline {
+    flex: 1;
+    flex-basis: auto;
+    min-width: 150px;
+}
+
+.chatlog__embed-field-name {
+    margin-bottom: 0.2em;
+    font-weight: 600;
+}
+
+.chatlog__embed-field-value {
+    font-weight: 500;
+}
+
+.chatlog__embed-thumbnail {
+    flex: 0;
+    margin-left: 1.2em;
+    max-width: 80px;
+    max-height: 80px;
+    border-radius: 3px;
+}
+
+.chatlog__embed-image-container {
+    margin-top: 0.6em;
+}
+
+.chatlog__embed-image {
+    max-width: 500px;
+    max-height: 400px;
+    border-radius: 3px;
+}
+
+.chatlog__embed-footer {
+    margin-top: 0.6em;
+}
+
+.chatlog__embed-footer-icon {
+    margin-right: 0.2em;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    vertical-align: middle;
+}
+
+.chatlog__embed-footer-text {
+    font-size: 0.75em;
+    font-weight: 500;
+}
+
+.chatlog__reactions {
+    display: flex;
+}
+
+.chatlog__reaction {
+    display: flex;
+    align-items: center;
+    margin: 0.35em 0.1em 0.1em 0.1em;
+    padding: 0.2em 0.35em;
+    border-radius: 3px;
+}
+
+.chatlog__reaction-count {
+    min-width: 9px;
+    margin-left: 0.35em;
+    font-size: 0.875em;
+}
+
+.chatlog__bot-tag {
+    position: relative;
+    top: -.2em;
+    margin-left: 0.3em;
+    padding: 0.05em 0.3em;
+    border-radius: 3px;
+    vertical-align: middle;
+    line-height: 1.3;
+    background: #7289da;
+    color: #ffffff;
+    font-size: 0.625em;
+    font-weight: 500;
+}
+
+/* Postamble */
+
+.postamble {
+    margin: 1.4em 0.3em 0.6em 0.3em;
+    padding: 1em;
+    border-top: 1px solid;
+}
+    </style>
+    <style>
+        /* General */
+
+body {
+    background-color: #36393e;
+    color: #dcddde;
+}
+
+a {
+    color: #0096cf;
+}
+
+.spoiler-text {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.spoiler--hidden .spoiler-text {
+    background-color: #202225;
+}
+
+.spoiler--hidden:hover .spoiler-text {
+    background-color: rgba(32, 34, 37, 0.8);
+}
+
+.quote {
+    border-color: #4f545c;
+}
+
+.pre {
+    background-color: #2f3136 !important;
+}
+
+.pre--multiline {
+    border-color: #282b30 !important;
+    color: #b9bbbe !important;
+}
+
+/* === Preamble === */
+
+.preamble__entry {
+    color: #ffffff;
+}
+
+/* Chatlog */
+
+.chatlog__message-group {
+    border-color: rgba(255, 255, 255, 0.1);
+}
+
+.chatlog__author-name {
+    color: #ffffff;
+}
+
+.chatlog__timestamp {
+    color: rgba(255, 255, 255, 0.2);
+}
+
+.chatlog__message--highlighted {
+    background-color: rgba(114, 137, 218, 0.2) !important;
+}
+
+.chatlog__message--pinned {
+    background-color: rgba(249, 168, 37, 0.05);
+}
+
+.chatlog__edited-timestamp {
+    color: rgba(255, 255, 255, 0.2);
+}
+
+.chatlog__embed-color-pill--default {
+    background-color: rgba(79, 84, 92, 1);
+}
+
+.chatlog__embed-content-container {
+    background-color: rgba(46, 48, 54, 0.3);
+    border-color: rgba(46, 48, 54, 0.6);
+}
+
+.chatlog__embed-author-name {
+    color: #ffffff;
+}
+
+.chatlog__embed-author-name-link {
+    color: #ffffff;
+}
+
+.chatlog__embed-title {
+    color: #ffffff;
+}
+
+.chatlog__embed-description {
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.chatlog__embed-field-name {
+    color: #ffffff;
+}
+
+.chatlog__embed-field-value {
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.chatlog__embed-footer {
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.chatlog__reaction {
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+.chatlog__reaction-count {
+    color: rgba(255, 255, 255, 0.3);
+}
+
+/* Postamble */
+
+.postamble {
+    border-color: rgba(255, 255, 255, 0.1);
+}
+
+.postamble__entry {
+    color: #ffffff;
+}
+    </style>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/solarized-dark.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/highlight.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelectorAll('.pre--multiline').forEach(block => hljs.highlightBlock(block));
+        });
+    </script>
+
+    <script>
+        function scrollToMessage(event, id) {
+            var element = document.getElementById('message-' + id);
+
+            if (element) {
+                event.preventDefault();
+
+                element.classList.add('chatlog__message--highlighted');
+
+                window.scrollTo({
+                    top: element.getBoundingClientRect().top - document.body.getBoundingClientRect().top - (window.innerHeight / 2),
+                    behavior: 'smooth'
+                });
+
+                window.setTimeout(function() {
+                    element.classList.remove('chatlog__message--highlighted');
+                }, 2000);
+            }
+        }
+
+        function showSpoiler(event, element) {
+            if (element && element.classList.contains('spoiler--hidden')) {
+                event.preventDefault();
+                element.classList.remove('spoiler--hidden');
+            }
+        }
+    </script>
+</head>
+<body>
+
+<div class="preamble">
+    <div class="preamble__guild-icon-container">
+        <img class="preamble__guild-icon" src="https://cdn.discordapp.com/icons/654291964250030101/cbdca1e9deee87fd1383394eb2ecb186.png" alt="Guild icon">
+    </div>
+    <div class="preamble__entries-container">
+        <div class="preamble__entry">东京电讯(Tokyo Teleport)</div>
+        <div class="preamble__entry">World / 东京电讯-hashtag</div>
+
+
+    </div>
+</div>
+
+<div class="chatlog">
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/embed/avatars/0.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="#东京电讯-hashtag#0000" data-user-id="767756955669757952" style="">#东京电讯-hashtag</span>
+
+            <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">19-Oct-20 11:35 PM</span>
+
+            <div class="chatlog__message " data-message-id="767757846657761300" id="message-767757846657761300">
+                <div class="chatlog__content">
+                    <div class="markdown">@TeleportTokyo October 19, 2020 at 11:35PM: <a href="http://twitter.com/TeleportTokyo/status/1318198969915170816">http://twitter.com/TeleportTokyo/status/1318198969915170816</a> </div>
+                </div>
+
+
+                    <div class="chatlog__embed">
+                            <div class="chatlog__embed-color-pill" style="background-color: rgba(29,161,242,255)"></div>
+
+                        <div class="chatlog__embed-content-container">
+                            <div class="chatlog__embed-content">
+                                <div class="chatlog__embed-text">
+                                        <div class="chatlog__embed-author">
+                                                <img class="chatlog__embed-author-icon" src="https://pbs.twimg.com/profile_images/1219265830925373441/oO-xsgJy_bigger.jpg" alt="Author icon">
+
+                                                <span class="chatlog__embed-author-name">
+                                                        <a class="chatlog__embed-author-name-link" href="https://twitter.com/TeleportTokyo">东京电讯（Tokyo Teleport） (@TeleportTokyo)</a>
+                                                </span>
+                                        </div>
+
+
+                                        <div class="chatlog__embed-description">
+                                            <div class="markdown">test
+ <a href="https://t.co/qrcz0jrNnw">https://t.co/qrcz0jrNnw</a> #东京电讯</div>
+                                        </div>
+
+                                </div>
+
+                                    <div class="chatlog__embed-thumbnail-container">
+                                        <a class="chatlog__embed-thumbnail-link" href="https://pbs.twimg.com/ext_tw_video_thumb/1318198914277728256/pu/img/X1a52-gyzThzbrdJ.jpg">
+                                            <img class="chatlog__embed-thumbnail" src="https://pbs.twimg.com/ext_tw_video_thumb/1318198914277728256/pu/img/X1a52-gyzThzbrdJ.jpg" alt="Thumbnail">
+                                        </a>
+                                    </div>
+                            </div>
+
+
+                                <div class="chatlog__embed-footer">
+                                        <img class="chatlog__embed-footer-icon" src="https://abs.twimg.com/icons/apple-touch-icon-192x192.png" alt="Footer icon">
+
+                                        <span class="chatlog__embed-footer-text">
+Twitter
+
+                                        </span>
+                                </div>
+                        </div>
+                    </div>
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/embed/avatars/0.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="#东京电讯-hashtag#0000" data-user-id="767756955669757952" style="">#东京电讯-hashtag</span>
+
+            <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">20-Oct-20 11:42 AM</span>
+
+            <div class="chatlog__message " data-message-id="767940814914584596" id="message-767940814914584596">
+                <div class="chatlog__content">
+                    <div class="markdown">@TeleportTokyo October 20, 2020 at 11:03AM: <a href="http://twitter.com/TeleportTokyo/status/1318372168598757377">http://twitter.com/TeleportTokyo/status/1318372168598757377</a> </div>
+                </div>
+
+
+                    <div class="chatlog__embed">
+                            <div class="chatlog__embed-color-pill" style="background-color: rgba(29,161,242,255)"></div>
+
+                        <div class="chatlog__embed-content-container">
+                            <div class="chatlog__embed-content">
+                                <div class="chatlog__embed-text">
+                                        <div class="chatlog__embed-author">
+                                                <img class="chatlog__embed-author-icon" src="https://pbs.twimg.com/profile_images/1219265830925373441/oO-xsgJy_bigger.jpg" alt="Author icon">
+
+                                                <span class="chatlog__embed-author-name">
+                                                        <a class="chatlog__embed-author-name-link" href="https://twitter.com/TeleportTokyo">东京电讯（Tokyo Teleport） (@TeleportTokyo)</a>
+                                                </span>
+                                        </div>
+
+
+                                        <div class="chatlog__embed-description">
+                                            <div class="markdown">Ran - In Perfect Shades of Blue (Prod. born hero x ayh okay)
+
+#tokyoteleport #东京电讯 #Ran #trap #rap #hiphop #emo #sad #cloudrap #music
+
+<a href="https://t.co/kWTNgKNJNY">https://t.co/kWTNgKNJNY</a></div>
+                                        </div>
+
+                                </div>
+
+                            </div>
+
+
+                                <div class="chatlog__embed-footer">
+                                        <img class="chatlog__embed-footer-icon" src="https://abs.twimg.com/icons/apple-touch-icon-192x192.png" alt="Footer icon">
+
+                                        <span class="chatlog__embed-footer-text">
+Twitter
+
+                                        </span>
+                                </div>
+                        </div>
+                    </div>
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/embed/avatars/0.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="#东京电讯-hashtag#0000" data-user-id="767756955669757952" style="">#东京电讯-hashtag</span>
+
+            <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">20-Oct-20 04:42 PM</span>
+
+            <div class="chatlog__message " data-message-id="768016251569569842" id="message-768016251569569842">
+                <div class="chatlog__content">
+                    <div class="markdown">@TeleportTokyo October 20, 2020 at 03:55PM: <a href="http://twitter.com/TeleportTokyo/status/1318445644886016000">http://twitter.com/TeleportTokyo/status/1318445644886016000</a> </div>
+                </div>
+
+
+                    <div class="chatlog__embed">
+                            <div class="chatlog__embed-color-pill" style="background-color: rgba(29,161,242,255)"></div>
+
+                        <div class="chatlog__embed-content-container">
+                            <div class="chatlog__embed-content">
+                                <div class="chatlog__embed-text">
+                                        <div class="chatlog__embed-author">
+                                                <img class="chatlog__embed-author-icon" src="https://pbs.twimg.com/profile_images/1219265830925373441/oO-xsgJy_bigger.jpg" alt="Author icon">
+
+                                                <span class="chatlog__embed-author-name">
+                                                        <a class="chatlog__embed-author-name-link" href="https://twitter.com/TeleportTokyo">东京电讯（Tokyo Teleport） (@TeleportTokyo)</a>
+                                                </span>
+                                        </div>
+
+
+                                        <div class="chatlog__embed-description">
+                                            <div class="markdown">lazygagey - imy (prod. majinaru)
+
+#tokyoteleport #东京电讯 #lazygagey#trap #rap #hiphop #emo #sad #cloudrap #music <a href="https://t.co/nkrXQW24An">https://t.co/nkrXQW24An</a></div>
+                                        </div>
+
+                                </div>
+
+                            </div>
+
+
+                                <div class="chatlog__embed-footer">
+                                        <img class="chatlog__embed-footer-icon" src="https://abs.twimg.com/icons/apple-touch-icon-192x192.png" alt="Footer icon">
+
+                                        <span class="chatlog__embed-footer-text">
+Twitter
+
+                                        </span>
+                                </div>
+                        </div>
+                    </div>
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/embed/avatars/0.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="#东京电讯-hashtag#0000" data-user-id="767756955669757952" style="">#东京电讯-hashtag</span>
+
+            <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">20-Oct-20 07:42 PM</span>
+
+            <div class="chatlog__message " data-message-id="768061533254844436" id="message-768061533254844436">
+                <div class="chatlog__content">
+                    <div class="markdown">@TeleportTokyo October 20, 2020 at 07:19PM: <a href="http://twitter.com/TeleportTokyo/status/1318497011977445377">http://twitter.com/TeleportTokyo/status/1318497011977445377</a> </div>
+                </div>
+
+
+                    <div class="chatlog__embed">
+                            <div class="chatlog__embed-color-pill" style="background-color: rgba(29,161,242,255)"></div>
+
+                        <div class="chatlog__embed-content-container">
+                            <div class="chatlog__embed-content">
+                                <div class="chatlog__embed-text">
+                                        <div class="chatlog__embed-author">
+                                                <img class="chatlog__embed-author-icon" src="https://pbs.twimg.com/profile_images/1219265830925373441/oO-xsgJy_bigger.jpg" alt="Author icon">
+
+                                                <span class="chatlog__embed-author-name">
+                                                        <a class="chatlog__embed-author-name-link" href="https://twitter.com/TeleportTokyo">东京电讯（Tokyo Teleport） (@TeleportTokyo)</a>
+                                                </span>
+                                        </div>
+
+
+                                        <div class="chatlog__embed-description">
+                                            <div class="markdown">test
+ <a href="https://t.co/AqxspI5SR6">https://t.co/AqxspI5SR6</a> #东京电讯</div>
+                                        </div>
+
+                                </div>
+
+                                    <div class="chatlog__embed-thumbnail-container">
+                                        <a class="chatlog__embed-thumbnail-link" href="https://pbs.twimg.com/ext_tw_video_thumb/1318496940720496642/pu/img/kh8X-at2MwGaAaUF.jpg">
+                                            <img class="chatlog__embed-thumbnail" src="https://pbs.twimg.com/ext_tw_video_thumb/1318496940720496642/pu/img/kh8X-at2MwGaAaUF.jpg" alt="Thumbnail">
+                                        </a>
+                                    </div>
+                            </div>
+
+
+                                <div class="chatlog__embed-footer">
+                                        <img class="chatlog__embed-footer-icon" src="https://abs.twimg.com/icons/apple-touch-icon-192x192.png" alt="Footer icon">
+
+                                        <span class="chatlog__embed-footer-text">
+Twitter
+
+                                        </span>
+                                </div>
+                        </div>
+                    </div>
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/embed/avatars/0.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="#东京电讯-hashtag#0000" data-user-id="767756955669757952" style="">#东京电讯-hashtag</span>
+
+            <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">21-Oct-20 03:42 AM</span>
+
+            <div class="chatlog__message " data-message-id="768182345500065813" id="message-768182345500065813">
+                <div class="chatlog__content">
+                    <div class="markdown">@TeleportTokyo October 21, 2020 at 03:23AM: <a href="http://twitter.com/TeleportTokyo/status/1318618872229093378">http://twitter.com/TeleportTokyo/status/1318618872229093378</a> </div>
+                </div>
+
+
+                    <div class="chatlog__embed">
+                            <div class="chatlog__embed-color-pill" style="background-color: rgba(29,161,242,255)"></div>
+
+                        <div class="chatlog__embed-content-container">
+                            <div class="chatlog__embed-content">
+                                <div class="chatlog__embed-text">
+                                        <div class="chatlog__embed-author">
+                                                <img class="chatlog__embed-author-icon" src="https://pbs.twimg.com/profile_images/1219265830925373441/oO-xsgJy_bigger.jpg" alt="Author icon">
+
+                                                <span class="chatlog__embed-author-name">
+                                                        <a class="chatlog__embed-author-name-link" href="https://twitter.com/TeleportTokyo">东京电讯（Tokyo Teleport） (@TeleportTokyo)</a>
+                                                </span>
+                                        </div>
+
+
+                                        <div class="chatlog__embed-description">
+                                            <div class="markdown"><img class="emoji " alt="🌐" title="🌐" src="https://twemoji.maxcdn.com/2/72x72/1f310.png"><img class="emoji " alt="𝖆" title="𝖆" src="https://twemoji.maxcdn.com/2/72x72/1d586.png"><img class="emoji " alt="𝖔" title="𝖔" src="https://twemoji.maxcdn.com/2/72x72/1d594.png"><img class="emoji " alt="𝖎" title="𝖎" src="https://twemoji.maxcdn.com/2/72x72/1d58e.png"><img class="emoji " alt="𝖈" title="𝖈" src="https://twemoji.maxcdn.com/2/72x72/1d588.png"><img class="emoji " alt="𝖍" title="𝖍" src="https://twemoji.maxcdn.com/2/72x72/1d58d.png"><img class="emoji " alt="𝖗" title="𝖗" src="https://twemoji.maxcdn.com/2/72x72/1d597.png"> | ｱｵｲﾁﾋﾛ<img class="emoji " alt="🌐" title="🌐" src="https://twemoji.maxcdn.com/2/72x72/1f310.png"> - layer2.0 (prod. acai)
+
+<a href="https://t.co/PmdPdk0XrW">https://t.co/PmdPdk0XrW</a>
+
+#tokyoteleport #东京电讯 #アオイチヒロ #trap #rap #hiphop #emo #sad #cloudrap #music</div>
+                                        </div>
+
+                                </div>
+
+                            </div>
+
+
+                                <div class="chatlog__embed-footer">
+                                        <img class="chatlog__embed-footer-icon" src="https://abs.twimg.com/icons/apple-touch-icon-192x192.png" alt="Footer icon">
+
+                                        <span class="chatlog__embed-footer-text">
+Twitter
+
+                                        </span>
+                                </div>
+                        </div>
+                    </div>
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/embed/avatars/0.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="#东京电讯-hashtag#0000" data-user-id="767756955669757952" style="">#东京电讯-hashtag</span>
+
+            <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">21-Oct-20 06:42 PM</span>
+
+            <div class="chatlog__message " data-message-id="768408872792490004" id="message-768408872792490004">
+                <div class="chatlog__content">
+                    <div class="markdown">@TeleportTokyo October 21, 2020 at 06:07PM: <a href="http://twitter.com/TeleportTokyo/status/1318841443524530177">http://twitter.com/TeleportTokyo/status/1318841443524530177</a> </div>
+                </div>
+
+
+                    <div class="chatlog__embed">
+                            <div class="chatlog__embed-color-pill" style="background-color: rgba(29,161,242,255)"></div>
+
+                        <div class="chatlog__embed-content-container">
+                            <div class="chatlog__embed-content">
+                                <div class="chatlog__embed-text">
+                                        <div class="chatlog__embed-author">
+                                                <img class="chatlog__embed-author-icon" src="https://pbs.twimg.com/profile_images/1219265830925373441/oO-xsgJy_bigger.jpg" alt="Author icon">
+
+                                                <span class="chatlog__embed-author-name">
+                                                        <a class="chatlog__embed-author-name-link" href="https://twitter.com/TeleportTokyo">东京电讯（Tokyo Teleport） (@TeleportTokyo)</a>
+                                                </span>
+                                        </div>
+
+
+                                        <div class="chatlog__embed-description">
+                                            <div class="markdown">Lil Toki - Enemy Spotted (prod. jonny)
+
+<a href="https://t.co/LZ8TzxVEcd">https://t.co/LZ8TzxVEcd</a>
+
+#tokyoteleport #东京电讯 #liltoki #trap #rap #hiphop #emo #sad #cloudrap #music <a href="https://t.co/jpGwNqNRPa">https://t.co/jpGwNqNRPa</a></div>
+                                        </div>
+
+                                </div>
+
+                            </div>
+
+
+                                <div class="chatlog__embed-footer">
+                                        <img class="chatlog__embed-footer-icon" src="https://abs.twimg.com/icons/apple-touch-icon-192x192.png" alt="Footer icon">
+
+                                        <span class="chatlog__embed-footer-text">
+Twitter
+
+                                        </span>
+                                </div>
+                        </div>
+                    </div>
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/embed/avatars/0.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="#东京电讯-hashtag#0000" data-user-id="767756955669757952" style="">#东京电讯-hashtag</span>
+
+            <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">21-Oct-20 10:42 PM</span>
+
+            <div class="chatlog__message " data-message-id="768469338922680320" id="message-768469338922680320">
+                <div class="chatlog__content">
+                    <div class="markdown">@TeleportTokyo October 21, 2020 at 10:33PM: <a href="http://twitter.com/TeleportTokyo/status/1318908225983549440">http://twitter.com/TeleportTokyo/status/1318908225983549440</a> </div>
+                </div>
+
+
+                    <div class="chatlog__embed">
+                            <div class="chatlog__embed-color-pill" style="background-color: rgba(29,161,242,255)"></div>
+
+                        <div class="chatlog__embed-content-container">
+                            <div class="chatlog__embed-content">
+                                <div class="chatlog__embed-text">
+                                        <div class="chatlog__embed-author">
+                                                <img class="chatlog__embed-author-icon" src="https://pbs.twimg.com/profile_images/1219265830925373441/oO-xsgJy_bigger.jpg" alt="Author icon">
+
+                                                <span class="chatlog__embed-author-name">
+                                                        <a class="chatlog__embed-author-name-link" href="https://twitter.com/TeleportTokyo">东京电讯（Tokyo Teleport） (@TeleportTokyo)</a>
+                                                </span>
+                                        </div>
+
+
+                                        <div class="chatlog__embed-description">
+                                            <div class="markdown">omu - baku talisman (kaktus)
+
+#tokyoteleport #东京电讯 #omu #trap #rap #hiphop #emo #sad #cloudrap #music
+
+<a href="https://t.co/16rXrdlttK">https://t.co/16rXrdlttK</a></div>
+                                        </div>
+
+                                </div>
+
+                            </div>
+
+
+                                <div class="chatlog__embed-footer">
+                                        <img class="chatlog__embed-footer-icon" src="https://abs.twimg.com/icons/apple-touch-icon-192x192.png" alt="Footer icon">
+
+                                        <span class="chatlog__embed-footer-text">
+Twitter
+
+                                        </span>
+                                </div>
+                        </div>
+                    </div>
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/embed/avatars/0.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="#东京电讯-hashtag#0000" data-user-id="767756955669757952" style="">#东京电讯-hashtag</span>
+
+            <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">22-Oct-20 04:42 PM</span>
+
+            <div class="chatlog__message " data-message-id="768741075669221376" id="message-768741075669221376">
+                <div class="chatlog__content">
+                    <div class="markdown">@TeleportTokyo October 22, 2020 at 03:58PM: <a href="http://twitter.com/TeleportTokyo/status/1319171189068255232">http://twitter.com/TeleportTokyo/status/1319171189068255232</a> </div>
+                </div>
+
+
+                    <div class="chatlog__embed">
+                            <div class="chatlog__embed-color-pill" style="background-color: rgba(29,161,242,255)"></div>
+
+                        <div class="chatlog__embed-content-container">
+                            <div class="chatlog__embed-content">
+                                <div class="chatlog__embed-text">
+                                        <div class="chatlog__embed-author">
+                                                <img class="chatlog__embed-author-icon" src="https://pbs.twimg.com/profile_images/1219265830925373441/oO-xsgJy_bigger.jpg" alt="Author icon">
+
+                                                <span class="chatlog__embed-author-name">
+                                                        <a class="chatlog__embed-author-name-link" href="https://twitter.com/TeleportTokyo">东京电讯（Tokyo Teleport） (@TeleportTokyo)</a>
+                                                </span>
+                                        </div>
+
+
+                                        <div class="chatlog__embed-description">
+                                            <div class="markdown">Lil Roar✨<img class="emoji " alt="💕" title="💕" src="https://twemoji.maxcdn.com/2/72x72/1f495.png"> - &quot;mirage&quot; feat. tahiti / Prod.Odece
+
+#tokyoteleport #东京电讯 #LilRoar #tahiti #trap #rap #hiphop #emo #sad #cloudrap #music
+
+<a href="https://t.co/kSZuMSNPDd">https://t.co/kSZuMSNPDd</a></div>
+                                        </div>
+
+                                </div>
+
+                            </div>
+
+
+                                <div class="chatlog__embed-footer">
+                                        <img class="chatlog__embed-footer-icon" src="https://abs.twimg.com/icons/apple-touch-icon-192x192.png" alt="Footer icon">
+
+                                        <span class="chatlog__embed-footer-text">
+Twitter
+
+                                        </span>
+                                </div>
+                        </div>
+                    </div>
+
+            </div>
+            <div class="chatlog__message " data-message-id="768741082783154216" id="message-768741082783154216">
+                <div class="chatlog__content">
+                    <div class="markdown">@TahitiRetweet October 22, 2020 at 04:39PM: <a href="http://twitter.com/TahitiRetweet/status/1319181614509936641">http://twitter.com/TahitiRetweet/status/1319181614509936641</a> </div>
+                </div>
+
+
+                    <div class="chatlog__embed">
+                            <div class="chatlog__embed-color-pill" style="background-color: rgba(29,161,242,255)"></div>
+
+                        <div class="chatlog__embed-content-container">
+                            <div class="chatlog__embed-content">
+                                <div class="chatlog__embed-text">
+                                        <div class="chatlog__embed-author">
+                                                <img class="chatlog__embed-author-icon" src="https://pbs.twimg.com/profile_images/1219265830925373441/oO-xsgJy_bigger.jpg" alt="Author icon">
+
+                                                <span class="chatlog__embed-author-name">
+                                                        <a class="chatlog__embed-author-name-link" href="https://twitter.com/TeleportTokyo">东京电讯（Tokyo Teleport） (@TeleportTokyo)</a>
+                                                </span>
+                                        </div>
+
+
+                                        <div class="chatlog__embed-description">
+                                            <div class="markdown">Lil Roar✨<img class="emoji " alt="💕" title="💕" src="https://twemoji.maxcdn.com/2/72x72/1f495.png"> - &quot;mirage&quot; feat. tahiti / Prod.Odece
+
+#tokyoteleport #东京电讯 #LilRoar #tahiti #trap #rap #hiphop #emo #sad #cloudrap #music
+
+<a href="https://t.co/kSZuMSNPDd">https://t.co/kSZuMSNPDd</a></div>
+                                        </div>
+
+                                </div>
+
+                            </div>
+
+
+                                <div class="chatlog__embed-footer">
+                                        <img class="chatlog__embed-footer-icon" src="https://abs.twimg.com/icons/apple-touch-icon-192x192.png" alt="Footer icon">
+
+                                        <span class="chatlog__embed-footer-text">
+Twitter
+
+                                        </span>
+                                </div>
+                        </div>
+                    </div>
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/embed/avatars/0.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="#东京电讯-hashtag#0000" data-user-id="767756955669757952" style="">#东京电讯-hashtag</span>
+
+            <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">23-Oct-20 10:42 AM</span>
+
+            <div class="chatlog__message " data-message-id="769012883882377227" id="message-769012883882377227">
+                <div class="chatlog__content">
+                    <div class="markdown">@TeleportTokyo October 23, 2020 at 10:23AM: <a href="http://twitter.com/TeleportTokyo/status/1319449311424413696">http://twitter.com/TeleportTokyo/status/1319449311424413696</a> </div>
+                </div>
+
+
+                    <div class="chatlog__embed">
+                            <div class="chatlog__embed-color-pill" style="background-color: rgba(29,161,242,255)"></div>
+
+                        <div class="chatlog__embed-content-container">
+                            <div class="chatlog__embed-content">
+                                <div class="chatlog__embed-text">
+                                        <div class="chatlog__embed-author">
+                                                <img class="chatlog__embed-author-icon" src="https://pbs.twimg.com/profile_images/1219265830925373441/oO-xsgJy_bigger.jpg" alt="Author icon">
+
+                                                <span class="chatlog__embed-author-name">
+                                                        <a class="chatlog__embed-author-name-link" href="https://twitter.com/TeleportTokyo">东京电讯（Tokyo Teleport） (@TeleportTokyo)</a>
+                                                </span>
+                                        </div>
+
+
+                                        <div class="chatlog__embed-description">
+                                            <div class="markdown">e5 - melt lost bb (prod.Yusei)
+
+#tokyoteleport #东京电讯 #e5 #trap #rap #hiphop #emo #sad #cloudrap #music
+
+<a href="https://t.co/1IT9lo1ScZ">https://t.co/1IT9lo1ScZ</a></div>
+                                        </div>
+
+                                </div>
+
+                            </div>
+
+
+                                <div class="chatlog__embed-footer">
+                                        <img class="chatlog__embed-footer-icon" src="https://abs.twimg.com/icons/apple-touch-icon-192x192.png" alt="Footer icon">
+
+                                        <span class="chatlog__embed-footer-text">
+Twitter
+
+                                        </span>
+                                </div>
+                        </div>
+                    </div>
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/embed/avatars/0.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="#东京电讯-hashtag#0000" data-user-id="767756955669757952" style="">#东京电讯-hashtag</span>
+
+            <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">24-Oct-20 05:42 AM</span>
+
+            <div class="chatlog__message " data-message-id="769299658564042771" id="message-769299658564042771">
+                <div class="chatlog__content">
+                    <div class="markdown">@TeleportTokyo October 24, 2020 at 05:33AM: <a href="http://twitter.com/TeleportTokyo/status/1319738677262733314">http://twitter.com/TeleportTokyo/status/1319738677262733314</a> </div>
+                </div>
+
+
+                    <div class="chatlog__embed">
+                            <div class="chatlog__embed-color-pill" style="background-color: rgba(29,161,242,255)"></div>
+
+                        <div class="chatlog__embed-content-container">
+                            <div class="chatlog__embed-content">
+                                <div class="chatlog__embed-text">
+                                        <div class="chatlog__embed-author">
+                                                <img class="chatlog__embed-author-icon" src="https://pbs.twimg.com/profile_images/1219265830925373441/oO-xsgJy_bigger.jpg" alt="Author icon">
+
+                                                <span class="chatlog__embed-author-name">
+                                                        <a class="chatlog__embed-author-name-link" href="https://twitter.com/TeleportTokyo">东京电讯（Tokyo Teleport） (@TeleportTokyo)</a>
+                                                </span>
+                                        </div>
+
+
+                                        <div class="chatlog__embed-description">
+                                            <div class="markdown">juju - Little Star
+
+#tokyoteleport #东京电讯 #juju #trap #rap #hiphop #emo #sad #cloudrap #music
+
+<a href="https://t.co/u8G1O0MVXD">https://t.co/u8G1O0MVXD</a></div>
+                                        </div>
+
+                                </div>
+
+                            </div>
+
+
+                                <div class="chatlog__embed-footer">
+                                        <img class="chatlog__embed-footer-icon" src="https://abs.twimg.com/icons/apple-touch-icon-192x192.png" alt="Footer icon">
+
+                                        <span class="chatlog__embed-footer-text">
+Twitter
+
+                                        </span>
+                                </div>
+                        </div>
+                    </div>
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/embed/avatars/0.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="#东京电讯-hashtag#0000" data-user-id="767756955669757952" style="">#东京电讯-hashtag</span>
+
+            <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">24-Oct-20 11:42 PM</span>
+
+            <div class="chatlog__message " data-message-id="769571494362611717" id="message-769571494362611717">
+                <div class="chatlog__content">
+                    <div class="markdown">@TeleportTokyo October 24, 2020 at 10:53PM: <a href="http://twitter.com/TeleportTokyo/status/1320000391577243648">http://twitter.com/TeleportTokyo/status/1320000391577243648</a> </div>
+                </div>
+
+
+                    <div class="chatlog__embed">
+                            <div class="chatlog__embed-color-pill" style="background-color: rgba(29,161,242,255)"></div>
+
+                        <div class="chatlog__embed-content-container">
+                            <div class="chatlog__embed-content">
+                                <div class="chatlog__embed-text">
+                                        <div class="chatlog__embed-author">
+                                                <img class="chatlog__embed-author-icon" src="https://pbs.twimg.com/profile_images/1219265830925373441/oO-xsgJy_bigger.jpg" alt="Author icon">
+
+                                                <span class="chatlog__embed-author-name">
+                                                        <a class="chatlog__embed-author-name-link" href="https://twitter.com/TeleportTokyo">东京电讯（Tokyo Teleport） (@TeleportTokyo)</a>
+                                                </span>
+                                        </div>
+
+
+                                        <div class="chatlog__embed-description">
+                                            <div class="markdown">lazygagey - imy (prod. majinaru)
+
+#tokyoteleport #东京电讯 #lazygagey #trap #rap #hiphop #emo #sad #cloudrap #music
+
+<a href="https://t.co/Ch6XnPeKKR">https://t.co/Ch6XnPeKKR</a></div>
+                                        </div>
+
+                                </div>
+
+                            </div>
+
+
+                                <div class="chatlog__embed-footer">
+                                        <img class="chatlog__embed-footer-icon" src="https://abs.twimg.com/icons/apple-touch-icon-192x192.png" alt="Footer icon">
+
+                                        <span class="chatlog__embed-footer-text">
+Twitter
+
+                                        </span>
+                                </div>
+                        </div>
+                    </div>
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/embed/avatars/0.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="#东京电讯-hashtag#0000" data-user-id="767756955669757952" style="">#东京电讯-hashtag</span>
+
+            <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">25-Oct-20 03:42 PM</span>
+
+            <div class="chatlog__message " data-message-id="769813130364190752" id="message-769813130364190752">
+                <div class="chatlog__content">
+                    <div class="markdown">@TeleportTokyo October 25, 2020 at 03:18PM: <a href="http://twitter.com/TeleportTokyo/status/1320248354484473856">http://twitter.com/TeleportTokyo/status/1320248354484473856</a> </div>
+                </div>
+
+
+                    <div class="chatlog__embed">
+                            <div class="chatlog__embed-color-pill" style="background-color: rgba(29,161,242,255)"></div>
+
+                        <div class="chatlog__embed-content-container">
+                            <div class="chatlog__embed-content">
+                                <div class="chatlog__embed-text">
+                                        <div class="chatlog__embed-author">
+                                                <img class="chatlog__embed-author-icon" src="https://pbs.twimg.com/profile_images/1219265830925373441/oO-xsgJy_bigger.jpg" alt="Author icon">
+
+                                                <span class="chatlog__embed-author-name">
+                                                        <a class="chatlog__embed-author-name-link" href="https://twitter.com/TeleportTokyo">东京电讯（Tokyo Teleport） (@TeleportTokyo)</a>
+                                                </span>
+                                        </div>
+
+
+                                        <div class="chatlog__embed-description">
+                                            <div class="markdown">by my side (feat. blackwinterwells) - wastedyouth
+
+<a href="https://t.co/RDigRDp7Bt">https://t.co/RDigRDp7Bt</a>
+
+#tokyoteleport #东京电讯 #wastedyouth #trap #rap #hiphop #emo #sad #cloudrap #music</div>
+                                        </div>
+
+                                </div>
+
+                            </div>
+
+
+                                <div class="chatlog__embed-footer">
+                                        <img class="chatlog__embed-footer-icon" src="https://abs.twimg.com/icons/apple-touch-icon-192x192.png" alt="Footer icon">
+
+                                        <span class="chatlog__embed-footer-text">
+Twitter
+
+                                        </span>
+                                </div>
+                        </div>
+                    </div>
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/embed/avatars/0.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="#东京电讯-hashtag#0000" data-user-id="767756955669757952" style="">#东京电讯-hashtag</span>
+
+            <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">26-Oct-20 01:42 AM</span>
+
+            <div class="chatlog__message " data-message-id="769964112184082452" id="message-769964112184082452">
+                <div class="chatlog__content">
+                    <div class="markdown">@TeleportTokyo October 26, 2020 at 01:32AM: <a href="http://twitter.com/TeleportTokyo/status/1320402854880759808">http://twitter.com/TeleportTokyo/status/1320402854880759808</a> </div>
+                </div>
+
+
+                    <div class="chatlog__embed">
+                            <div class="chatlog__embed-color-pill" style="background-color: rgba(29,161,242,255)"></div>
+
+                        <div class="chatlog__embed-content-container">
+                            <div class="chatlog__embed-content">
+                                <div class="chatlog__embed-text">
+                                        <div class="chatlog__embed-author">
+                                                <img class="chatlog__embed-author-icon" src="https://pbs.twimg.com/profile_images/1219265830925373441/oO-xsgJy_bigger.jpg" alt="Author icon">
+
+                                                <span class="chatlog__embed-author-name">
+                                                        <a class="chatlog__embed-author-name-link" href="https://twitter.com/TeleportTokyo">东京电讯（Tokyo Teleport） (@TeleportTokyo)</a>
+                                                </span>
+                                        </div>
+
+
+                                        <div class="chatlog__embed-description">
+                                            <div class="markdown">永眠ちゃん(eiminnちゃん) - めんどくさいって言わないで＞＜
+
+<a href="https://t.co/Wp7BMMYtl8">https://t.co/Wp7BMMYtl8</a>
+
+#tokyoteleport #东京电讯 #永眠ちゃん #eiminnちゃん #jyota #trap #rap #hiphop #emo #sad #cloudrap #music <a href="https://t.co/FV8KxQbJio">https://t.co/FV8KxQbJio</a></div>
+                                        </div>
+
+                                </div>
+
+                            </div>
+
+
+                                <div class="chatlog__embed-footer">
+                                        <img class="chatlog__embed-footer-icon" src="https://abs.twimg.com/icons/apple-touch-icon-192x192.png" alt="Footer icon">
+
+                                        <span class="chatlog__embed-footer-text">
+Twitter
+
+                                        </span>
+                                </div>
+                        </div>
+                    </div>
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/embed/avatars/0.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="#东京电讯-hashtag#0000" data-user-id="767756955669757952" style="">#东京电讯-hashtag</span>
+
+            <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">26-Oct-20 11:42 AM</span>
+
+            <div class="chatlog__message " data-message-id="770115161788514344" id="message-770115161788514344">
+                <div class="chatlog__content">
+                    <div class="markdown">@TeleportTokyo October 26, 2020 at 11:13AM: <a href="http://twitter.com/TeleportTokyo/status/1320549060919599108">http://twitter.com/TeleportTokyo/status/1320549060919599108</a> </div>
+                </div>
+
+
+                    <div class="chatlog__embed">
+                            <div class="chatlog__embed-color-pill" style="background-color: rgba(29,161,242,255)"></div>
+
+                        <div class="chatlog__embed-content-container">
+                            <div class="chatlog__embed-content">
+                                <div class="chatlog__embed-text">
+                                        <div class="chatlog__embed-author">
+                                                <img class="chatlog__embed-author-icon" src="https://pbs.twimg.com/profile_images/1219265830925373441/oO-xsgJy_bigger.jpg" alt="Author icon">
+
+                                                <span class="chatlog__embed-author-name">
+                                                        <a class="chatlog__embed-author-name-link" href="https://twitter.com/TeleportTokyo">东京电讯（Tokyo Teleport） (@TeleportTokyo)</a>
+                                                </span>
+                                        </div>
+
+
+                                        <div class="chatlog__embed-description">
+                                            <div class="markdown">cold outside (prod dandy <img class="emoji " alt="♡" title="♡" src="https://twemoji.maxcdn.com/2/72x72/2661.png">) - Kawasaki!
+
+<a href="https://t.co/nWuDUsDchM">https://t.co/nWuDUsDchM</a>
+
+#tokyoteleport #东京电讯 #Kawasaki #trap #rap #hiphop #emo #sad #cloudrap #music</div>
+                                        </div>
+
+                                </div>
+
+                            </div>
+
+
+                                <div class="chatlog__embed-footer">
+                                        <img class="chatlog__embed-footer-icon" src="https://abs.twimg.com/icons/apple-touch-icon-192x192.png" alt="Footer icon">
+
+                                        <span class="chatlog__embed-footer-text">
+Twitter
+
+                                        </span>
+                                </div>
+                        </div>
+                    </div>
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/embed/avatars/0.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="#东京电讯-hashtag#0000" data-user-id="767756955669757952" style="">#东京电讯-hashtag</span>
+
+            <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">27-Oct-20 04:42 AM</span>
+
+            <div class="chatlog__message " data-message-id="770371836693184575" id="message-770371836693184575">
+                <div class="chatlog__content">
+                    <div class="markdown">@TeleportTokyo October 27, 2020 at 04:28AM: <a href="http://twitter.com/TeleportTokyo/status/1320809498357964811">http://twitter.com/TeleportTokyo/status/1320809498357964811</a> </div>
+                </div>
+
+
+                    <div class="chatlog__embed">
+                            <div class="chatlog__embed-color-pill" style="background-color: rgba(29,161,242,255)"></div>
+
+                        <div class="chatlog__embed-content-container">
+                            <div class="chatlog__embed-content">
+                                <div class="chatlog__embed-text">
+                                        <div class="chatlog__embed-author">
+                                                <img class="chatlog__embed-author-icon" src="https://pbs.twimg.com/profile_images/1219265830925373441/oO-xsgJy_bigger.jpg" alt="Author icon">
+
+                                                <span class="chatlog__embed-author-name">
+                                                        <a class="chatlog__embed-author-name-link" href="https://twitter.com/TeleportTokyo">东京电讯（Tokyo Teleport） (@TeleportTokyo)</a>
+                                                </span>
+                                        </div>
+
+
+                                        <div class="chatlog__embed-description">
+                                            <div class="markdown">M!U - 水星 Remix <img class="emoji " alt="😺" title="😺" src="https://twemoji.maxcdn.com/2/72x72/1f63a.png"><img class="emoji " alt="💙" title="💙" src="https://twemoji.maxcdn.com/2/72x72/1f499.png">
+
+#tokyoteleport #东京电讯 #M!U #trap #rap #hiphop #emo #sad #cloudrap #music
+
+<a href="https://t.co/MZQPhXcmMf">https://t.co/MZQPhXcmMf</a></div>
+                                        </div>
+
+                                </div>
+
+                            </div>
+
+
+                                <div class="chatlog__embed-footer">
+                                        <img class="chatlog__embed-footer-icon" src="https://abs.twimg.com/icons/apple-touch-icon-192x192.png" alt="Footer icon">
+
+                                        <span class="chatlog__embed-footer-text">
+Twitter
+
+                                        </span>
+                                </div>
+                        </div>
+                    </div>
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/embed/avatars/0.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="#东京电讯-hashtag#0000" data-user-id="767756955669757952" style="">#东京电讯-hashtag</span>
+
+            <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">27-Oct-20 10:42 PM</span>
+
+            <div class="chatlog__message " data-message-id="770643514907164683" id="message-770643514907164683">
+                <div class="chatlog__content">
+                    <div class="markdown">@TeleportTokyo October 27, 2020 at 10:03PM: <a href="http://twitter.com/TeleportTokyo/status/1321074996379324417">http://twitter.com/TeleportTokyo/status/1321074996379324417</a> </div>
+                </div>
+
+
+                    <div class="chatlog__embed">
+                            <div class="chatlog__embed-color-pill" style="background-color: rgba(29,161,242,255)"></div>
+
+                        <div class="chatlog__embed-content-container">
+                            <div class="chatlog__embed-content">
+                                <div class="chatlog__embed-text">
+                                        <div class="chatlog__embed-author">
+                                                <img class="chatlog__embed-author-icon" src="https://pbs.twimg.com/profile_images/1219265830925373441/oO-xsgJy_bigger.jpg" alt="Author icon">
+
+                                                <span class="chatlog__embed-author-name">
+                                                        <a class="chatlog__embed-author-name-link" href="https://twitter.com/TeleportTokyo">东京电讯（Tokyo Teleport） (@TeleportTokyo)</a>
+                                                </span>
+                                        </div>
+
+
+                                        <div class="chatlog__embed-description">
+                                            <div class="markdown">Lil Toki - Enemy Spotted (prod. jonny)
+
+#tokyoteleport #东京电讯 #LilToki #trap #rap #hiphop #emo #sad #cloudrap #music
+
+<a href="https://t.co/Ub6CMrt0eU">https://t.co/Ub6CMrt0eU</a></div>
+                                        </div>
+
+                                </div>
+
+                            </div>
+
+
+                                <div class="chatlog__embed-footer">
+                                        <img class="chatlog__embed-footer-icon" src="https://abs.twimg.com/icons/apple-touch-icon-192x192.png" alt="Footer icon">
+
+                                        <span class="chatlog__embed-footer-text">
+Twitter
+
+                                        </span>
+                                </div>
+                        </div>
+                    </div>
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/embed/avatars/0.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="#东京电讯-hashtag#0000" data-user-id="767756955669757952" style="">#东京电讯-hashtag</span>
+
+            <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">28-Oct-20 04:42 PM</span>
+
+            <div class="chatlog__message " data-message-id="770915426720546837" id="message-770915426720546837">
+                <div class="chatlog__content">
+                    <div class="markdown">@TeleportTokyo October 28, 2020 at 03:58PM: <a href="http://twitter.com/TeleportTokyo/status/1321345522016374784">http://twitter.com/TeleportTokyo/status/1321345522016374784</a> </div>
+                </div>
+
+
+                    <div class="chatlog__embed">
+                            <div class="chatlog__embed-color-pill" style="background-color: rgba(29,161,242,255)"></div>
+
+                        <div class="chatlog__embed-content-container">
+                            <div class="chatlog__embed-content">
+                                <div class="chatlog__embed-text">
+                                        <div class="chatlog__embed-author">
+                                                <img class="chatlog__embed-author-icon" src="https://pbs.twimg.com/profile_images/1219265830925373441/oO-xsgJy_bigger.jpg" alt="Author icon">
+
+                                                <span class="chatlog__embed-author-name">
+                                                        <a class="chatlog__embed-author-name-link" href="https://twitter.com/TeleportTokyo">东京电讯（Tokyo Teleport） (@TeleportTokyo)</a>
+                                                </span>
+                                        </div>
+
+
+                                        <div class="chatlog__embed-description">
+                                            <div class="markdown">Kid Sora X Kamakirii X Veezuh X Firstplace! X Omu -On Me! (prod. kimj x relik)
+
+#tokyoteleport #东京电讯 #KidSora #kamakirii #Veezuh #Firstplace #omu #trap #rap #hiphop #emo #sad #cloudrap #music
+
+<a href="https://t.co/fECIkUkmVl">https://t.co/fECIkUkmVl</a></div>
+                                        </div>
+
+                                </div>
+
+                            </div>
+
+
+                                <div class="chatlog__embed-footer">
+                                        <img class="chatlog__embed-footer-icon" src="https://abs.twimg.com/icons/apple-touch-icon-192x192.png" alt="Footer icon">
+
+                                        <span class="chatlog__embed-footer-text">
+Twitter
+
+                                        </span>
+                                </div>
+                        </div>
+                    </div>
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/embed/avatars/0.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="#东京电讯-hashtag#0000" data-user-id="767756955669757952" style="">#东京电讯-hashtag</span>
+
+            <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">29-Oct-20 11:42 AM</span>
+
+            <div class="chatlog__message " data-message-id="771202221869760542" id="message-771202221869760542">
+                <div class="chatlog__content">
+                    <div class="markdown">@TeleportTokyo October 29, 2020 at 10:38AM: <a href="http://twitter.com/TeleportTokyo/status/1321627369883488259">http://twitter.com/TeleportTokyo/status/1321627369883488259</a> </div>
+                </div>
+
+
+                    <div class="chatlog__embed">
+                            <div class="chatlog__embed-color-pill" style="background-color: rgba(29,161,242,255)"></div>
+
+                        <div class="chatlog__embed-content-container">
+                            <div class="chatlog__embed-content">
+                                <div class="chatlog__embed-text">
+                                        <div class="chatlog__embed-author">
+                                                <img class="chatlog__embed-author-icon" src="https://pbs.twimg.com/profile_images/1219265830925373441/oO-xsgJy_bigger.jpg" alt="Author icon">
+
+                                                <span class="chatlog__embed-author-name">
+                                                        <a class="chatlog__embed-author-name-link" href="https://twitter.com/TeleportTokyo">东京电讯（Tokyo Teleport） (@TeleportTokyo)</a>
+                                                </span>
+                                        </div>
+
+
+                                        <div class="chatlog__embed-description">
+                                            <div class="markdown">Kaz9 - Dear Insomnia feat Ghostsocial (Prod. _Snip)
+
+#tokyoteleport #东京电讯 #Kaz9 #Ghostsocial #trap #rap #hiphop #emo #sad #cloudrap #music
+
+<a href="https://t.co/dlwUm4RJkr">https://t.co/dlwUm4RJkr</a></div>
+                                        </div>
+
+                                </div>
+
+                            </div>
+
+
+                                <div class="chatlog__embed-footer">
+                                        <img class="chatlog__embed-footer-icon" src="https://abs.twimg.com/icons/apple-touch-icon-192x192.png" alt="Footer icon">
+
+                                        <span class="chatlog__embed-footer-text">
+Twitter
+
+                                        </span>
+                                </div>
+                        </div>
+                    </div>
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/embed/avatars/0.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="#东京电讯-hashtag#0000" data-user-id="767756955669757952" style="">#东京电讯-hashtag</span>
+
+            <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">30-Oct-20 05:42 AM</span>
+
+            <div class="chatlog__message " data-message-id="771473962995679242" id="message-771473962995679242">
+                <div class="chatlog__content">
+                    <div class="markdown">@TeleportTokyo October 30, 2020 at 04:53AM: <a href="http://twitter.com/TeleportTokyo/status/1321902933370351617">http://twitter.com/TeleportTokyo/status/1321902933370351617</a> </div>
+                </div>
+
+
+                    <div class="chatlog__embed">
+                            <div class="chatlog__embed-color-pill" style="background-color: rgba(29,161,242,255)"></div>
+
+                        <div class="chatlog__embed-content-container">
+                            <div class="chatlog__embed-content">
+                                <div class="chatlog__embed-text">
+                                        <div class="chatlog__embed-author">
+                                                <img class="chatlog__embed-author-icon" src="https://pbs.twimg.com/profile_images/1219265830925373441/oO-xsgJy_bigger.jpg" alt="Author icon">
+
+                                                <span class="chatlog__embed-author-name">
+                                                        <a class="chatlog__embed-author-name-link" href="https://twitter.com/TeleportTokyo">东京电讯（Tokyo Teleport） (@TeleportTokyo)</a>
+                                                </span>
+                                        </div>
+
+
+                                        <div class="chatlog__embed-description">
+                                            <div class="markdown">astralzig - burnt out ft. sewerperson (prod. metlast)
+
+#tokyoteleport #东京电讯 #astralzig #sewerperson #trap #rap #hiphop #emo #sad #cloudrap #music
+
+<a href="https://t.co/DsToGld6xW">https://t.co/DsToGld6xW</a></div>
+                                        </div>
+
+                                </div>
+
+                            </div>
+
+
+                                <div class="chatlog__embed-footer">
+                                        <img class="chatlog__embed-footer-icon" src="https://abs.twimg.com/icons/apple-touch-icon-192x192.png" alt="Footer icon">
+
+                                        <span class="chatlog__embed-footer-text">
+Twitter
+
+                                        </span>
+                                </div>
+                        </div>
+                    </div>
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/embed/avatars/0.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="#东京电讯-hashtag#0000" data-user-id="767756955669757952" style="">#东京电讯-hashtag</span>
+
+            <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">30-Oct-20 11:42 PM</span>
+
+            <div class="chatlog__message " data-message-id="771745796847566859" id="message-771745796847566859">
+                <div class="chatlog__content">
+                    <div class="markdown">@TeleportTokyo October 30, 2020 at 10:53PM: <a href="http://twitter.com/TeleportTokyo/status/1322174719043526657">http://twitter.com/TeleportTokyo/status/1322174719043526657</a> </div>
+                </div>
+
+
+                    <div class="chatlog__embed">
+                            <div class="chatlog__embed-color-pill" style="background-color: rgba(29,161,242,255)"></div>
+
+                        <div class="chatlog__embed-content-container">
+                            <div class="chatlog__embed-content">
+                                <div class="chatlog__embed-text">
+                                        <div class="chatlog__embed-author">
+                                                <img class="chatlog__embed-author-icon" src="https://pbs.twimg.com/profile_images/1219265830925373441/oO-xsgJy_bigger.jpg" alt="Author icon">
+
+                                                <span class="chatlog__embed-author-name">
+                                                        <a class="chatlog__embed-author-name-link" href="https://twitter.com/TeleportTokyo">东京电讯（Tokyo Teleport） (@TeleportTokyo)</a>
+                                                </span>
+                                        </div>
+
+
+                                        <div class="chatlog__embed-description">
+                                            <div class="markdown">ICYRED 死-midnight 失踪 (feat. areizaga) [prod. discent]
+
+#tokyoteleport #东京电讯 #ICYRED死 #trap #rap #hiphop #emo #sad #cloudrap #music
+
+<a href="https://t.co/CzQuUg4fG5">https://t.co/CzQuUg4fG5</a></div>
+                                        </div>
+
+                                </div>
+
+                            </div>
+
+
+                                <div class="chatlog__embed-footer">
+                                        <img class="chatlog__embed-footer-icon" src="https://abs.twimg.com/icons/apple-touch-icon-192x192.png" alt="Footer icon">
+
+                                        <span class="chatlog__embed-footer-text">
+Twitter
+ • 
+30-Oct-20 10:53 PM                                        </span>
+                                </div>
+                        </div>
+                    </div>
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/embed/avatars/0.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="#东京电讯-hashtag#0000" data-user-id="767756955669757952" style="">#东京电讯-hashtag</span>
+
+            <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">31-Oct-20 04:42 PM</span>
+
+            <div class="chatlog__message " data-message-id="772002445861322753" id="message-772002445861322753">
+                <div class="chatlog__content">
+                    <div class="markdown">@TeleportTokyo October 31, 2020 at 04:38PM: <a href="http://twitter.com/TeleportTokyo/status/1322442733785620481">http://twitter.com/TeleportTokyo/status/1322442733785620481</a> </div>
+                </div>
+
+
+                    <div class="chatlog__embed">
+                            <div class="chatlog__embed-color-pill" style="background-color: rgba(29,161,242,255)"></div>
+
+                        <div class="chatlog__embed-content-container">
+                            <div class="chatlog__embed-content">
+                                <div class="chatlog__embed-text">
+                                        <div class="chatlog__embed-author">
+                                                <img class="chatlog__embed-author-icon" src="https://pbs.twimg.com/profile_images/1219265830925373441/oO-xsgJy_bigger.jpg" alt="Author icon">
+
+                                                <span class="chatlog__embed-author-name">
+                                                        <a class="chatlog__embed-author-name-link" href="https://twitter.com/TeleportTokyo">东京电讯（Tokyo Teleport） (@TeleportTokyo)</a>
+                                                </span>
+                                        </div>
+
+
+                                        <div class="chatlog__embed-description">
+                                            <div class="markdown">blindbyhate - blue tones (prod. hellamase)
+
+#tokyoteleport #东京电讯 #blindbyhate #trap #rap #hiphop #emo #sad #cloudrap #music
+
+<a href="https://t.co/2Isv0K6Xyd">https://t.co/2Isv0K6Xyd</a></div>
+                                        </div>
+
+                                </div>
+
+                            </div>
+
+
+                                <div class="chatlog__embed-footer">
+                                        <img class="chatlog__embed-footer-icon" src="https://abs.twimg.com/icons/apple-touch-icon-192x192.png" alt="Footer icon">
+
+                                        <span class="chatlog__embed-footer-text">
+Twitter
+ • 
+31-Oct-20 04:38 PM                                        </span>
+                                </div>
+                        </div>
+                    </div>
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/embed/avatars/0.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="#东京电讯-hashtag#0000" data-user-id="767756955669757952" style="">#东京电讯-hashtag</span>
+
+            <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">01-Nov-20 09:42 AM</span>
+
+            <div class="chatlog__message " data-message-id="772259133943578624" id="message-772259133943578624">
+                <div class="chatlog__content">
+                    <div class="markdown">@TeleportTokyo November 01, 2020 at 09:38AM: <a href="http://twitter.com/TeleportTokyo/status/1322699472271478784">http://twitter.com/TeleportTokyo/status/1322699472271478784</a> </div>
+                </div>
+
+
+                    <div class="chatlog__embed">
+                            <div class="chatlog__embed-color-pill" style="background-color: rgba(29,161,242,255)"></div>
+
+                        <div class="chatlog__embed-content-container">
+                            <div class="chatlog__embed-content">
+                                <div class="chatlog__embed-text">
+                                        <div class="chatlog__embed-author">
+                                                <img class="chatlog__embed-author-icon" src="https://pbs.twimg.com/profile_images/1219265830925373441/oO-xsgJy_bigger.jpg" alt="Author icon">
+
+                                                <span class="chatlog__embed-author-name">
+                                                        <a class="chatlog__embed-author-name-link" href="https://twitter.com/TeleportTokyo">东京电讯（Tokyo Teleport） (@TeleportTokyo)</a>
+                                                </span>
+                                        </div>
+
+
+                                        <div class="chatlog__embed-description">
+                                            <div class="markdown">kid sora &amp; omu - Tokyo Trapp II (prod. sora)
+
+#tokyoteleport #东京电讯 #kidsora #omu #trap #rap #hiphop #emo #sad #cloudrap #music
+
+<a href="https://t.co/Jv9udw6TT2">https://t.co/Jv9udw6TT2</a></div>
+                                        </div>
+
+                                </div>
+
+                            </div>
+
+
+                                <div class="chatlog__embed-footer">
+                                        <img class="chatlog__embed-footer-icon" src="https://abs.twimg.com/icons/apple-touch-icon-192x192.png" alt="Footer icon">
+
+                                        <span class="chatlog__embed-footer-text">
+Twitter
+ • 
+01-Nov-20 09:38 AM                                        </span>
+                                </div>
+                        </div>
+                    </div>
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/embed/avatars/0.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="#东京电讯-hashtag#0000" data-user-id="767756955669757952" style="">#东京电讯-hashtag</span>
+
+            <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">02-Nov-20 04:42 AM</span>
+
+            <div class="chatlog__message " data-message-id="772546068788936704" id="message-772546068788936704">
+                <div class="chatlog__content">
+                    <div class="markdown">@TeleportTokyo November 02, 2020 at 03:48AM: <a href="http://twitter.com/TeleportTokyo/status/1322973748459413509">http://twitter.com/TeleportTokyo/status/1322973748459413509</a> </div>
+                </div>
+
+
+                    <div class="chatlog__embed">
+                            <div class="chatlog__embed-color-pill" style="background-color: rgba(29,161,242,255)"></div>
+
+                        <div class="chatlog__embed-content-container">
+                            <div class="chatlog__embed-content">
+                                <div class="chatlog__embed-text">
+                                        <div class="chatlog__embed-author">
+                                                <img class="chatlog__embed-author-icon" src="https://pbs.twimg.com/profile_images/1219265830925373441/oO-xsgJy_bigger.jpg" alt="Author icon">
+
+                                                <span class="chatlog__embed-author-name">
+                                                        <a class="chatlog__embed-author-name-link" href="https://twitter.com/TeleportTokyo">东京电讯（Tokyo Teleport） (@TeleportTokyo)</a>
+                                                </span>
+                                        </div>
+
+
+                                        <div class="chatlog__embed-description">
+                                            <div class="markdown">Josua Natanael - Stars At Night
+
+#tokyoteleport #东京电讯 #JosuaNatanael #trap #rap #hiphop #emo #sad #cloudrap #music
+
+<a href="https://t.co/ptFfkAdyyq">https://t.co/ptFfkAdyyq</a></div>
+                                        </div>
+
+                                </div>
+
+                            </div>
+
+
+                                <div class="chatlog__embed-footer">
+                                        <img class="chatlog__embed-footer-icon" src="https://abs.twimg.com/icons/apple-touch-icon-192x192.png" alt="Footer icon">
+
+                                        <span class="chatlog__embed-footer-text">
+Twitter
+ • 
+02-Nov-20 03:48 AM                                        </span>
+                                </div>
+                        </div>
+                    </div>
+
+            </div>
+            <div class="chatlog__message " data-message-id="772546070513057794" id="message-772546070513057794">
+                <div class="chatlog__content">
+                    <div class="markdown">@zb_l0st_n November 02, 2020 at 04:15AM: <a href="http://twitter.com/zb_l0st_n/status/1322980645157564418">http://twitter.com/zb_l0st_n/status/1322980645157564418</a> </div>
+                </div>
+
+
+                    <div class="chatlog__embed">
+                            <div class="chatlog__embed-color-pill" style="background-color: rgba(29,161,242,255)"></div>
+
+                        <div class="chatlog__embed-content-container">
+                            <div class="chatlog__embed-content">
+                                <div class="chatlog__embed-text">
+                                        <div class="chatlog__embed-author">
+                                                <img class="chatlog__embed-author-icon" src="https://pbs.twimg.com/profile_images/1219265830925373441/oO-xsgJy_bigger.jpg" alt="Author icon">
+
+                                                <span class="chatlog__embed-author-name">
+                                                        <a class="chatlog__embed-author-name-link" href="https://twitter.com/TeleportTokyo">东京电讯（Tokyo Teleport） (@TeleportTokyo)</a>
+                                                </span>
+                                        </div>
+
+
+                                        <div class="chatlog__embed-description">
+                                            <div class="markdown">Josua Natanael - Stars At Night
+
+#tokyoteleport #东京电讯 #JosuaNatanael #trap #rap #hiphop #emo #sad #cloudrap #music
+
+<a href="https://t.co/ptFfkAdyyq">https://t.co/ptFfkAdyyq</a></div>
+                                        </div>
+
+                                </div>
+
+                            </div>
+
+
+                                <div class="chatlog__embed-footer">
+                                        <img class="chatlog__embed-footer-icon" src="https://abs.twimg.com/icons/apple-touch-icon-192x192.png" alt="Footer icon">
+
+                                        <span class="chatlog__embed-footer-text">
+Twitter
+ • 
+02-Nov-20 04:15 AM                                        </span>
+                                </div>
+                        </div>
+                    </div>
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/embed/avatars/0.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="#东京电讯-hashtag#0000" data-user-id="767756955669757952" style="">#东京电讯-hashtag</span>
+
+            <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">02-Nov-20 07:42 AM</span>
+
+            <div class="chatlog__message " data-message-id="772591434242588682" id="message-772591434242588682">
+                <div class="chatlog__content">
+                    <div class="markdown">@TeleportTokyo November 02, 2020 at 07:17AM: <a href="http://twitter.com/TeleportTokyo/status/1323026327566364672">http://twitter.com/TeleportTokyo/status/1323026327566364672</a> </div>
+                </div>
+
+
+                    <div class="chatlog__embed">
+                            <div class="chatlog__embed-color-pill" style="background-color: rgba(29,161,242,255)"></div>
+
+                        <div class="chatlog__embed-content-container">
+                            <div class="chatlog__embed-content">
+                                <div class="chatlog__embed-text">
+                                        <div class="chatlog__embed-author">
+                                                <img class="chatlog__embed-author-icon" src="https://pbs.twimg.com/profile_images/1219265830925373441/oO-xsgJy_bigger.jpg" alt="Author icon">
+
+                                                <span class="chatlog__embed-author-name">
+                                                        <a class="chatlog__embed-author-name-link" href="https://twitter.com/TeleportTokyo">东京电讯（Tokyo Teleport） (@TeleportTokyo)</a>
+                                                </span>
+                                        </div>
+
+
+                                        <div class="chatlog__embed-description">
+                                            <div class="markdown">test
+<a href="https://t.co/i4iKVDvqZR">https://t.co/i4iKVDvqZR</a> #东京电讯</div>
+                                        </div>
+
+                                </div>
+
+                                    <div class="chatlog__embed-thumbnail-container">
+                                        <a class="chatlog__embed-thumbnail-link" href="https://pbs.twimg.com/ext_tw_video_thumb/1318503837951426560/pu/img/8rTBRD7S6ThPJKPl.jpg">
+                                            <img class="chatlog__embed-thumbnail" src="https://pbs.twimg.com/ext_tw_video_thumb/1318503837951426560/pu/img/8rTBRD7S6ThPJKPl.jpg" alt="Thumbnail">
+                                        </a>
+                                    </div>
+                            </div>
+
+
+                                <div class="chatlog__embed-footer">
+                                        <img class="chatlog__embed-footer-icon" src="https://abs.twimg.com/icons/apple-touch-icon-192x192.png" alt="Footer icon">
+
+                                        <span class="chatlog__embed-footer-text">
+Twitter
+ • 
+02-Nov-20 07:17 AM                                        </span>
+                                </div>
+                        </div>
+                    </div>
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/embed/avatars/0.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="#东京电讯-hashtag#0000" data-user-id="767756955669757952" style="">#东京电讯-hashtag</span>
+
+            <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">02-Nov-20 10:42 PM</span>
+
+            <div class="chatlog__message " data-message-id="772817851136213013" id="message-772817851136213013">
+                <div class="chatlog__content">
+                    <div class="markdown">@TeleportTokyo November 02, 2020 at 09:58PM: <a href="http://twitter.com/TeleportTokyo/status/1323248047590154240">http://twitter.com/TeleportTokyo/status/1323248047590154240</a> </div>
+                </div>
+
+
+                    <div class="chatlog__embed">
+                            <div class="chatlog__embed-color-pill" style="background-color: rgba(29,161,242,255)"></div>
+
+                        <div class="chatlog__embed-content-container">
+                            <div class="chatlog__embed-content">
+                                <div class="chatlog__embed-text">
+                                        <div class="chatlog__embed-author">
+                                                <img class="chatlog__embed-author-icon" src="https://pbs.twimg.com/profile_images/1219265830925373441/oO-xsgJy_bigger.jpg" alt="Author icon">
+
+                                                <span class="chatlog__embed-author-name">
+                                                        <a class="chatlog__embed-author-name-link" href="https://twitter.com/TeleportTokyo">东京电讯（Tokyo Teleport） (@TeleportTokyo)</a>
+                                                </span>
+                                        </div>
+
+
+                                        <div class="chatlog__embed-description">
+                                            <div class="markdown">END&#216;FW&#216;RLD - running away from your love (Prod. Tundra Beats)
+
+#tokyoteleport #东京电讯 #END&#216;FW&#216;RLD #trap #rap #hiphop #emo #sad #cloudrap #music
+
+<a href="https://t.co/3m3NnBvf9l">https://t.co/3m3NnBvf9l</a></div>
+                                        </div>
+
+                                </div>
+
+                            </div>
+
+
+                                <div class="chatlog__embed-footer">
+                                        <img class="chatlog__embed-footer-icon" src="https://abs.twimg.com/icons/apple-touch-icon-192x192.png" alt="Footer icon">
+
+                                        <span class="chatlog__embed-footer-text">
+Twitter
+ • 
+02-Nov-20 09:58 PM                                        </span>
+                                </div>
+                        </div>
+                    </div>
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/embed/avatars/0.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="#东京电讯-hashtag#0000" data-user-id="767756955669757952" style="">#东京电讯-hashtag</span>
+
+            <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">03-Nov-20 05:42 PM</span>
+
+            <div class="chatlog__message " data-message-id="773104753898684426" id="message-773104753898684426">
+                <div class="chatlog__content">
+                    <div class="markdown">@TeleportTokyo November 03, 2020 at 05:38PM: <a href="http://twitter.com/TeleportTokyo/status/1323545015625355264">http://twitter.com/TeleportTokyo/status/1323545015625355264</a> </div>
+                </div>
+
+
+                    <div class="chatlog__embed">
+                            <div class="chatlog__embed-color-pill" style="background-color: rgba(29,161,242,255)"></div>
+
+                        <div class="chatlog__embed-content-container">
+                            <div class="chatlog__embed-content">
+                                <div class="chatlog__embed-text">
+                                        <div class="chatlog__embed-author">
+                                                <img class="chatlog__embed-author-icon" src="https://pbs.twimg.com/profile_images/1219265830925373441/oO-xsgJy_bigger.jpg" alt="Author icon">
+
+                                                <span class="chatlog__embed-author-name">
+                                                        <a class="chatlog__embed-author-name-link" href="https://twitter.com/TeleportTokyo">东京电讯（Tokyo Teleport） (@TeleportTokyo)</a>
+                                                </span>
+                                        </div>
+
+
+                                        <div class="chatlog__embed-description">
+                                            <div class="markdown">espeon - Silent Hill ft. Starkids [Prod. Pitfall]
+
+#tokyoteleport #东京电讯 #espeon #trap #rap #hiphop #emo #sad #cloudrap #music
+
+<a href="https://t.co/rWnaxTBhH1">https://t.co/rWnaxTBhH1</a></div>
+                                        </div>
+
+                                </div>
+
+                            </div>
+
+
+                                <div class="chatlog__embed-footer">
+                                        <img class="chatlog__embed-footer-icon" src="https://abs.twimg.com/icons/apple-touch-icon-192x192.png" alt="Footer icon">
+
+                                        <span class="chatlog__embed-footer-text">
+Twitter
+ • 
+03-Nov-20 05:38 PM                                        </span>
+                                </div>
+                        </div>
+                    </div>
+
+            </div>
+    </div>
+</div>
+
+</div>
+
+<div class="postamble">
+    <div class="postamble__entry">Exported 28 message(s)</div>
+</div>
+
+</body>
+</html>

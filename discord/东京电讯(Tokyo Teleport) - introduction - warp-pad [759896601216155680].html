@@ -1,0 +1,3689 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>东京电讯(Tokyo Teleport) - warp-pad</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+
+    <style>
+        /* General */
+
+@font-face {
+    font-family: Whitney;
+    src: url(https://cdn.jsdelivr.net/gh/Tyrrrz/DiscordFonts@master/whitney-300.woff);
+    font-weight: 300;
+}
+
+@font-face {
+    font-family: Whitney;
+    src: url(https://cdn.jsdelivr.net/gh/Tyrrrz/DiscordFonts@master/whitney-400.woff);
+    font-weight: 400;
+}
+
+@font-face {
+    font-family: Whitney;
+    src: url(https://cdn.jsdelivr.net/gh/Tyrrrz/DiscordFonts@master/whitney-500.woff);
+    font-weight: 500;
+}
+
+@font-face {
+    font-family: Whitney;
+    src: url(https://cdn.jsdelivr.net/gh/Tyrrrz/DiscordFonts@master/whitney-600.woff);
+    font-weight: 600;
+}
+
+@font-face {
+    font-family: Whitney;
+    src: url(https://cdn.jsdelivr.net/gh/Tyrrrz/DiscordFonts@master/whitney-700.woff);
+    font-weight: 700;
+}
+
+body {
+    font-family: "Whitney", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 17px;
+}
+
+a {
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+img {
+    object-fit: contain;
+}
+
+.markdown {
+    max-width: 100%;
+    white-space: pre-wrap;
+    line-height: 1.3;
+    overflow-wrap: break-word;
+}
+
+.spoiler {
+    width: fit-content;
+}
+
+.spoiler--hidden {
+    cursor: pointer;
+}
+
+.spoiler-text {
+    border-radius: 3px;
+}
+
+.spoiler--hidden .spoiler-text {
+    color: rgba(0, 0, 0, 0);
+}
+
+.spoiler--hidden .spoiler-text::selection {
+    color: rgba(0, 0, 0, 0);
+}
+
+.spoiler-image {
+    position: relative;
+    overflow: hidden;
+    border-radius: 3px;
+}
+
+.spoiler--hidden .spoiler-image {
+    box-shadow: 0 0 1px 1px rgba(0, 0, 0, 0.1);
+}
+
+.spoiler--hidden .spoiler-image img {
+    filter: blur(44px);
+}
+
+.spoiler--hidden .spoiler-image:after {
+    content: "SPOILER";
+    color: #dcddde;
+    background-color: rgba(0, 0, 0, 0.6);
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    font-weight: 600;
+    padding: 0.5em 0.7em;
+    border-radius: 20px;
+    letter-spacing: 0.05em;
+    font-size: 0.9em;
+}
+
+.spoiler--hidden:hover .spoiler-image:after {
+    color: #fff;
+    background-color: rgba(0, 0, 0, 0.9);
+}
+
+.quote {
+    margin: 0.1em 0;
+    padding-left: 0.6em;
+    border-left: 4px solid;
+    border-radius: 3px;
+}
+
+.pre {
+    font-family: "Consolas", "Courier New", Courier, monospace;
+}
+
+.pre--multiline {
+    margin-top: 0.25em;
+    padding: 0.5em;
+    border: 2px solid;
+    border-radius: 5px;
+}
+
+.pre--inline {
+    padding: 2px;
+    border-radius: 3px;
+    font-size: 0.85em;
+}
+
+.mention {
+    border-radius: 3px;
+    padding: 0 2px;
+    color: #7289da;
+    background: rgba(114, 137, 218, .1);
+    font-weight: 500;
+}
+
+.emoji {
+    width: 1.25em;
+    height: 1.25em;
+    margin: 0 0.06em;
+    vertical-align: -0.4em;
+}
+
+.emoji--small {
+    width: 1em;
+    height: 1em;
+}
+
+.emoji--large {
+    width: 2.8em;
+    height: 2.8em;
+}
+
+/* Preamble */
+
+.preamble {
+    display: grid;
+    margin: 0 0.3em 0.6em 0.3em;
+    max-width: 100%;
+    grid-template-columns: auto 1fr;
+}
+
+.preamble__guild-icon-container {
+    grid-column: 1;
+}
+
+.preamble__guild-icon {
+    max-width: 88px;
+    max-height: 88px;
+}
+
+.preamble__entries-container {
+    grid-column: 2;
+    margin-left: 0.6em;
+}
+
+.preamble__entry {
+    font-size: 1.4em;
+}
+
+.preamble__entry--small {
+    font-size: 1em;
+}
+
+/* Chatlog */
+
+.chatlog {
+    max-width: 100%;
+}
+
+.chatlog__message-group {
+    display: grid;
+    margin: 0 0.6em;
+    padding: 0.9em 0;
+    border-top: 1px solid;
+    grid-template-columns: auto 1fr;
+}
+
+.chatlog__author-avatar-container {
+    grid-column: 1;
+    width: 40px;
+    height: 40px;
+}
+
+.chatlog__author-avatar {
+    border-radius: 50%;
+    height: 40px;
+    width: 40px;
+}
+
+.chatlog__messages {
+    grid-column: 2;
+    margin-left: 1.2em;
+    min-width: 50%;
+}
+
+.chatlog__author-name {
+    font-weight: 500;
+}
+
+.chatlog__timestamp {
+    margin-left: 0.3em;
+    font-size: 0.75em;
+}
+
+.chatlog__message {
+    padding: 0.1em 0.3em;
+    margin: 0 -0.3em;
+    background-color: transparent;
+    transition: background-color 1s ease;
+}
+
+.chatlog__content {
+    font-size: 0.95em;
+    word-wrap: break-word;
+}
+
+.chatlog__edited-timestamp {
+    margin-left: 0.15em;
+    font-size: 0.8em;
+}
+
+.chatlog__attachment {
+    margin-top: 0.3em;
+}
+
+.chatlog__attachment-thumbnail {
+    vertical-align: top;
+    max-width: 45vw;
+    max-height: 500px;
+    border-radius: 3px;
+}
+
+.chatlog__embed {
+    display: flex;
+    margin-top: 0.3em;
+    max-width: 520px;
+}
+
+.chatlog__embed-color-pill {
+    flex-shrink: 0;
+    width: 0.25em;
+    border-top-left-radius: 3px;
+    border-bottom-left-radius: 3px;
+}
+
+.chatlog__embed-content-container {
+    display: flex;
+    flex-direction: column;
+    padding: 0.5em 0.6em;
+    border: 1px solid;
+    border-top-right-radius: 3px;
+    border-bottom-right-radius: 3px;
+}
+
+.chatlog__embed-content {
+    display: flex;
+    width: 100%;
+}
+
+.chatlog__embed-text {
+    flex: 1;
+}
+
+.chatlog__embed-author {
+    display: flex;
+    margin-bottom: 0.3em;
+    align-items: center;
+}
+
+.chatlog__embed-author-icon {
+    margin-right: 0.5em;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+}
+
+.chatlog__embed-author-name {
+    font-size: 0.875em;
+    font-weight: 600;
+}
+
+.chatlog__embed-title {
+    margin-bottom: 0.2em;
+    font-size: 0.875em;
+    font-weight: 600;
+}
+
+.chatlog__embed-description {
+    font-weight: 500;
+    font-size: 0.85em;
+}
+
+.chatlog__embed-fields {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.chatlog__embed-field {
+    flex: 0;
+    min-width: 100%;
+    max-width: 506px;
+    padding-top: 0.6em;
+    font-size: 0.875em;
+}
+
+.chatlog__embed-field--inline {
+    flex: 1;
+    flex-basis: auto;
+    min-width: 150px;
+}
+
+.chatlog__embed-field-name {
+    margin-bottom: 0.2em;
+    font-weight: 600;
+}
+
+.chatlog__embed-field-value {
+    font-weight: 500;
+}
+
+.chatlog__embed-thumbnail {
+    flex: 0;
+    margin-left: 1.2em;
+    max-width: 80px;
+    max-height: 80px;
+    border-radius: 3px;
+}
+
+.chatlog__embed-image-container {
+    margin-top: 0.6em;
+}
+
+.chatlog__embed-image {
+    max-width: 500px;
+    max-height: 400px;
+    border-radius: 3px;
+}
+
+.chatlog__embed-footer {
+    margin-top: 0.6em;
+}
+
+.chatlog__embed-footer-icon {
+    margin-right: 0.2em;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    vertical-align: middle;
+}
+
+.chatlog__embed-footer-text {
+    font-size: 0.75em;
+    font-weight: 500;
+}
+
+.chatlog__reactions {
+    display: flex;
+}
+
+.chatlog__reaction {
+    display: flex;
+    align-items: center;
+    margin: 0.35em 0.1em 0.1em 0.1em;
+    padding: 0.2em 0.35em;
+    border-radius: 3px;
+}
+
+.chatlog__reaction-count {
+    min-width: 9px;
+    margin-left: 0.35em;
+    font-size: 0.875em;
+}
+
+.chatlog__bot-tag {
+    position: relative;
+    top: -.2em;
+    margin-left: 0.3em;
+    padding: 0.05em 0.3em;
+    border-radius: 3px;
+    vertical-align: middle;
+    line-height: 1.3;
+    background: #7289da;
+    color: #ffffff;
+    font-size: 0.625em;
+    font-weight: 500;
+}
+
+/* Postamble */
+
+.postamble {
+    margin: 1.4em 0.3em 0.6em 0.3em;
+    padding: 1em;
+    border-top: 1px solid;
+}
+    </style>
+    <style>
+        /* General */
+
+body {
+    background-color: #36393e;
+    color: #dcddde;
+}
+
+a {
+    color: #0096cf;
+}
+
+.spoiler-text {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.spoiler--hidden .spoiler-text {
+    background-color: #202225;
+}
+
+.spoiler--hidden:hover .spoiler-text {
+    background-color: rgba(32, 34, 37, 0.8);
+}
+
+.quote {
+    border-color: #4f545c;
+}
+
+.pre {
+    background-color: #2f3136 !important;
+}
+
+.pre--multiline {
+    border-color: #282b30 !important;
+    color: #b9bbbe !important;
+}
+
+/* === Preamble === */
+
+.preamble__entry {
+    color: #ffffff;
+}
+
+/* Chatlog */
+
+.chatlog__message-group {
+    border-color: rgba(255, 255, 255, 0.1);
+}
+
+.chatlog__author-name {
+    color: #ffffff;
+}
+
+.chatlog__timestamp {
+    color: rgba(255, 255, 255, 0.2);
+}
+
+.chatlog__message--highlighted {
+    background-color: rgba(114, 137, 218, 0.2) !important;
+}
+
+.chatlog__message--pinned {
+    background-color: rgba(249, 168, 37, 0.05);
+}
+
+.chatlog__edited-timestamp {
+    color: rgba(255, 255, 255, 0.2);
+}
+
+.chatlog__embed-color-pill--default {
+    background-color: rgba(79, 84, 92, 1);
+}
+
+.chatlog__embed-content-container {
+    background-color: rgba(46, 48, 54, 0.3);
+    border-color: rgba(46, 48, 54, 0.6);
+}
+
+.chatlog__embed-author-name {
+    color: #ffffff;
+}
+
+.chatlog__embed-author-name-link {
+    color: #ffffff;
+}
+
+.chatlog__embed-title {
+    color: #ffffff;
+}
+
+.chatlog__embed-description {
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.chatlog__embed-field-name {
+    color: #ffffff;
+}
+
+.chatlog__embed-field-value {
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.chatlog__embed-footer {
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.chatlog__reaction {
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+.chatlog__reaction-count {
+    color: rgba(255, 255, 255, 0.3);
+}
+
+/* Postamble */
+
+.postamble {
+    border-color: rgba(255, 255, 255, 0.1);
+}
+
+.postamble__entry {
+    color: #ffffff;
+}
+    </style>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/solarized-dark.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/highlight.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelectorAll('.pre--multiline').forEach(block => hljs.highlightBlock(block));
+        });
+    </script>
+
+    <script>
+        function scrollToMessage(event, id) {
+            var element = document.getElementById('message-' + id);
+
+            if (element) {
+                event.preventDefault();
+
+                element.classList.add('chatlog__message--highlighted');
+
+                window.scrollTo({
+                    top: element.getBoundingClientRect().top - document.body.getBoundingClientRect().top - (window.innerHeight / 2),
+                    behavior: 'smooth'
+                });
+
+                window.setTimeout(function() {
+                    element.classList.remove('chatlog__message--highlighted');
+                }, 2000);
+            }
+        }
+
+        function showSpoiler(event, element) {
+            if (element && element.classList.contains('spoiler--hidden')) {
+                event.preventDefault();
+                element.classList.remove('spoiler--hidden');
+            }
+        }
+    </script>
+</head>
+<body>
+
+<div class="preamble">
+    <div class="preamble__guild-icon-container">
+        <img class="preamble__guild-icon" src="https://cdn.discordapp.com/icons/654291964250030101/cbdca1e9deee87fd1383394eb2ecb186.png" alt="Guild icon">
+    </div>
+    <div class="preamble__entries-container">
+        <div class="preamble__entry">东京电讯(Tokyo Teleport)</div>
+        <div class="preamble__entry">introduction / warp-pad</div>
+
+
+    </div>
+</div>
+
+<div class="chatlog">
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/759904611799793696/c46529fdb267cfc19e8070005329a6e6.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Rei-chan#9272" data-user-id="759904611799793696" style="">Rei-chan</span>
+
+            <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">28-Sep-20 07:32 AM</span>
+
+            <div class="chatlog__message " data-message-id="759905375964758046" id="message-759905375964758046">
+                <div class="chatlog__content">
+                    <div class="markdown">Joined the server. </div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/284998208508133376/8cf72cb7999c9705d33d39a2c9892e60.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Kho#5603" data-user-id="284998208508133376" style="color: rgb(132,61,164)">Kho</span>
+
+
+        <span class="chatlog__timestamp">28-Sep-20 02:40 PM</span>
+
+            <div class="chatlog__message " data-message-id="760012943650979850" id="message-760012943650979850">
+                <div class="chatlog__content">
+                    <div class="markdown">Joined the server. </div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/759904611799793696/c46529fdb267cfc19e8070005329a6e6.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Rei-chan#9272" data-user-id="759904611799793696" style="">Rei-chan</span>
+
+            <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">28-Sep-20 02:40 PM</span>
+
+            <div class="chatlog__message " data-message-id="760012950751674388" id="message-760012950751674388">
+                <div class="chatlog__content">
+                    <div class="markdown">Hey <span class="mention" title="Kho#5603">@Kho</span>, welcome to <strong>东京电讯(Tokyo Teleport)</strong>! </div>
+                </div>
+
+                    <div class="chatlog__attachment">
+                            <a href="https://cdn.discordapp.com/attachments/759896601216155680/760012950412591115/card.png">
+                                    <img class="chatlog__attachment-thumbnail" src="https://cdn.discordapp.com/attachments/759896601216155680/760012950412591115/card.png" alt="Attachment">
+                            </a>
+                    </div>
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/751746266333184090/1939d806eb4f4129a16dab5c89fe9006.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="senja#9810" data-user-id="751746266333184090" style="color: rgb(132,61,164)">senja</span>
+
+
+        <span class="chatlog__timestamp">28-Sep-20 02:42 PM</span>
+
+            <div class="chatlog__message " data-message-id="760013466286948352" id="message-760013466286948352">
+                <div class="chatlog__content">
+                    <div class="markdown">Joined the server. </div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/759904611799793696/c46529fdb267cfc19e8070005329a6e6.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Rei-chan#9272" data-user-id="759904611799793696" style="">Rei-chan</span>
+
+            <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">28-Sep-20 02:42 PM</span>
+
+            <div class="chatlog__message " data-message-id="760013474847129660" id="message-760013474847129660">
+                <div class="chatlog__content">
+                    <div class="markdown">Hey <span class="mention" title="senja#9810">@senja</span>, welcome to <strong>东京电讯(Tokyo Teleport)</strong>! </div>
+                </div>
+
+                    <div class="chatlog__attachment">
+                            <a href="https://cdn.discordapp.com/attachments/759896601216155680/760013474603991070/card.png">
+                                    <img class="chatlog__attachment-thumbnail" src="https://cdn.discordapp.com/attachments/759896601216155680/760013474603991070/card.png" alt="Attachment">
+                            </a>
+                    </div>
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/681769542766166016/845f8ecccf0150f9129b1840db2a90da.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="mikuzou#1785" data-user-id="681769542766166016" style="color: rgb(132,61,164)">mikuzou</span>
+
+
+        <span class="chatlog__timestamp">29-Sep-20 12:35 AM</span>
+
+            <div class="chatlog__message " data-message-id="760162803632832572" id="message-760162803632832572">
+                <div class="chatlog__content">
+                    <div class="markdown">Joined the server. </div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/759904611799793696/c46529fdb267cfc19e8070005329a6e6.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Rei-chan#9272" data-user-id="759904611799793696" style="">Rei-chan</span>
+
+            <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">29-Sep-20 12:35 AM</span>
+
+            <div class="chatlog__message " data-message-id="760162810805223444" id="message-760162810805223444">
+                <div class="chatlog__content">
+                    <div class="markdown">Hey <span class="mention" title="mikuzou#1785">@mikuzou</span>, welcome to <strong>东京电讯(Tokyo Teleport)</strong>! </div>
+                </div>
+
+                    <div class="chatlog__attachment">
+                            <a href="https://cdn.discordapp.com/attachments/759896601216155680/760162810557890580/card.png">
+                                    <img class="chatlog__attachment-thumbnail" src="https://cdn.discordapp.com/attachments/759896601216155680/760162810557890580/card.png" alt="Attachment">
+                            </a>
+                    </div>
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/759904611799793696/c46529fdb267cfc19e8070005329a6e6.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Rei-chan#9272" data-user-id="759904611799793696" style="">Rei-chan</span>
+
+            <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">29-Sep-20 03:49 AM</span>
+
+            <div class="chatlog__message " data-message-id="760211549561815080" id="message-760211549561815080">
+                <div class="chatlog__content">
+                    <div class="markdown"><strong>MEE6#4876</strong> left the server </div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/451917140916830209/a3741eb192f59f04ef47e94d5349e570.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="KevS#8796" data-user-id="451917140916830209" style="color: rgb(132,61,164)">KevS</span>
+
+
+        <span class="chatlog__timestamp">29-Sep-20 06:01 AM</span>
+
+            <div class="chatlog__message " data-message-id="760244819913211996" id="message-760244819913211996">
+                <div class="chatlog__content">
+                    <div class="markdown">Joined the server. </div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/759904611799793696/c46529fdb267cfc19e8070005329a6e6.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Rei-chan#9272" data-user-id="759904611799793696" style="">Rei-chan</span>
+
+            <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">29-Sep-20 06:01 AM</span>
+
+            <div class="chatlog__message " data-message-id="760244827740045323" id="message-760244827740045323">
+                <div class="chatlog__content">
+                    <div class="markdown">Hey <span class="mention" title="KevS#8796">@KevS</span>, welcome to <strong>东京电讯(Tokyo Teleport)</strong>! </div>
+                </div>
+
+                    <div class="chatlog__attachment">
+                            <a href="https://cdn.discordapp.com/attachments/759896601216155680/760244826909442048/card.png">
+                                    <img class="chatlog__attachment-thumbnail" src="https://cdn.discordapp.com/attachments/759896601216155680/760244826909442048/card.png" alt="Attachment">
+                            </a>
+                    </div>
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/212787499532156928/92b5779b78f22e63134baa5cf726be15.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="paperthinwalls#2088" data-user-id="212787499532156928" style="color: rgb(132,61,164)">paperthinwalls</span>
+
+
+        <span class="chatlog__timestamp">29-Sep-20 10:14 PM</span>
+
+            <div class="chatlog__message " data-message-id="760489681484906506" id="message-760489681484906506">
+                <div class="chatlog__content">
+                    <div class="markdown">Joined the server. </div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/759904611799793696/c46529fdb267cfc19e8070005329a6e6.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Rei-chan#9272" data-user-id="759904611799793696" style="">Rei-chan</span>
+
+            <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">29-Sep-20 10:14 PM</span>
+
+            <div class="chatlog__message " data-message-id="760489689232310343" id="message-760489689232310343">
+                <div class="chatlog__content">
+                    <div class="markdown">Hey <span class="mention" title="paperthinwalls#2088">@paperthinwalls</span>, welcome to <strong>东京电讯(Tokyo Teleport)</strong>! </div>
+                </div>
+
+                    <div class="chatlog__attachment">
+                            <a href="https://cdn.discordapp.com/attachments/759896601216155680/760489689089179708/card.png">
+                                    <img class="chatlog__attachment-thumbnail" src="https://cdn.discordapp.com/attachments/759896601216155680/760489689089179708/card.png" alt="Attachment">
+                            </a>
+                    </div>
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/759904611799793696/c46529fdb267cfc19e8070005329a6e6.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Rei-chan#9272" data-user-id="759904611799793696" style="">Rei-chan</span>
+
+            <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">04-Oct-20 09:40 AM</span>
+
+            <div class="chatlog__message " data-message-id="762111970635022356" id="message-762111970635022356">
+                <div class="chatlog__content">
+                    <div class="markdown"><strong>ΡURΡLΣ RΙVΣR#9976</strong> left the server </div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/embed/avatars/1.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="chibi-chan#8041" data-user-id="761199713444823080" style="color: rgb(132,61,164)">chibi-chan</span>
+
+
+        <span class="chatlog__timestamp">05-Oct-20 04:00 PM</span>
+
+            <div class="chatlog__message " data-message-id="762569868587040858" id="message-762569868587040858">
+                <div class="chatlog__content">
+                    <div class="markdown">Joined the server. </div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/759904611799793696/c46529fdb267cfc19e8070005329a6e6.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Rei-chan#9272" data-user-id="759904611799793696" style="">Rei-chan</span>
+
+            <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">05-Oct-20 04:00 PM</span>
+
+            <div class="chatlog__message " data-message-id="762569876652949515" id="message-762569876652949515">
+                <div class="chatlog__content">
+                    <div class="markdown">Hey <span class="mention" title="chibi-chan#8041">@chibi-chan</span>, welcome to <strong>东京电讯(Tokyo Teleport)</strong>! </div>
+                </div>
+
+                    <div class="chatlog__attachment">
+                            <a href="https://cdn.discordapp.com/attachments/759896601216155680/762569876035469312/card.png">
+                                    <img class="chatlog__attachment-thumbnail" src="https://cdn.discordapp.com/attachments/759896601216155680/762569876035469312/card.png" alt="Attachment">
+                            </a>
+                    </div>
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/522425162864525313/b357241dd71fd77551081adff7346c80.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="&#129472;♥&#129364;(ᶜʰᵉᵉˢᵉ-ᴾₒᵀₐᵀₒ)#5156" data-user-id="522425162864525313" style="">&#129472;♥&#129364;(ᶜʰᵉᵉˢᵉ-ᴾₒᵀₐᵀₒ)</span>
+
+
+        <span class="chatlog__timestamp">05-Oct-20 04:04 PM</span>
+
+            <div class="chatlog__message " data-message-id="762570965724299284" id="message-762570965724299284">
+                <div class="chatlog__content">
+                    <div class="markdown">Joined the server. </div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/759904611799793696/c46529fdb267cfc19e8070005329a6e6.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Rei-chan#9272" data-user-id="759904611799793696" style="">Rei-chan</span>
+
+            <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">05-Oct-20 04:04 PM</span>
+
+            <div class="chatlog__message " data-message-id="762570972120350750" id="message-762570972120350750">
+                <div class="chatlog__content">
+                    <div class="markdown">Hey <span class="mention" title="&#129472;♥&#129364;(ᶜʰᵉᵉˢᵉ-ᴾₒᵀₐᵀₒ)#5156">@&#129472;♥&#129364;(ᶜʰᵉᵉˢᵉ-ᴾₒᵀₐᵀₒ)</span>, welcome to <strong>东京电讯(Tokyo Teleport)</strong>! </div>
+                </div>
+
+                    <div class="chatlog__attachment">
+                            <a href="https://cdn.discordapp.com/attachments/759896601216155680/762570971793850378/card.png">
+                                    <img class="chatlog__attachment-thumbnail" src="https://cdn.discordapp.com/attachments/759896601216155680/762570971793850378/card.png" alt="Attachment">
+                            </a>
+                    </div>
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="762571237653348363" id="message-762571237653348363">
+                <div class="chatlog__content">
+                    <div class="markdown"><strong><img class="emoji " alt="🧀" title="🧀" src="https://twemoji.maxcdn.com/2/72x72/1f9c0.png"><img class="emoji " alt="♥" title="♥" src="https://twemoji.maxcdn.com/2/72x72/2665.png"><img class="emoji " alt="🥔" title="🥔" src="https://twemoji.maxcdn.com/2/72x72/1f954.png">(ᶜʰᵉᵉˢᵉ-ᴾₒᵀₐᵀₒ)#5156</strong> left the server </div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/536026360762597387/488fe555997c664a646a9e9244b67919.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="kitchen sink#8413" data-user-id="536026360762597387" style="">kitchen sink</span>
+
+
+        <span class="chatlog__timestamp">05-Oct-20 07:17 PM</span>
+
+            <div class="chatlog__message " data-message-id="762619533411876874" id="message-762619533411876874">
+                <div class="chatlog__content">
+                    <div class="markdown">Joined the server. </div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/759904611799793696/c46529fdb267cfc19e8070005329a6e6.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Rei-chan#9272" data-user-id="759904611799793696" style="">Rei-chan</span>
+
+            <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">05-Oct-20 07:17 PM</span>
+
+            <div class="chatlog__message " data-message-id="762619539417464832" id="message-762619539417464832">
+                <div class="chatlog__content">
+                    <div class="markdown">Hey <span class="mention" title="kitchen sink#8413">@kitchen sink</span>, welcome to <strong>东京电讯(Tokyo Teleport)</strong>! </div>
+                </div>
+
+                    <div class="chatlog__attachment">
+                            <a href="https://cdn.discordapp.com/attachments/759896601216155680/762619538906284072/card.png">
+                                    <img class="chatlog__attachment-thumbnail" src="https://cdn.discordapp.com/attachments/759896601216155680/762619538906284072/card.png" alt="Attachment">
+                            </a>
+                    </div>
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/617747656428748803/70edecad0f6264a68b89128fea504b8b.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Lil feef#0314" data-user-id="617747656428748803" style="color: rgb(132,61,164)">Lil feef</span>
+
+
+        <span class="chatlog__timestamp">06-Oct-20 11:39 AM</span>
+
+            <div class="chatlog__message " data-message-id="762866563505848360" id="message-762866563505848360">
+                <div class="chatlog__content">
+                    <div class="markdown">Joined the server. </div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/759904611799793696/c46529fdb267cfc19e8070005329a6e6.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Rei-chan#9272" data-user-id="759904611799793696" style="">Rei-chan</span>
+
+            <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">06-Oct-20 11:39 AM</span>
+
+            <div class="chatlog__message " data-message-id="762866569982246912" id="message-762866569982246912">
+                <div class="chatlog__content">
+                    <div class="markdown">Hey <span class="mention" title="Lil feef#0314">@Lil feef</span>, welcome to <strong>东京电讯(Tokyo Teleport)</strong>! </div>
+                </div>
+
+                    <div class="chatlog__attachment">
+                            <a href="https://cdn.discordapp.com/attachments/759896601216155680/762866569641852938/card.png">
+                                    <img class="chatlog__attachment-thumbnail" src="https://cdn.discordapp.com/attachments/759896601216155680/762866569641852938/card.png" alt="Attachment">
+                            </a>
+                    </div>
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/743870240382779414/92d85169fd7b2a88d5a195014aa32879.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="YogiBearbb#2173" data-user-id="743870240382779414" style="color: rgb(132,61,164)">YogiBearbb</span>
+
+
+        <span class="chatlog__timestamp">06-Oct-20 03:28 PM</span>
+
+            <div class="chatlog__message " data-message-id="762924132932517898" id="message-762924132932517898">
+                <div class="chatlog__content">
+                    <div class="markdown">Joined the server. </div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/759904611799793696/c46529fdb267cfc19e8070005329a6e6.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Rei-chan#9272" data-user-id="759904611799793696" style="">Rei-chan</span>
+
+            <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">06-Oct-20 03:28 PM</span>
+
+            <div class="chatlog__message " data-message-id="762924139966103592" id="message-762924139966103592">
+                <div class="chatlog__content">
+                    <div class="markdown">Hey <span class="mention" title="YogiBearbb#2173">@YogiBearbb</span>, welcome to <strong>东京电讯(Tokyo Teleport)</strong>! </div>
+                </div>
+
+                    <div class="chatlog__attachment">
+                            <a href="https://cdn.discordapp.com/attachments/759896601216155680/762924139203133450/card.png">
+                                    <img class="chatlog__attachment-thumbnail" src="https://cdn.discordapp.com/attachments/759896601216155680/762924139203133450/card.png" alt="Attachment">
+                            </a>
+                    </div>
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/759904611799793696/c46529fdb267cfc19e8070005329a6e6.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Rei-chan#9272" data-user-id="759904611799793696" style="">Rei-chan</span>
+
+            <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">08-Oct-20 06:02 AM</span>
+
+            <div class="chatlog__message " data-message-id="763506658214674442" id="message-763506658214674442">
+                <div class="chatlog__content">
+                    <div class="markdown"><strong>Peachy_Ya.exe#9349</strong> left the server </div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/521310710257680407/bb05e562f17472ce372672a854dcac9a.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Oli &#128150;#1312" data-user-id="521310710257680407" style="color: rgb(139,221,248)">Kaz9</span>
+
+
+        <span class="chatlog__timestamp">09-Oct-20 03:51 AM</span>
+
+            <div class="chatlog__message " data-message-id="763836016514564186" id="message-763836016514564186">
+                <div class="chatlog__content">
+                    <div class="markdown"> </div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/646506907430813746/74ddb4cdb4ca50aa1fc04e34b5e7150b.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="sloface#7266" data-user-id="646506907430813746" style="color: rgb(132,61,164)">sloface</span>
+
+
+        <span class="chatlog__timestamp">09-Oct-20 05:39 AM</span>
+
+            <div class="chatlog__message " data-message-id="763863284038238268" id="message-763863284038238268">
+                <div class="chatlog__content">
+                    <div class="markdown">Joined the server. </div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/759904611799793696/c46529fdb267cfc19e8070005329a6e6.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Rei-chan#9272" data-user-id="759904611799793696" style="">Rei-chan</span>
+
+            <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">09-Oct-20 05:40 AM</span>
+
+            <div class="chatlog__message " data-message-id="763863295266258955" id="message-763863295266258955">
+                <div class="chatlog__content">
+                    <div class="markdown">Hey <span class="mention" title="sloface#7266">@sloface</span>, welcome to <strong>东京电讯(Tokyo Teleport)</strong>! </div>
+                </div>
+
+                    <div class="chatlog__attachment">
+                            <a href="https://cdn.discordapp.com/attachments/759896601216155680/763863295068209192/card.png">
+                                    <img class="chatlog__attachment-thumbnail" src="https://cdn.discordapp.com/attachments/759896601216155680/763863295068209192/card.png" alt="Attachment">
+                            </a>
+                    </div>
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/212091164436725761/d775a7c324d8c00bf8a8e2dfb6f30c7c.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="redheadbitch#2862" data-user-id="212091164436725761" style="color: rgb(46,204,113)">redheadbitch</span>
+
+
+        <span class="chatlog__timestamp">09-Oct-20 05:07 PM</span>
+
+            <div class="chatlog__message " data-message-id="764036291603857409" id="message-764036291603857409">
+                <div class="chatlog__content">
+                    <div class="markdown">Joined the server. </div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/759904611799793696/c46529fdb267cfc19e8070005329a6e6.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Rei-chan#9272" data-user-id="759904611799793696" style="">Rei-chan</span>
+
+            <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">09-Oct-20 05:07 PM</span>
+
+            <div class="chatlog__message " data-message-id="764036335598043146" id="message-764036335598043146">
+                <div class="chatlog__content">
+                    <div class="markdown">Hey <span class="mention" title="redheadbitch#2862">@redheadbitch</span>, welcome to <strong>东京电讯(Tokyo Teleport)</strong>! </div>
+                </div>
+
+                    <div class="chatlog__attachment">
+                            <a href="https://cdn.discordapp.com/attachments/759896601216155680/764036334846214194/card.png">
+                                    <img class="chatlog__attachment-thumbnail" src="https://cdn.discordapp.com/attachments/759896601216155680/764036334846214194/card.png" alt="Attachment">
+                            </a>
+                    </div>
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/758719438660304917/fc6f514993be8f25d5ae8fc2e9e3b82c.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="✿&#119925;&#119952;&#119962;&#119938;&#39;&#119956; &#119956;&#119946;&#119950;&#119953;✿#0523" data-user-id="758719438660304917" style="">✿&#119925;&#119952;&#119962;&#119938;&#39;&#119956; &#119956;&#119946;&#119950;&#119953;✿</span>
+
+
+        <span class="chatlog__timestamp">09-Oct-20 06:51 PM</span>
+
+            <div class="chatlog__message " data-message-id="764062487154524160" id="message-764062487154524160">
+                <div class="chatlog__content">
+                    <div class="markdown">Joined the server. </div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/759904611799793696/c46529fdb267cfc19e8070005329a6e6.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Rei-chan#9272" data-user-id="759904611799793696" style="">Rei-chan</span>
+
+            <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">09-Oct-20 06:51 PM</span>
+
+            <div class="chatlog__message " data-message-id="764062496247513099" id="message-764062496247513099">
+                <div class="chatlog__content">
+                    <div class="markdown">Hey <span class="mention" title="✿&#119925;&#119952;&#119962;&#119938;&#39;&#119956; &#119956;&#119946;&#119950;&#119953;✿#0523">@✿&#119925;&#119952;&#119962;&#119938;&#39;&#119956; &#119956;&#119946;&#119950;&#119953;✿</span>, welcome to <strong>东京电讯(Tokyo Teleport)</strong>! </div>
+                </div>
+
+                    <div class="chatlog__attachment">
+                            <a href="https://cdn.discordapp.com/attachments/759896601216155680/764062496038060042/card.png">
+                                    <img class="chatlog__attachment-thumbnail" src="https://cdn.discordapp.com/attachments/759896601216155680/764062496038060042/card.png" alt="Attachment">
+                            </a>
+                    </div>
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/760034489660473355/3e289127ded20b29b4bf85afc26b090b.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Katarina.#2635" data-user-id="760034489660473355" style="color: rgb(132,61,164)">Katarina.</span>
+
+
+        <span class="chatlog__timestamp">09-Oct-20 07:50 PM</span>
+
+            <div class="chatlog__message " data-message-id="764077425406771230" id="message-764077425406771230">
+                <div class="chatlog__content">
+                    <div class="markdown">Joined the server. </div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/759904611799793696/c46529fdb267cfc19e8070005329a6e6.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Rei-chan#9272" data-user-id="759904611799793696" style="">Rei-chan</span>
+
+            <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">09-Oct-20 07:50 PM</span>
+
+            <div class="chatlog__message " data-message-id="764077435649785866" id="message-764077435649785866">
+                <div class="chatlog__content">
+                    <div class="markdown">Hey <span class="mention" title="Katarina.#2635">@Katarina.</span>, welcome to <strong>东京电讯(Tokyo Teleport)</strong>! </div>
+                </div>
+
+                    <div class="chatlog__attachment">
+                            <a href="https://cdn.discordapp.com/attachments/759896601216155680/764077434609467422/card.png">
+                                    <img class="chatlog__attachment-thumbnail" src="https://cdn.discordapp.com/attachments/759896601216155680/764077434609467422/card.png" alt="Attachment">
+                            </a>
+                    </div>
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/759904611799793696/c46529fdb267cfc19e8070005329a6e6.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Rei-chan#9272" data-user-id="759904611799793696" style="">Rei-chan</span>
+
+            <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">10-Oct-20 07:02 AM</span>
+
+            <div class="chatlog__message " data-message-id="764246380604030998" id="message-764246380604030998">
+                <div class="chatlog__content">
+                    <div class="markdown"><strong>✿<img class="emoji " alt="𝑵" title="𝑵" src="https://twemoji.maxcdn.com/2/72x72/1d475.png"><img class="emoji " alt="𝒐" title="𝒐" src="https://twemoji.maxcdn.com/2/72x72/1d490.png"><img class="emoji " alt="𝒚" title="𝒚" src="https://twemoji.maxcdn.com/2/72x72/1d49a.png"><img class="emoji " alt="𝒂" title="𝒂" src="https://twemoji.maxcdn.com/2/72x72/1d482.png">&#39;<img class="emoji " alt="𝒔" title="𝒔" src="https://twemoji.maxcdn.com/2/72x72/1d494.png"> <img class="emoji " alt="𝒔" title="𝒔" src="https://twemoji.maxcdn.com/2/72x72/1d494.png"><img class="emoji " alt="𝒊" title="𝒊" src="https://twemoji.maxcdn.com/2/72x72/1d48a.png"><img class="emoji " alt="𝒎" title="𝒎" src="https://twemoji.maxcdn.com/2/72x72/1d48e.png"><img class="emoji " alt="𝒑" title="𝒑" src="https://twemoji.maxcdn.com/2/72x72/1d491.png">✿#0523</strong> left the server </div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/759904611799793696/c46529fdb267cfc19e8070005329a6e6.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Rei-chan#9272" data-user-id="759904611799793696" style="">Rei-chan</span>
+
+            <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">11-Oct-20 02:06 AM</span>
+
+            <div class="chatlog__message " data-message-id="764534365983473674" id="message-764534365983473674">
+                <div class="chatlog__content">
+                    <div class="markdown"><strong>Karl Peter#1976</strong> left the server </div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/585262509519405121/3b4f4dd011ef15905493dad541070312.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="EliteFord_1400#6696" data-user-id="585262509519405121" style="color: rgb(132,61,164)">EliteFord_1400</span>
+
+
+        <span class="chatlog__timestamp">11-Oct-20 06:02 AM</span>
+
+            <div class="chatlog__message " data-message-id="764593817076498532" id="message-764593817076498532">
+                <div class="chatlog__content">
+                    <div class="markdown">Joined the server. </div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/759904611799793696/c46529fdb267cfc19e8070005329a6e6.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Rei-chan#9272" data-user-id="759904611799793696" style="">Rei-chan</span>
+
+            <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">11-Oct-20 06:02 AM</span>
+
+            <div class="chatlog__message " data-message-id="764593827460939787" id="message-764593827460939787">
+                <div class="chatlog__content">
+                    <div class="markdown">Hey <span class="mention" title="EliteFord_1400#6696">@EliteFord_1400</span>, welcome to <strong>东京电讯(Tokyo Teleport)</strong>! </div>
+                </div>
+
+                    <div class="chatlog__attachment">
+                            <a href="https://cdn.discordapp.com/attachments/759896601216155680/764593827209674802/card.png">
+                                    <img class="chatlog__attachment-thumbnail" src="https://cdn.discordapp.com/attachments/759896601216155680/764593827209674802/card.png" alt="Attachment">
+                            </a>
+                    </div>
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/759904611799793696/c46529fdb267cfc19e8070005329a6e6.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Rei-chan#9272" data-user-id="759904611799793696" style="">Rei-chan</span>
+
+            <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">11-Oct-20 07:30 PM</span>
+
+            <div class="chatlog__message " data-message-id="764797070825488405" id="message-764797070825488405">
+                <div class="chatlog__content">
+                    <div class="markdown"><strong>Yonkou#0904</strong> left the server </div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/759904611799793696/c46529fdb267cfc19e8070005329a6e6.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Rei-chan#9272" data-user-id="759904611799793696" style="">Rei-chan</span>
+
+            <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">12-Oct-20 08:25 PM</span>
+
+            <div class="chatlog__message " data-message-id="765173319443808269" id="message-765173319443808269">
+                <div class="chatlog__content">
+                    <div class="markdown"><strong>hamburger123#8771</strong> left the server </div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/249417460732657664/b0ee9f13d3aa3b93bda360cfa1f5975e.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Dank#6495" data-user-id="249417460732657664" style="color: rgb(132,61,164)">Dank</span>
+
+
+        <span class="chatlog__timestamp">13-Oct-20 04:23 AM</span>
+
+            <div class="chatlog__message " data-message-id="765293481693937704" id="message-765293481693937704">
+                <div class="chatlog__content">
+                    <div class="markdown">Joined the server. </div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/759904611799793696/c46529fdb267cfc19e8070005329a6e6.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Rei-chan#9272" data-user-id="759904611799793696" style="">Rei-chan</span>
+
+            <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">13-Oct-20 04:23 AM</span>
+
+            <div class="chatlog__message " data-message-id="765293488924655617" id="message-765293488924655617">
+                <div class="chatlog__content">
+                    <div class="markdown">Hey <span class="mention" title="Dank#6495">@Dank</span>, welcome to <strong>东京电讯(Tokyo Teleport)</strong>! </div>
+                </div>
+
+                    <div class="chatlog__attachment">
+                            <a href="https://cdn.discordapp.com/attachments/759896601216155680/765293488887562280/card.png">
+                                    <img class="chatlog__attachment-thumbnail" src="https://cdn.discordapp.com/attachments/759896601216155680/765293488887562280/card.png" alt="Attachment">
+                            </a>
+                    </div>
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/759904611799793696/c46529fdb267cfc19e8070005329a6e6.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Rei-chan#9272" data-user-id="759904611799793696" style="">Rei-chan</span>
+
+            <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">14-Oct-20 05:19 PM</span>
+
+            <div class="chatlog__message " data-message-id="765851254953082900" id="message-765851254953082900">
+                <div class="chatlog__content">
+                    <div class="markdown"><strong>kitchen sink#8413</strong> left the server </div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/389075302803963904/93c9304346fe1267e89612453bb0563c.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Blooozy#4987" data-user-id="389075302803963904" style="color: rgb(46,204,113)">Blooozy</span>
+
+
+        <span class="chatlog__timestamp">21-Oct-20 08:16 PM</span>
+
+            <div class="chatlog__message " data-message-id="768432574728896552" id="message-768432574728896552">
+                <div class="chatlog__content">
+                    <div class="markdown">Joined the server. </div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/759904611799793696/c46529fdb267cfc19e8070005329a6e6.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Rei-chan#9272" data-user-id="759904611799793696" style="">Rei-chan</span>
+
+            <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">21-Oct-20 08:16 PM</span>
+
+            <div class="chatlog__message " data-message-id="768432581657231383" id="message-768432581657231383">
+                <div class="chatlog__content">
+                    <div class="markdown">Hey <span class="mention" title="Blooozy#4987">@Blooozy</span>, welcome to <strong>东京电讯(Tokyo Teleport)</strong>! </div>
+                </div>
+
+                    <div class="chatlog__attachment">
+                            <a href="https://cdn.discordapp.com/attachments/759896601216155680/768432581527863296/card.png">
+                                    <img class="chatlog__attachment-thumbnail" src="https://cdn.discordapp.com/attachments/759896601216155680/768432581527863296/card.png" alt="Attachment">
+                            </a>
+                    </div>
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/95942729866948608/264a07c79161289528936afd51a32678.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="kumo#8279" data-user-id="95942729866948608" style="color: rgb(132,61,164)">kumo</span>
+
+
+        <span class="chatlog__timestamp">23-Oct-20 10:40 AM</span>
+
+            <div class="chatlog__message " data-message-id="769012349557932052" id="message-769012349557932052">
+                <div class="chatlog__content">
+                    <div class="markdown">Joined the server. </div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/759904611799793696/c46529fdb267cfc19e8070005329a6e6.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Rei-chan#9272" data-user-id="759904611799793696" style="">Rei-chan</span>
+
+            <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">23-Oct-20 10:40 AM</span>
+
+            <div class="chatlog__message " data-message-id="769012357405736980" id="message-769012357405736980">
+                <div class="chatlog__content">
+                    <div class="markdown">Hey <span class="mention" title="kumo#8279">@kumo</span>, welcome to <strong>东京电讯(Tokyo Teleport)</strong>! </div>
+                </div>
+
+                    <div class="chatlog__attachment">
+                            <a href="https://cdn.discordapp.com/attachments/759896601216155680/769012357094703155/card.png">
+                                    <img class="chatlog__attachment-thumbnail" src="https://cdn.discordapp.com/attachments/759896601216155680/769012357094703155/card.png" alt="Attachment">
+                            </a>
+                    </div>
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/243477087338496010/c8e40839f065114c0b365e779f082238.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="xantasia2000#0903" data-user-id="243477087338496010" style="color: rgb(132,61,164)">xantasia2000</span>
+
+
+        <span class="chatlog__timestamp">23-Oct-20 03:28 PM</span>
+
+            <div class="chatlog__message " data-message-id="769084706503262258" id="message-769084706503262258">
+                <div class="chatlog__content">
+                    <div class="markdown">Joined the server. </div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/759904611799793696/c46529fdb267cfc19e8070005329a6e6.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Rei-chan#9272" data-user-id="759904611799793696" style="">Rei-chan</span>
+
+            <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">23-Oct-20 03:28 PM</span>
+
+            <div class="chatlog__message " data-message-id="769084714283171861" id="message-769084714283171861">
+                <div class="chatlog__content">
+                    <div class="markdown">Hey <span class="mention" title="xantasia2000#0903">@xantasia2000</span>, welcome to <strong>东京电讯(Tokyo Teleport)</strong>! </div>
+                </div>
+
+                    <div class="chatlog__attachment">
+                            <a href="https://cdn.discordapp.com/attachments/759896601216155680/769084713956278312/card.png">
+                                    <img class="chatlog__attachment-thumbnail" src="https://cdn.discordapp.com/attachments/759896601216155680/769084713956278312/card.png" alt="Attachment">
+                            </a>
+                    </div>
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/746996721229496400/82b6d3a5ff5f1e1bc5690063296554bb.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="demonfilla696#4308" data-user-id="746996721229496400" style="color: rgb(46,204,113)">demonfilla696</span>
+
+
+        <span class="chatlog__timestamp">23-Oct-20 07:54 PM</span>
+
+            <div class="chatlog__message " data-message-id="769151808848527360" id="message-769151808848527360">
+                <div class="chatlog__content">
+                    <div class="markdown">Joined the server. </div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/759904611799793696/c46529fdb267cfc19e8070005329a6e6.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Rei-chan#9272" data-user-id="759904611799793696" style="">Rei-chan</span>
+
+            <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">23-Oct-20 07:54 PM</span>
+
+            <div class="chatlog__message " data-message-id="769151816008466472" id="message-769151816008466472">
+                <div class="chatlog__content">
+                    <div class="markdown">Hey <span class="mention" title="demonfilla696#4308">@demonfilla696</span>, welcome to <strong>东京电讯(Tokyo Teleport)</strong>! </div>
+                </div>
+
+                    <div class="chatlog__attachment">
+                            <a href="https://cdn.discordapp.com/attachments/759896601216155680/769151815664140309/card.png">
+                                    <img class="chatlog__attachment-thumbnail" src="https://cdn.discordapp.com/attachments/759896601216155680/769151815664140309/card.png" alt="Attachment">
+                            </a>
+                    </div>
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/636633580059230220/0f1b9db241aed5fc4228d714fe81ba6a.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="cosmo#4416" data-user-id="636633580059230220" style="color: rgb(132,61,164)">cosmo</span>
+
+
+        <span class="chatlog__timestamp">24-Oct-20 09:10 AM</span>
+
+            <div class="chatlog__message " data-message-id="769352026986774528" id="message-769352026986774528">
+                <div class="chatlog__content">
+                    <div class="markdown">Joined the server. </div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/759904611799793696/c46529fdb267cfc19e8070005329a6e6.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Rei-chan#9272" data-user-id="759904611799793696" style="">Rei-chan</span>
+
+            <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">24-Oct-20 09:10 AM</span>
+
+            <div class="chatlog__message " data-message-id="769352039536001055" id="message-769352039536001055">
+                <div class="chatlog__content">
+                    <div class="markdown">Hey <span class="mention" title="cosmo#4416">@cosmo</span>, welcome to <strong>东京电讯(Tokyo Teleport)</strong>! </div>
+                </div>
+
+                    <div class="chatlog__attachment">
+                            <a href="https://cdn.discordapp.com/attachments/759896601216155680/769352039229947924/card.png">
+                                    <img class="chatlog__attachment-thumbnail" src="https://cdn.discordapp.com/attachments/759896601216155680/769352039229947924/card.png" alt="Attachment">
+                            </a>
+                    </div>
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/546834331222540288/f3829146b7f7acb91f6fc1160882c999.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="ㄚᴇᴛɪ&#127837;#1306" data-user-id="546834331222540288" style="color: rgb(132,61,164)">ㄚᴇᴛɪ&#127837;</span>
+
+
+        <span class="chatlog__timestamp">25-Oct-20 12:18 AM</span>
+
+            <div class="chatlog__message " data-message-id="769580626340216832" id="message-769580626340216832">
+                <div class="chatlog__content">
+                    <div class="markdown">Joined the server. </div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/759904611799793696/c46529fdb267cfc19e8070005329a6e6.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Rei-chan#9272" data-user-id="759904611799793696" style="">Rei-chan</span>
+
+            <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">25-Oct-20 12:18 AM</span>
+
+            <div class="chatlog__message " data-message-id="769580632325357614" id="message-769580632325357614">
+                <div class="chatlog__content">
+                    <div class="markdown">Hey <span class="mention" title="ㄚᴇᴛɪ&#127837;#1306">@ㄚᴇᴛɪ&#127837;</span>, welcome to <strong>东京电讯(Tokyo Teleport)</strong>! </div>
+                </div>
+
+                    <div class="chatlog__attachment">
+                            <a href="https://cdn.discordapp.com/attachments/759896601216155680/769580632065572874/card.png">
+                                    <img class="chatlog__attachment-thumbnail" src="https://cdn.discordapp.com/attachments/759896601216155680/769580632065572874/card.png" alt="Attachment">
+                            </a>
+                    </div>
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/768486675000066108/906c1bd846d3524c1e92c41d6f91cbf3.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Sei#2341" data-user-id="768486675000066108" style="color: rgb(132,61,164)">Sei</span>
+
+
+        <span class="chatlog__timestamp">26-Oct-20 04:45 AM</span>
+
+            <div class="chatlog__message " data-message-id="770010250647699466" id="message-770010250647699466">
+                <div class="chatlog__content">
+                    <div class="markdown">Joined the server. </div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/759904611799793696/c46529fdb267cfc19e8070005329a6e6.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Rei-chan#9272" data-user-id="759904611799793696" style="">Rei-chan</span>
+
+            <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">26-Oct-20 04:45 AM</span>
+
+            <div class="chatlog__message " data-message-id="770010266288390164" id="message-770010266288390164">
+                <div class="chatlog__content">
+                    <div class="markdown">Hey <span class="mention" title="Sei#2341">@Sei</span>, welcome to <strong>东京电讯(Tokyo Teleport)</strong>! </div>
+                </div>
+
+                    <div class="chatlog__attachment">
+                            <a href="https://cdn.discordapp.com/attachments/759896601216155680/770010265995444234/card.png">
+                                    <img class="chatlog__attachment-thumbnail" src="https://cdn.discordapp.com/attachments/759896601216155680/770010265995444234/card.png" alt="Attachment">
+                            </a>
+                    </div>
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/534792468290469889/84695fab9c4f391b11b1a18a547eb593.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="93gm#3508" data-user-id="534792468290469889" style="">93gm</span>
+
+
+        <span class="chatlog__timestamp">26-Oct-20 05:20 AM</span>
+
+            <div class="chatlog__message " data-message-id="770019050490429440" id="message-770019050490429440">
+                <div class="chatlog__content">
+                    <div class="markdown">Joined the server. </div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/759904611799793696/c46529fdb267cfc19e8070005329a6e6.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Rei-chan#9272" data-user-id="759904611799793696" style="">Rei-chan</span>
+
+            <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">26-Oct-20 05:20 AM</span>
+
+            <div class="chatlog__message " data-message-id="770019056974692352" id="message-770019056974692352">
+                <div class="chatlog__content">
+                    <div class="markdown">Hey <span class="mention" title="93gm#3508">@93gm</span>, welcome to <strong>东京电讯(Tokyo Teleport)</strong>! </div>
+                </div>
+
+                    <div class="chatlog__attachment">
+                            <a href="https://cdn.discordapp.com/attachments/759896601216155680/770019056542941203/card.png">
+                                    <img class="chatlog__attachment-thumbnail" src="https://cdn.discordapp.com/attachments/759896601216155680/770019056542941203/card.png" alt="Attachment">
+                            </a>
+                    </div>
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="770020473529958430" id="message-770020473529958430">
+                <div class="chatlog__content">
+                    <div class="markdown"><strong>93gm#3508</strong> left the server </div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/762222945372209164/51ab8d8cc68606acdb05c1d346f2772e.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="yuno gasai#2195" data-user-id="762222945372209164" style="color: rgb(132,61,164)">yuno gasai</span>
+
+
+        <span class="chatlog__timestamp">26-Oct-20 12:47 PM</span>
+
+            <div class="chatlog__message " data-message-id="770131542709370891" id="message-770131542709370891">
+                <div class="chatlog__content">
+                    <div class="markdown">Joined the server. </div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/759904611799793696/c46529fdb267cfc19e8070005329a6e6.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Rei-chan#9272" data-user-id="759904611799793696" style="">Rei-chan</span>
+
+            <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">26-Oct-20 12:47 PM</span>
+
+            <div class="chatlog__message " data-message-id="770131548120023070" id="message-770131548120023070">
+                <div class="chatlog__content">
+                    <div class="markdown">Hey <span class="mention" title="yuno gasai#2195">@yuno gasai</span>, welcome to <strong>东京电讯(Tokyo Teleport)</strong>! </div>
+                </div>
+
+                    <div class="chatlog__attachment">
+                            <a href="https://cdn.discordapp.com/attachments/759896601216155680/770131547478556672/card.png">
+                                    <img class="chatlog__attachment-thumbnail" src="https://cdn.discordapp.com/attachments/759896601216155680/770131547478556672/card.png" alt="Attachment">
+                            </a>
+                    </div>
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/599456693801189377/70102086839d81f06a108510c7c2cdda.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="somewierdkid#0431" data-user-id="599456693801189377" style="">somewierdkid</span>
+
+
+        <span class="chatlog__timestamp">26-Oct-20 12:48 PM</span>
+
+            <div class="chatlog__message " data-message-id="770131639451516979" id="message-770131639451516979">
+                <div class="chatlog__content">
+                    <div class="markdown">Joined the server. </div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/759904611799793696/c46529fdb267cfc19e8070005329a6e6.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Rei-chan#9272" data-user-id="759904611799793696" style="">Rei-chan</span>
+
+            <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">26-Oct-20 12:48 PM</span>
+
+            <div class="chatlog__message " data-message-id="770131645050781696" id="message-770131645050781696">
+                <div class="chatlog__content">
+                    <div class="markdown">Hey <span class="mention" title="somewierdkid#0431">@somewierdkid</span>, welcome to <strong>东京电讯(Tokyo Teleport)</strong>! </div>
+                </div>
+
+                    <div class="chatlog__attachment">
+                            <a href="https://cdn.discordapp.com/attachments/759896601216155680/770131644739878986/card.png">
+                                    <img class="chatlog__attachment-thumbnail" src="https://cdn.discordapp.com/attachments/759896601216155680/770131644739878986/card.png" alt="Attachment">
+                            </a>
+                    </div>
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/749065485785759845/21117e21f0922408420261fb4fab5e7f.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="ethanroberts.official#9249" data-user-id="749065485785759845" style="color: rgb(132,61,164)">ethanroberts.official</span>
+
+
+        <span class="chatlog__timestamp">26-Oct-20 04:39 PM</span>
+
+            <div class="chatlog__message " data-message-id="770189733094621194" id="message-770189733094621194">
+                <div class="chatlog__content">
+                    <div class="markdown">Joined the server. </div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/759904611799793696/c46529fdb267cfc19e8070005329a6e6.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Rei-chan#9272" data-user-id="759904611799793696" style="">Rei-chan</span>
+
+            <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">26-Oct-20 04:39 PM</span>
+
+            <div class="chatlog__message " data-message-id="770189738861920287" id="message-770189738861920287">
+                <div class="chatlog__content">
+                    <div class="markdown">Hey <span class="mention" title="ethanroberts.official#9249">@ethanroberts.official</span>, welcome to <strong>东京电讯(Tokyo Teleport)</strong>! </div>
+                </div>
+
+                    <div class="chatlog__attachment">
+                            <a href="https://cdn.discordapp.com/attachments/759896601216155680/770189738606329886/card.png">
+                                    <img class="chatlog__attachment-thumbnail" src="https://cdn.discordapp.com/attachments/759896601216155680/770189738606329886/card.png" alt="Attachment">
+                            </a>
+                    </div>
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/752806304480755793/87cb8cd2fc08cdb5443a2190aaf8d2c1.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="shiniamond#1924" data-user-id="752806304480755793" style="color: rgb(132,61,164)">shiniamond</span>
+
+
+        <span class="chatlog__timestamp">26-Oct-20 04:41 PM</span>
+
+            <div class="chatlog__message " data-message-id="770190335707840543" id="message-770190335707840543">
+                <div class="chatlog__content">
+                    <div class="markdown">Joined the server. </div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/759904611799793696/c46529fdb267cfc19e8070005329a6e6.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Rei-chan#9272" data-user-id="759904611799793696" style="">Rei-chan</span>
+
+            <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">26-Oct-20 04:41 PM</span>
+
+            <div class="chatlog__message " data-message-id="770190342124732416" id="message-770190342124732416">
+                <div class="chatlog__content">
+                    <div class="markdown">Hey <span class="mention" title="shiniamond#1924">@shiniamond</span>, welcome to <strong>东京电讯(Tokyo Teleport)</strong>! </div>
+                </div>
+
+                    <div class="chatlog__attachment">
+                            <a href="https://cdn.discordapp.com/attachments/759896601216155680/770190341860622346/card.png">
+                                    <img class="chatlog__attachment-thumbnail" src="https://cdn.discordapp.com/attachments/759896601216155680/770190341860622346/card.png" alt="Attachment">
+                            </a>
+                    </div>
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/604421556889976843/a52472ebb5a44b74997a49f29b78cc55.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="danoonie#6950" data-user-id="604421556889976843" style="">danoonie</span>
+
+
+        <span class="chatlog__timestamp">26-Oct-20 07:33 PM</span>
+
+            <div class="chatlog__message " data-message-id="770233633528217608" id="message-770233633528217608">
+                <div class="chatlog__content">
+                    <div class="markdown">Joined the server. </div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/759904611799793696/c46529fdb267cfc19e8070005329a6e6.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Rei-chan#9272" data-user-id="759904611799793696" style="">Rei-chan</span>
+
+            <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">26-Oct-20 07:33 PM</span>
+
+            <div class="chatlog__message " data-message-id="770233640126513173" id="message-770233640126513173">
+                <div class="chatlog__content">
+                    <div class="markdown">Hey <span class="mention" title="danoonie#6950">@danoonie</span>, welcome to <strong>东京电讯(Tokyo Teleport)</strong>! </div>
+                </div>
+
+                    <div class="chatlog__attachment">
+                            <a href="https://cdn.discordapp.com/attachments/759896601216155680/770233640050229258/card.png">
+                                    <img class="chatlog__attachment-thumbnail" src="https://cdn.discordapp.com/attachments/759896601216155680/770233640050229258/card.png" alt="Attachment">
+                            </a>
+                    </div>
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/669803034649427970/c48548d6fec0e876f4f047d7a952b202.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="yungxnos#9632" data-user-id="669803034649427970" style="color: rgb(132,61,164)">yungxnos</span>
+
+
+        <span class="chatlog__timestamp">26-Oct-20 09:46 PM</span>
+
+            <div class="chatlog__message " data-message-id="770267014090326047" id="message-770267014090326047">
+                <div class="chatlog__content">
+                    <div class="markdown">Joined the server. </div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/759904611799793696/c46529fdb267cfc19e8070005329a6e6.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Rei-chan#9272" data-user-id="759904611799793696" style="">Rei-chan</span>
+
+            <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">26-Oct-20 09:46 PM</span>
+
+            <div class="chatlog__message " data-message-id="770267019848712222" id="message-770267019848712222">
+                <div class="chatlog__content">
+                    <div class="markdown">Hey <span class="mention" title="yungxnos#9632">@yungxnos</span>, welcome to <strong>东京电讯(Tokyo Teleport)</strong>! </div>
+                </div>
+
+                    <div class="chatlog__attachment">
+                            <a href="https://cdn.discordapp.com/attachments/759896601216155680/770267019609112586/card.png">
+                                    <img class="chatlog__attachment-thumbnail" src="https://cdn.discordapp.com/attachments/759896601216155680/770267019609112586/card.png" alt="Attachment">
+                            </a>
+                    </div>
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/239322619210366976/dfa4297d3282dd4385ad382283f07363.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Twintee Rabbit#8116" data-user-id="239322619210366976" style="color: rgb(132,61,164)">Twintee Rabbit</span>
+
+
+        <span class="chatlog__timestamp">26-Oct-20 10:45 PM</span>
+
+            <div class="chatlog__message " data-message-id="770282010819952670" id="message-770282010819952670">
+                <div class="chatlog__content">
+                    <div class="markdown">Joined the server. </div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/759904611799793696/c46529fdb267cfc19e8070005329a6e6.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Rei-chan#9272" data-user-id="759904611799793696" style="">Rei-chan</span>
+
+            <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">26-Oct-20 10:45 PM</span>
+
+            <div class="chatlog__message " data-message-id="770282018276638741" id="message-770282018276638741">
+                <div class="chatlog__content">
+                    <div class="markdown">Hey <span class="mention" title="Twintee Rabbit#8116">@Twintee Rabbit</span>, welcome to <strong>东京电讯(Tokyo Teleport)</strong>! </div>
+                </div>
+
+                    <div class="chatlog__attachment">
+                            <a href="https://cdn.discordapp.com/attachments/759896601216155680/770282017799536650/card.png">
+                                    <img class="chatlog__attachment-thumbnail" src="https://cdn.discordapp.com/attachments/759896601216155680/770282017799536650/card.png" alt="Attachment">
+                            </a>
+                    </div>
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/362767933241294852/362daa63e959716771f68739c870a4a2.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Spike#4461" data-user-id="362767933241294852" style="color: rgb(132,61,164)">Spike</span>
+
+
+        <span class="chatlog__timestamp">26-Oct-20 10:55 PM</span>
+
+            <div class="chatlog__message " data-message-id="770284484531847230" id="message-770284484531847230">
+                <div class="chatlog__content">
+                    <div class="markdown">Joined the server. </div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/759904611799793696/c46529fdb267cfc19e8070005329a6e6.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Rei-chan#9272" data-user-id="759904611799793696" style="">Rei-chan</span>
+
+            <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">26-Oct-20 10:55 PM</span>
+
+            <div class="chatlog__message " data-message-id="770284491457167371" id="message-770284491457167371">
+                <div class="chatlog__content">
+                    <div class="markdown">Hey <span class="mention" title="Spike#4461">@Spike</span>, welcome to <strong>东京电讯(Tokyo Teleport)</strong>! </div>
+                </div>
+
+                    <div class="chatlog__attachment">
+                            <a href="https://cdn.discordapp.com/attachments/759896601216155680/770284490974036029/card.png">
+                                    <img class="chatlog__attachment-thumbnail" src="https://cdn.discordapp.com/attachments/759896601216155680/770284490974036029/card.png" alt="Attachment">
+                            </a>
+                    </div>
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/558256727099965440/9fa12a547d2fe3d165f0edb42bc44de2.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="wagashi#9293" data-user-id="558256727099965440" style="color: rgb(132,61,164)">wagashi</span>
+
+
+        <span class="chatlog__timestamp">26-Oct-20 11:12 PM</span>
+
+            <div class="chatlog__message " data-message-id="770288806321586206" id="message-770288806321586206">
+                <div class="chatlog__content">
+                    <div class="markdown">Joined the server. </div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/759904611799793696/c46529fdb267cfc19e8070005329a6e6.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Rei-chan#9272" data-user-id="759904611799793696" style="">Rei-chan</span>
+
+            <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">26-Oct-20 11:12 PM</span>
+
+            <div class="chatlog__message " data-message-id="770288812709642281" id="message-770288812709642281">
+                <div class="chatlog__content">
+                    <div class="markdown">Hey <span class="mention" title="wagashi#9293">@wagashi</span>, welcome to <strong>东京电讯(Tokyo Teleport)</strong>! </div>
+                </div>
+
+                    <div class="chatlog__attachment">
+                            <a href="https://cdn.discordapp.com/attachments/759896601216155680/770288812425084958/card.png">
+                                    <img class="chatlog__attachment-thumbnail" src="https://cdn.discordapp.com/attachments/759896601216155680/770288812425084958/card.png" alt="Attachment">
+                            </a>
+                    </div>
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/758089609963110452/5c38eb009318fa813ac9ab23279d2052.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Geist Corzain#3110" data-user-id="758089609963110452" style="color: rgb(132,61,164)">Geist Corzain</span>
+
+
+        <span class="chatlog__timestamp">26-Oct-20 11:12 PM</span>
+
+            <div class="chatlog__message " data-message-id="770288830024384542" id="message-770288830024384542">
+                <div class="chatlog__content">
+                    <div class="markdown">Joined the server. </div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/759904611799793696/c46529fdb267cfc19e8070005329a6e6.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Rei-chan#9272" data-user-id="759904611799793696" style="">Rei-chan</span>
+
+            <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">26-Oct-20 11:12 PM</span>
+
+            <div class="chatlog__message " data-message-id="770288837187600424" id="message-770288837187600424">
+                <div class="chatlog__content">
+                    <div class="markdown">Hey <span class="mention" title="Geist Corzain#3110">@Geist Corzain</span>, welcome to <strong>东京电讯(Tokyo Teleport)</strong>! </div>
+                </div>
+
+                    <div class="chatlog__attachment">
+                            <a href="https://cdn.discordapp.com/attachments/759896601216155680/770288836928208896/card.png">
+                                    <img class="chatlog__attachment-thumbnail" src="https://cdn.discordapp.com/attachments/759896601216155680/770288836928208896/card.png" alt="Attachment">
+                            </a>
+                    </div>
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/712389411756703745/e2b35ae7aa5e558764e004892c557c6d.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="arucat#9081" data-user-id="712389411756703745" style="color: rgb(132,61,164)">arucat</span>
+
+
+        <span class="chatlog__timestamp">27-Oct-20 12:49 AM</span>
+
+            <div class="chatlog__message " data-message-id="770313141824913419" id="message-770313141824913419">
+                <div class="chatlog__content">
+                    <div class="markdown">Joined the server. </div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/759904611799793696/c46529fdb267cfc19e8070005329a6e6.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Rei-chan#9272" data-user-id="759904611799793696" style="">Rei-chan</span>
+
+            <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">27-Oct-20 12:49 AM</span>
+
+            <div class="chatlog__message " data-message-id="770313147776499722" id="message-770313147776499722">
+                <div class="chatlog__content">
+                    <div class="markdown">Hey <span class="mention" title="arucat#9081">@arucat</span>, welcome to <strong>东京电讯(Tokyo Teleport)</strong>! </div>
+                </div>
+
+                    <div class="chatlog__attachment">
+                            <a href="https://cdn.discordapp.com/attachments/759896601216155680/770313147465596979/card.png">
+                                    <img class="chatlog__attachment-thumbnail" src="https://cdn.discordapp.com/attachments/759896601216155680/770313147465596979/card.png" alt="Attachment">
+                            </a>
+                    </div>
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/759904611799793696/c46529fdb267cfc19e8070005329a6e6.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Rei-chan#9272" data-user-id="759904611799793696" style="">Rei-chan</span>
+
+            <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">27-Oct-20 05:33 AM</span>
+
+            <div class="chatlog__message " data-message-id="770384602078380032" id="message-770384602078380032">
+                <div class="chatlog__content">
+                    <div class="markdown"><strong>danoonie#6950</strong> left the server </div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/770425964135055431/8e0ad839ed207ea1ca4b27d63e214ca6.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="TKY#0916" data-user-id="770425964135055431" style="color: rgb(132,61,164)">TKY</span>
+
+
+        <span class="chatlog__timestamp">27-Oct-20 08:29 AM</span>
+
+            <div class="chatlog__message " data-message-id="770428960365477909" id="message-770428960365477909">
+                <div class="chatlog__content">
+                    <div class="markdown">Joined the server. </div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/759904611799793696/c46529fdb267cfc19e8070005329a6e6.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Rei-chan#9272" data-user-id="759904611799793696" style="">Rei-chan</span>
+
+            <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">27-Oct-20 08:29 AM</span>
+
+            <div class="chatlog__message " data-message-id="770428965163630603" id="message-770428965163630603">
+                <div class="chatlog__content">
+                    <div class="markdown">Hey <span class="mention" title="TKY#0916">@TKY</span>, welcome to <strong>东京电讯(Tokyo Teleport)</strong>! </div>
+                </div>
+
+                    <div class="chatlog__attachment">
+                            <a href="https://cdn.discordapp.com/attachments/759896601216155680/770428965088919602/card.png">
+                                    <img class="chatlog__attachment-thumbnail" src="https://cdn.discordapp.com/attachments/759896601216155680/770428965088919602/card.png" alt="Attachment">
+                            </a>
+                    </div>
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/481567806119215119/6d2a473e45c0b880a0e28b666efab1c1.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="スレイヤー#9574" data-user-id="481567806119215119" style="color: rgb(132,61,164)">スレイヤー</span>
+
+
+        <span class="chatlog__timestamp">27-Oct-20 08:51 AM</span>
+
+            <div class="chatlog__message " data-message-id="770434566333661184" id="message-770434566333661184">
+                <div class="chatlog__content">
+                    <div class="markdown">Joined the server. </div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/759904611799793696/c46529fdb267cfc19e8070005329a6e6.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Rei-chan#9272" data-user-id="759904611799793696" style="">Rei-chan</span>
+
+            <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">27-Oct-20 08:51 AM</span>
+
+            <div class="chatlog__message " data-message-id="770434573045465128" id="message-770434573045465128">
+                <div class="chatlog__content">
+                    <div class="markdown">Hey <span class="mention" title="スレイヤー#9574">@スレイヤー</span>, welcome to <strong>东京电讯(Tokyo Teleport)</strong>! </div>
+                </div>
+
+                    <div class="chatlog__attachment">
+                            <a href="https://cdn.discordapp.com/attachments/759896601216155680/770434572445024326/card.png">
+                                    <img class="chatlog__attachment-thumbnail" src="https://cdn.discordapp.com/attachments/759896601216155680/770434572445024326/card.png" alt="Attachment">
+                            </a>
+                    </div>
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/758879405774209045/2a5fedc619913f08dd3d936298617f25.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Sammy2009#2090" data-user-id="758879405774209045" style="">Sammy2009</span>
+
+
+        <span class="chatlog__timestamp">27-Oct-20 01:54 PM</span>
+
+            <div class="chatlog__message " data-message-id="770510641492525076" id="message-770510641492525076">
+                <div class="chatlog__content">
+                    <div class="markdown">Joined the server. </div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/759904611799793696/c46529fdb267cfc19e8070005329a6e6.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Rei-chan#9272" data-user-id="759904611799793696" style="">Rei-chan</span>
+
+            <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">27-Oct-20 01:54 PM</span>
+
+            <div class="chatlog__message " data-message-id="770510646684811264" id="message-770510646684811264">
+                <div class="chatlog__content">
+                    <div class="markdown">Hey <span class="mention" title="Sammy2009#2090">@Sammy2009</span>, welcome to <strong>东京电讯(Tokyo Teleport)</strong>! </div>
+                </div>
+
+                    <div class="chatlog__attachment">
+                            <a href="https://cdn.discordapp.com/attachments/759896601216155680/770510646369583155/card.png">
+                                    <img class="chatlog__attachment-thumbnail" src="https://cdn.discordapp.com/attachments/759896601216155680/770510646369583155/card.png" alt="Attachment">
+                            </a>
+                    </div>
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="770511042181595146" id="message-770511042181595146">
+                <div class="chatlog__content">
+                    <div class="markdown"><strong>Sammy2009#2090</strong> left the server </div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/637682644842446848/ccc6d5fc0bf377a7210d39b2b73c357c.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="™EX-Liya•Dn|`#8560" data-user-id="637682644842446848" style="color: rgb(132,61,164)">™EX-Liya•Dn|`</span>
+
+
+        <span class="chatlog__timestamp">27-Oct-20 03:32 PM</span>
+
+            <div class="chatlog__message " data-message-id="770535365873500169" id="message-770535365873500169">
+                <div class="chatlog__content">
+                    <div class="markdown">Joined the server. </div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/759904611799793696/c46529fdb267cfc19e8070005329a6e6.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Rei-chan#9272" data-user-id="759904611799793696" style="">Rei-chan</span>
+
+            <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">27-Oct-20 03:32 PM</span>
+
+            <div class="chatlog__message " data-message-id="770535373512245278" id="message-770535373512245278">
+                <div class="chatlog__content">
+                    <div class="markdown">Hey <span class="mention" title="™EX-Liya•Dn|`#8560">@™EX-Liya•Dn|`</span>, welcome to <strong>东京电讯(Tokyo Teleport)</strong>! </div>
+                </div>
+
+                    <div class="chatlog__attachment">
+                            <a href="https://cdn.discordapp.com/attachments/759896601216155680/770535372722929684/card.png">
+                                    <img class="chatlog__attachment-thumbnail" src="https://cdn.discordapp.com/attachments/759896601216155680/770535372722929684/card.png" alt="Attachment">
+                            </a>
+                    </div>
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/743302228252819577/18b204b1ec82abaf0d6d16315716b591.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Rian#9808" data-user-id="743302228252819577" style="color: rgb(132,61,164)">Rian</span>
+
+
+        <span class="chatlog__timestamp">27-Oct-20 03:42 PM</span>
+
+            <div class="chatlog__message " data-message-id="770537969042980924" id="message-770537969042980924">
+                <div class="chatlog__content">
+                    <div class="markdown">Joined the server. </div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/759904611799793696/c46529fdb267cfc19e8070005329a6e6.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Rei-chan#9272" data-user-id="759904611799793696" style="">Rei-chan</span>
+
+            <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">27-Oct-20 03:42 PM</span>
+
+            <div class="chatlog__message " data-message-id="770537975283974154" id="message-770537975283974154">
+                <div class="chatlog__content">
+                    <div class="markdown">Hey <span class="mention" title="Rian#9808">@Rian</span>, welcome to <strong>东京电讯(Tokyo Teleport)</strong>! </div>
+                </div>
+
+                    <div class="chatlog__attachment">
+                            <a href="https://cdn.discordapp.com/attachments/759896601216155680/770537974836232192/card.png">
+                                    <img class="chatlog__attachment-thumbnail" src="https://cdn.discordapp.com/attachments/759896601216155680/770537974836232192/card.png" alt="Attachment">
+                            </a>
+                    </div>
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/752651771125694514/cb472d2dc4678dc8e8d9bfca9d6c9fb7.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Elite#7595" data-user-id="752651771125694514" style="">Elite</span>
+
+
+        <span class="chatlog__timestamp">27-Oct-20 06:30 PM</span>
+
+            <div class="chatlog__message " data-message-id="770580137343057920" id="message-770580137343057920">
+                <div class="chatlog__content">
+                    <div class="markdown">Joined the server. </div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/759904611799793696/c46529fdb267cfc19e8070005329a6e6.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Rei-chan#9272" data-user-id="759904611799793696" style="">Rei-chan</span>
+
+            <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">27-Oct-20 06:30 PM</span>
+
+            <div class="chatlog__message " data-message-id="770580143621275658" id="message-770580143621275658">
+                <div class="chatlog__content">
+                    <div class="markdown">Hey <span class="mention" title="Elite#7595">@Elite</span>, welcome to <strong>东京电讯(Tokyo Teleport)</strong>! </div>
+                </div>
+
+                    <div class="chatlog__attachment">
+                            <a href="https://cdn.discordapp.com/attachments/759896601216155680/770580142606123008/card.png">
+                                    <img class="chatlog__attachment-thumbnail" src="https://cdn.discordapp.com/attachments/759896601216155680/770580142606123008/card.png" alt="Attachment">
+                            </a>
+                    </div>
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/521310710257680407/bb05e562f17472ce372672a854dcac9a.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Oli &#128150;#1312" data-user-id="521310710257680407" style="color: rgb(139,221,248)">Kaz9</span>
+
+
+        <span class="chatlog__timestamp">27-Oct-20 11:25 PM</span>
+
+            <div class="chatlog__message " data-message-id="770654438218137671" id="message-770654438218137671">
+                <div class="chatlog__content">
+                    <div class="markdown">Welcome to Tokyo Teleport! <span class="mention" title="Rian#9808">@Rian</span> <span class="mention" title="™EX-Liya•Dn|`#8560">@™EX-Liya•Dn|`</span> </div>
+                </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="770654587970912266" id="message-770654587970912266">
+                <div class="chatlog__content">
+                    <div class="markdown">If you have any questions, please don&#39;t hesitate to ask a mod, admin, or staff member! We hope you enjoy your stay! </div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/750866222043758672/f7d7dc36f5a09cb08d7896f2ab947349.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="P_e_l_p#5900" data-user-id="750866222043758672" style="">P_e_l_p</span>
+
+
+        <span class="chatlog__timestamp">27-Oct-20 11:55 PM</span>
+
+            <div class="chatlog__message " data-message-id="770661927574831154" id="message-770661927574831154">
+                <div class="chatlog__content">
+                    <div class="markdown">Joined the server. </div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/512777713778425886/f1283ebfd723a7146785b4d5058a0198.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="niHAOma#5374" data-user-id="512777713778425886" style="">niHAOma</span>
+
+
+        <span class="chatlog__timestamp">28-Oct-20 12:15 AM</span>
+
+            <div class="chatlog__message " data-message-id="770666909880287282" id="message-770666909880287282">
+                <div class="chatlog__content">
+                    <div class="markdown">Joined the server. </div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/758879405774209045/2a5fedc619913f08dd3d936298617f25.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Sammy2009#2090" data-user-id="758879405774209045" style="">Sammy2009</span>
+
+
+        <span class="chatlog__timestamp">29-Oct-20 05:17 AM</span>
+
+            <div class="chatlog__message " data-message-id="771105312807452712" id="message-771105312807452712">
+                <div class="chatlog__content">
+                    <div class="markdown">Joined the server. </div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/embed/avatars/0.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="WAR SIDE GAMER#8485" data-user-id="771566701993132083" style="color: rgb(132,61,164)">WAR SIDE GAMER</span>
+
+
+        <span class="chatlog__timestamp">30-Oct-20 12:13 PM</span>
+
+            <div class="chatlog__message " data-message-id="771572363279728650" id="message-771572363279728650">
+                <div class="chatlog__content">
+                    <div class="markdown">Joined the server. </div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/521310710257680407/bb05e562f17472ce372672a854dcac9a.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Oli &#128150;#1312" data-user-id="521310710257680407" style="color: rgb(139,221,248)">Kaz9</span>
+
+
+        <span class="chatlog__timestamp">30-Oct-20 12:21 PM</span>
+
+            <div class="chatlog__message " data-message-id="771574363446050817" id="message-771574363446050817">
+                <div class="chatlog__content">
+                    <div class="markdown">Welcome! </div>
+                </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="771574438143590400" id="message-771574438143590400">
+                <div class="chatlog__content">
+                    <div class="markdown">I&#39;m tired, sorry for the uninspired welcome </div>
+                </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="771574528782237716" id="message-771574528782237716">
+                <div class="chatlog__content">
+                    <div class="markdown">And I am still working on permanent hosting for the bot </div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/248489960993193984/a353294ecca67ccce350154d551065e4.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Jown#8291" data-user-id="248489960993193984" style="color: rgb(31,139,76)">Jown</span>
+
+
+        <span class="chatlog__timestamp">31-Oct-20 02:36 AM</span>
+
+            <div class="chatlog__message " data-message-id="771789678881669121" id="message-771789678881669121">
+                <div class="chatlog__content">
+                    <div class="markdown">Joined the server. </div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/202619570832408576/ed24ebdee92dd94adf328ec6ed4cbfcd.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Nitro546#8953" data-user-id="202619570832408576" style="">Nitro546</span>
+
+
+        <span class="chatlog__timestamp">31-Oct-20 08:44 AM</span>
+
+            <div class="chatlog__message " data-message-id="771882373000331264" id="message-771882373000331264">
+                <div class="chatlog__content">
+                    <div class="markdown">Joined the server. </div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/494437449863528448/8a4dbe915214e656618e6f6d0a3d55eb.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="forpositiononly#0001" data-user-id="494437449863528448" style="color: rgb(132,61,164)">forpositiononly</span>
+
+
+        <span class="chatlog__timestamp">31-Oct-20 11:30 AM</span>
+
+            <div class="chatlog__message " data-message-id="771923910530564126" id="message-771923910530564126">
+                <div class="chatlog__content">
+                    <div class="markdown">Joined the server. </div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/159985870458322944/b50adff099924dd5e6b72d13f77eb9d7.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="MEE6#4876" data-user-id="159985870458322944" style="color: rgb(248,248,249)">MEE6</span>
+
+            <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">31-Oct-20 12:17 PM</span>
+
+            <div class="chatlog__message " data-message-id="771935953148444682" id="message-771935953148444682">
+                <div class="chatlog__content">
+                    <div class="markdown">Joined the server. </div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/159985870458322944/b50adff099924dd5e6b72d13f77eb9d7.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="MEE6#4876" data-user-id="159985870458322944" style="color: rgb(248,248,249)">MEE6</span>
+
+            <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">31-Oct-20 12:26 PM</span>
+
+            <div class="chatlog__message " data-message-id="771938113001619507" id="message-771938113001619507">
+                <div class="chatlog__content">
+                    <div class="markdown"><strong>Rei-chan#9272</strong> left the server </div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/759904611799793696/c46529fdb267cfc19e8070005329a6e6.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Rei-chan#9272" data-user-id="759904611799793696" style="">Rei-chan</span>
+
+            <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">31-Oct-20 12:28 PM</span>
+
+            <div class="chatlog__message " data-message-id="771938508470353951" id="message-771938508470353951">
+                <div class="chatlog__content">
+                    <div class="markdown">Joined the server. </div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/159985870458322944/b50adff099924dd5e6b72d13f77eb9d7.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="MEE6#4876" data-user-id="159985870458322944" style="color: rgb(248,248,249)">MEE6</span>
+
+            <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">31-Oct-20 12:40 PM</span>
+
+            <div class="chatlog__message " data-message-id="771941645192658984" id="message-771941645192658984">
+                <div class="chatlog__content">
+                    <div class="markdown"><strong>Rei-chan#9272</strong> left the server </div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/759904611799793696/c46529fdb267cfc19e8070005329a6e6.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Rei-chan#9272" data-user-id="759904611799793696" style="">Rei-chan</span>
+
+            <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">31-Oct-20 12:41 PM</span>
+
+            <div class="chatlog__message " data-message-id="771941948268871680" id="message-771941948268871680">
+                <div class="chatlog__content">
+                    <div class="markdown">Joined the server. </div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/159985870458322944/b50adff099924dd5e6b72d13f77eb9d7.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="MEE6#4876" data-user-id="159985870458322944" style="color: rgb(248,248,249)">MEE6</span>
+
+            <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">31-Oct-20 12:44 PM</span>
+
+            <div class="chatlog__message " data-message-id="771942535496859688" id="message-771942535496859688">
+                <div class="chatlog__content">
+                    <div class="markdown"><strong>Rei-chan#9272</strong> left the server </div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/771942641428201493/c46529fdb267cfc19e8070005329a6e6.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Rei-chan#3557" data-user-id="771942641428201493" style="color: rgb(248,248,249)">Rei-chan</span>
+
+            <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">31-Oct-20 12:47 PM</span>
+
+            <div class="chatlog__message " data-message-id="771943326369710090" id="message-771943326369710090">
+                <div class="chatlog__content">
+                    <div class="markdown">Joined the server. </div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/159985870458322944/b50adff099924dd5e6b72d13f77eb9d7.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="MEE6#4876" data-user-id="159985870458322944" style="color: rgb(248,248,249)">MEE6</span>
+
+            <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">31-Oct-20 12:54 PM</span>
+
+            <div class="chatlog__message " data-message-id="771945088782696448" id="message-771945088782696448">
+                <div class="chatlog__content">
+                    <div class="markdown">Joined the server. </div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/647862874596835363/4693baf41879ddbdbc9cf6c82877ba85.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="sleepy#7923" data-user-id="647862874596835363" style="">sleepy</span>
+
+
+        <span class="chatlog__timestamp">01-Nov-20 11:39 PM</span>
+
+            <div class="chatlog__message " data-message-id="772469890828992602" id="message-772469890828992602">
+                <div class="chatlog__content">
+                    <div class="markdown">Joined the server. </div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/159985870458322944/b50adff099924dd5e6b72d13f77eb9d7.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="MEE6#4876" data-user-id="159985870458322944" style="color: rgb(248,248,249)">MEE6</span>
+
+            <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">01-Nov-20 11:39 PM</span>
+
+            <div class="chatlog__message " data-message-id="772469897200271380" id="message-772469897200271380">
+                <div class="chatlog__content">
+                    <div class="markdown">Hey <span class="mention" title="sleepy#7923">@sleepy</span>, welcome to <strong>东京电讯(Tokyo Teleport)</strong>! </div>
+                </div>
+
+                    <div class="chatlog__attachment">
+                            <a href="https://cdn.discordapp.com/attachments/759896601216155680/772469896881766400/card.png">
+                                    <img class="chatlog__attachment-thumbnail" src="https://cdn.discordapp.com/attachments/759896601216155680/772469896881766400/card.png" alt="Attachment">
+                            </a>
+                    </div>
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="772469983825100801" id="message-772469983825100801">
+                <div class="chatlog__content">
+                    <div class="markdown"><strong>sleepy#7923</strong> left the server </div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/647862874596835363/4693baf41879ddbdbc9cf6c82877ba85.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="sleepy#7923" data-user-id="647862874596835363" style="">sleepy</span>
+
+
+        <span class="chatlog__timestamp">01-Nov-20 11:40 PM</span>
+
+            <div class="chatlog__message " data-message-id="772470120819720203" id="message-772470120819720203">
+                <div class="chatlog__content">
+                    <div class="markdown">Joined the server. </div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/159985870458322944/b50adff099924dd5e6b72d13f77eb9d7.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="MEE6#4876" data-user-id="159985870458322944" style="color: rgb(248,248,249)">MEE6</span>
+
+            <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">01-Nov-20 11:40 PM</span>
+
+            <div class="chatlog__message " data-message-id="772470126154350642" id="message-772470126154350642">
+                <div class="chatlog__content">
+                    <div class="markdown">Hey <span class="mention" title="sleepy#7923">@sleepy</span>, welcome to <strong>东京电讯(Tokyo Teleport)</strong>! </div>
+                </div>
+
+                    <div class="chatlog__attachment">
+                            <a href="https://cdn.discordapp.com/attachments/759896601216155680/772470125869269002/card.png">
+                                    <img class="chatlog__attachment-thumbnail" src="https://cdn.discordapp.com/attachments/759896601216155680/772470125869269002/card.png" alt="Attachment">
+                            </a>
+                    </div>
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="772470494867095574" id="message-772470494867095574">
+                <div class="chatlog__content">
+                    <div class="markdown"><strong>sleepy#7923</strong> left the server </div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/765225543611449384/a_0be18ab626e6f1332b0030c4b39bc783.gif" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Molotov3#4700" data-user-id="765225543611449384" style="color: rgb(132,61,164)">Molotov3</span>
+
+
+        <span class="chatlog__timestamp">03-Nov-20 08:33 AM</span>
+
+            <div class="chatlog__message " data-message-id="772966597689212958" id="message-772966597689212958">
+                <div class="chatlog__content">
+                    <div class="markdown">Joined the server. </div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/159985870458322944/b50adff099924dd5e6b72d13f77eb9d7.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="MEE6#4876" data-user-id="159985870458322944" style="color: rgb(248,248,249)">MEE6</span>
+
+            <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">03-Nov-20 08:33 AM</span>
+
+            <div class="chatlog__message " data-message-id="772966606795440201" id="message-772966606795440201">
+                <div class="chatlog__content">
+                    <div class="markdown">Hey <span class="mention" title="Molotov3#4700">@Molotov3</span>, welcome to <strong>东京电讯(Tokyo Teleport)</strong>! </div>
+                </div>
+
+                    <div class="chatlog__attachment">
+                            <a href="https://cdn.discordapp.com/attachments/759896601216155680/772966606321614868/card.png">
+                                    <img class="chatlog__attachment-thumbnail" src="https://cdn.discordapp.com/attachments/759896601216155680/772966606321614868/card.png" alt="Attachment">
+                            </a>
+                    </div>
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/766450378019045426/c2080a3624170bd4af6ba400c35d20d4.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Lony#5576" data-user-id="766450378019045426" style="color: rgb(132,61,164)">Lony</span>
+
+
+        <span class="chatlog__timestamp">03-Nov-20 10:22 AM</span>
+
+            <div class="chatlog__message " data-message-id="772994002671632404" id="message-772994002671632404">
+                <div class="chatlog__content">
+                    <div class="markdown">Joined the server. </div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/159985870458322944/b50adff099924dd5e6b72d13f77eb9d7.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="MEE6#4876" data-user-id="159985870458322944" style="color: rgb(248,248,249)">MEE6</span>
+
+            <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">03-Nov-20 10:22 AM</span>
+
+            <div class="chatlog__message " data-message-id="772994007616716881" id="message-772994007616716881">
+                <div class="chatlog__content">
+                    <div class="markdown">Hey <span class="mention" title="Lony#5576">@Lony</span>, welcome to <strong>东京电讯(Tokyo Teleport)</strong>! </div>
+                </div>
+
+                    <div class="chatlog__attachment">
+                            <a href="https://cdn.discordapp.com/attachments/759896601216155680/772994007655645184/card.png">
+                                    <img class="chatlog__attachment-thumbnail" src="https://cdn.discordapp.com/attachments/759896601216155680/772994007655645184/card.png" alt="Attachment">
+                            </a>
+                    </div>
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/592645051868381184/47d5ec68dc97c2762bc8f11fd069dd8a.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="coincidence#7007" data-user-id="592645051868381184" style="">coincidence</span>
+
+
+        <span class="chatlog__timestamp">03-Nov-20 04:27 PM</span>
+
+            <div class="chatlog__message " data-message-id="773085897506684938" id="message-773085897506684938">
+                <div class="chatlog__content">
+                    <div class="markdown">Joined the server. </div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/159985870458322944/b50adff099924dd5e6b72d13f77eb9d7.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="MEE6#4876" data-user-id="159985870458322944" style="color: rgb(248,248,249)">MEE6</span>
+
+            <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">03-Nov-20 04:27 PM</span>
+
+            <div class="chatlog__message " data-message-id="773085904075489321" id="message-773085904075489321">
+                <div class="chatlog__content">
+                    <div class="markdown">Hey <span class="mention" title="coincidence#7007">@coincidence</span>, welcome to <strong>东京电讯(Tokyo Teleport)</strong>! </div>
+                </div>
+
+                    <div class="chatlog__attachment">
+                            <a href="https://cdn.discordapp.com/attachments/759896601216155680/773085904117039144/card.png">
+                                    <img class="chatlog__attachment-thumbnail" src="https://cdn.discordapp.com/attachments/759896601216155680/773085904117039144/card.png" alt="Attachment">
+                            </a>
+                    </div>
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/159985870458322944/b50adff099924dd5e6b72d13f77eb9d7.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="MEE6#4876" data-user-id="159985870458322944" style="color: rgb(248,248,249)">MEE6</span>
+
+            <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">03-Nov-20 06:18 PM</span>
+
+            <div class="chatlog__message " data-message-id="773113863938899969" id="message-773113863938899969">
+                <div class="chatlog__content">
+                    <div class="markdown"><strong>coincidence#7007</strong> left the server </div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/342446484157104138/dc30381685735f353d5f666fe3ae8d08.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="ic3#6971" data-user-id="342446484157104138" style="color: rgb(132,61,164)">ic3</span>
+
+
+        <span class="chatlog__timestamp">03-Nov-20 08:43 PM</span>
+
+            <div class="chatlog__message " data-message-id="773150284221382687" id="message-773150284221382687">
+                <div class="chatlog__content">
+                    <div class="markdown">Joined the server. </div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/159985870458322944/b50adff099924dd5e6b72d13f77eb9d7.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="MEE6#4876" data-user-id="159985870458322944" style="color: rgb(248,248,249)">MEE6</span>
+
+            <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">03-Nov-20 08:43 PM</span>
+
+            <div class="chatlog__message " data-message-id="773150290164842537" id="message-773150290164842537">
+                <div class="chatlog__content">
+                    <div class="markdown">Hey <span class="mention" title="ic3#6971">@ic3</span>, welcome to <strong>东京电讯(Tokyo Teleport)</strong>! </div>
+                </div>
+
+                    <div class="chatlog__attachment">
+                            <a href="https://cdn.discordapp.com/attachments/759896601216155680/773150290077286400/card.png">
+                                    <img class="chatlog__attachment-thumbnail" src="https://cdn.discordapp.com/attachments/759896601216155680/773150290077286400/card.png" alt="Attachment">
+                            </a>
+                    </div>
+
+
+            </div>
+    </div>
+</div>
+
+</div>
+
+<div class="postamble">
+    <div class="postamble__entry">Exported 131 message(s)</div>
+</div>
+
+</body>
+</html>
